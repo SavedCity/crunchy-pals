@@ -1,5 +1,5 @@
-import Layout from '@/app/components/Layout'
-import Home from '@/app/pages/Home'
+import Layout from 'components/Layout'
+import Home from 'pages/Home'
 
 export default function HomePage() {
   return (
