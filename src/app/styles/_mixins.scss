@@ -1,0 +1,142 @@
+@mixin breakpoint($minimum) {
+  @media (min-width: $minimum) {
+    @content;
+  }
+}
+
+@mixin clearfix {
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+// FLEXBOX
+@mixin flex($align-items: stretch, $justify-content: flex-start, $direction: row, $wrap: nowrap, $flex: flex) {
+  display: $flex;
+  align-items: $align-items;
+  justify-content: $justify-content;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+}
+
+@mixin flex-container(
+  $align-items: stretch,
+  $justify-content: flex-start,
+  $direction: row,
+  $wrap: nowrap,
+  $flex: flex
+) {
+  @include flex($align-items, $justify-content, $direction, $wrap, $flex);
+
+  width: 100%;
+}
+
+@mixin center-screen {
+  @include flex-container(center, center, column);
+  min-height: calc(100vh - #{$nav-height});
+}
+
+@mixin one-line-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// TYPE
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+@mixin fluid-type($min, $max) {
+  $min_: strip-unit($min);
+  $max_: strip-unit($max);
+
+  font-size: calc(#{$min} + (#{$max_} - #{$min_}) * ((100vw - 300px) / (1440 - 300)));
+
+  @include breakpoint($desktop) {
+    font-size: $max;
+  }
+}
+
+// TODO: discuss with design on default sizes of these elements
+@mixin h1() {
+}
+@mixin h2() {
+}
+@mixin h3() {
+}
+@mixin h4() {
+}
+@mixin h5() {
+}
+@mixin p() {
+}
+@mixin caption() {
+}
+
+@mixin center-image() {
+  @include flex-container(center, center);
+
+  > img {
+    position: relative !important;
+    height: auto !important;
+    width: 100%;
+  }
+}
+
+@mixin card() {
+  @include flex-container($direction: column);
+  @include elevate('lg');
+
+  background-color: $white;
+  padding: $spacing-4;
+}
+
+@mixin elevate($elevation: 'none') {
+  @if $elevation == 'none' {
+  } @else if $elevation == 'md' {
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
+  } @else if $elevation == 'lg' {
+    box-shadow: 0px 15px 50px rgba(0, 0, 0, 0.15);
+  }
+
+  // TODO: "around" box-shadow
+  // box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+}
+
+// BROWSER SNIFFING
+@mixin onlyOnIE() {
+  @media (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    @content;
+  }
+}
+
+@mixin isEdge() {
+  @supports (-ms-ime-align: auto) {
+    @content;
+  }
+}
+
+@mixin isFF() {
+  @supports (-moz-appearance: none) {
+    @content;
+  }
+}
+
+@mixin isSafari() {
+  @media not all and (min-resolution: 0.001dpcm) {
+    @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+      @content;
+    }
+  }
+}

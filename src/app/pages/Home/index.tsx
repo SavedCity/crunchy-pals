@@ -1,3 +1,5 @@
-export default function Home() {
-  return <section>ReviewT</section>
+import styles from './index.module.scss'
+
+export default function HomePage() {
+  return <section className={styles.homeContainer}>Great Home Page Content</section>
 }
