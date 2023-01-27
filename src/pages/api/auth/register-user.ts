@@ -35,8 +35,8 @@ const validateForm = async (username: string, email: string, password: string) =
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<ResponseData>) {
-  const client = await clientPromise
-  const db = client.db('ReviewT_App')
+  // const client = await clientPromise
+  // const db = client.db('ReviewT_App')
   // validate if it is a POST
   if (req.method !== 'POST') {
     return res.status(200).json({ error: 'This API call only accepts POST methods' })
