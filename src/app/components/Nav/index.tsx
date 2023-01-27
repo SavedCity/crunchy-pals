@@ -1,3 +1,4 @@
+import LoginBtn from 'components/Auth/LoginBtn'
 import styles from './index.module.scss'
 
 export default function Nav() {
@@ -10,7 +11,7 @@ export default function Nav() {
       <section className={styles.linksContainer}>
         <a href="#">Profile</a>
         <a href="#">Favorites</a>
-        <a href="#">Login</a>
+        <LoginBtn />
       </section>
     </section>
   )

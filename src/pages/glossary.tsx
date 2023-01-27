@@ -1,4 +1,4 @@
-import Glossary from '@/app/pages/Glossary'
+import Glossary from 'pages/Glossary'
 
 export default function GlossaryPage() {
   return <Glossary />
