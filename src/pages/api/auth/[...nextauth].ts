@@ -3,7 +3,7 @@ import { MongoDBAdapter } from '@next-auth/mongodb-adapter'
 import { compare } from 'bcrypt'
 import clientPromise from 'lib/mongodb'
 import dbConnect from 'lib/dbConnect'
-import User from 'utils/model/User'
+import User from 'utils/schema/User'
 
 // import AppleProvider from 'next-auth/providers/apple'
 // import FacebookProvider from 'next-auth/providers/facebook'

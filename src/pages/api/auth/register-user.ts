@@ -1,9 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 import dbConnect from 'lib/dbConnect'
-import User from 'utils/model/User'
+import User from 'utils/schema/User'
 import bcrypt from 'bcrypt'
-import clientPromise from 'lib/mongodb'
 
 interface ResponseData {
   error?: string
@@ -35,8 +34,6 @@ const validateForm = async (username: string, email: string, password: string) =
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<ResponseData>) {
-  // const client = await clientPromise
-  // const db = client.db('ReviewT_App')
   // validate if it is a POST
   if (req.method !== 'POST') {
     return res.status(200).json({ error: 'This API call only accepts POST methods' })
