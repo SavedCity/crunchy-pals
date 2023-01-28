@@ -1,38 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ReviewT
 
-## Getting Started
+ReviewT is an innovative app that allows users to post their purchased products and leave reviews for others to see. With ReviewT, you can easily share your thoughts and experiences on the everyday products you purchase, and help others make informed decisions when they're shopping.
 
-First, run the development server:
+Its user-friendly interface makes it easy for anyone to post a review and its rating system allows users to find the best products with the best reviews. The app also allows users to search for products and reviews based on specific criteria, making the process of finding the perfect product a breeze.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+With ReviewT, you'll never have to worry about making a bad purchase again.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<hr>
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Technologies
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+This project was built using a combination of the following technologies to provide a robust and efficient development experience, and to deliver a high-quality, production-ready application.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- [Next.js](https://nextjs.org/): A framework for building server-rendered React applications.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- [TypeScript](https://www.typescriptlang.org/): A typed superset of JavaScript that adds optional types, classes, interfaces and more, to JavaScript.
 
-## Learn More
+- [SCSS Overview](https://sass-lang.com/documentation/syntax): A CSS pre-processor that allows for the use of variables, nested rules, and other features.
 
-To learn more about Next.js, take a look at the following resources:
+- [NextAuth](https://next-auth.js.org/getting-started/example): An authentication library for Next.js which provides an easy way to handle authentication with different providers like Google, Twitter, Facebook, etc.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [React Context](https://reactjs.org/docs/context.html): A way to share state between components without the need for props drilling.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<hr>
 
-## Deploy on Vercel
+## App Features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- TBD
