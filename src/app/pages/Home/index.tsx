@@ -27,7 +27,6 @@ export default function HomePage() {
       getUserData()
     }
   }, [email])
-  console.log(userData)
 
   return (
     <>
