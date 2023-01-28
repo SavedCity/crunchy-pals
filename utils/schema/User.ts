@@ -17,7 +17,6 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     minlength: 5,
-    select: false,
   },
   image: {
     type: String,

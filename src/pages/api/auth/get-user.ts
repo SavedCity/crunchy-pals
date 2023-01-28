@@ -8,7 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method === 'POST') {
     await dbConnect()
     try {
-      const user = await User.find({ email }).select('+password')
+      const user = await User.find({ email }, { hashedPassword: 0 })
       return res.json({ status: 200, user })
     } catch (error) {
       return res.json({ status: 400, error: 'Bad request' })

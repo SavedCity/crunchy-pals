@@ -17,10 +17,9 @@ export default function HomePage() {
         email,
       })
       .then(res => {
-        return res
+        setUserData(res!.data?.user[0])
       })
       .catch(err => console.log(err))
-    setUserData(res!.data?.user[0])
   }
 
   useEffect(() => {
@@ -28,6 +27,7 @@ export default function HomePage() {
       getUserData()
     }
   }, [email])
+  console.log(userData)
 
   return (
     <>
