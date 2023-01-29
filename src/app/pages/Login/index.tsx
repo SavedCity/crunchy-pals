@@ -1,10 +1,14 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
-import { loginUser } from '../helpers/login'
+import React, { useContext, useState } from 'react'
+import { loginUser } from '../../helpers/login'
+import { UserProvider } from '../../contexts/user'
 
 export default function LoginPage() {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+
+  // const { name } = useContext(UserContext)
+  // console.log(name)
 
   return (
     <div>

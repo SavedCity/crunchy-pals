@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
 import axios from 'axios'
-import { loginUser } from '../helpers/login'
+import { loginUser } from '../../helpers/login'
 
 export default function SignUpPage() {
   const [username, setUsername] = useState<string>('')
