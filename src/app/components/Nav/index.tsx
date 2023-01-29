@@ -1,6 +1,7 @@
 import LoginBtn from 'components/Auth/LoginBtn'
 import styles from './index.module.scss'
 import { useSession } from 'next-auth/react'
+import Link from 'next/link'
 
 export default function Nav() {
   const { data: session } = useSession()
@@ -13,8 +14,8 @@ export default function Nav() {
       </a>
 
       <section className={styles.linksContainer}>
-        <a href='#'>Profile</a>
-        <a href='#'>Favorites</a>
+        <Link href={'/profile'}>Profile</Link>
+        <Link href={'/favorites'}>Favorites</Link>
         <LoginBtn />
         <span>{user?.name || user?.email}</span>
       </section>
