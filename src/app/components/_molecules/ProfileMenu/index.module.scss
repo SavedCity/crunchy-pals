@@ -1,0 +1,20 @@
+@import 'styles/mixins';
+@import 'styles/variables';
+
+.profile {
+  position: relative;
+
+  &__avatar {
+    cursor: pointer;
+  }
+
+  &__menu {
+    outline: 1px solid;
+    position: absolute;
+    right: 0;
+    background-color: $soft-white;
+    padding: $spacing-2 $spacing-5;
+    @include flex($direction: column);
+    row-gap: $spacing-1;
+  }
+}

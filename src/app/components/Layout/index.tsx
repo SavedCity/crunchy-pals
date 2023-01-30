@@ -3,6 +3,8 @@ import Head from '../Head'
 import Nav from '../Nav'
 import Footer from '../Footer'
 
+import styles from './index.module.scss'
+
 interface LayoutProps {
   children: ReactNode
 }
@@ -12,7 +14,7 @@ export default function Layout({ children }: LayoutProps) {
     <>
       <Head />
       <Nav />
-      <main>{children}</main>
+      <main className={styles.main}>{children}</main>
       <Footer />
     </>
   )

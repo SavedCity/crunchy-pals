@@ -4,6 +4,6 @@
 .footerContainer {
   height: $nav-height;
   border-top: 1px solid $trans-black-3;
-  padding: 0 $spacing-5;
-  @include flex(flex-start, center);
+  padding: $spacing-10;
+  @include flex($direction: column);
 }
