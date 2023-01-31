@@ -1,3 +1,5 @@
+@import 'variables';
+
 @mixin breakpoint($minimum) {
   @media (min-width: $minimum) {
     @content;
@@ -21,7 +23,13 @@
 }
 
 // FLEXBOX
-@mixin flex($align-items: stretch, $justify-content: flex-start, $direction: row, $wrap: nowrap, $flex: flex) {
+@mixin flex(
+  $align-items: stretch,
+  $justify-content: flex-start,
+  $direction: row,
+  $wrap: nowrap,
+  $flex: flex
+) {
   display: $flex;
   align-items: $align-items;
   justify-content: $justify-content;
@@ -68,18 +76,29 @@
   }
 }
 
-// TODO: discuss with design on default sizes of these elements
 @mixin h1() {
+  font-size: $xx-large;
+  font-weight: bold;
 }
 @mixin h2() {
+  font-size: $x-large;
+  font-weight: bold;
 }
 @mixin h3() {
+  font-size: $large;
+  font-weight: bold;
 }
 @mixin h4() {
+  font-size: $medium;
+  font-weight: bold;
 }
 @mixin h5() {
+  font-size: $small;
+  font-weight: bold;
 }
 @mixin p() {
+  font-size: $small;
+  font-weight: normal;
 }
 @mixin caption() {
 }

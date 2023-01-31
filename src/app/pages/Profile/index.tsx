@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React, { useContext } from 'react'
-import UserContext from 'src/app/contexts/user'
+import UserContext from 'contexts/user'
 
 import cat from 'public/avatars/cat.png'
 import Avatar from 'components/_atoms/Avatar'

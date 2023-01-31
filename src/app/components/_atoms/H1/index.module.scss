@@ -1,0 +1,5 @@
+@import 'styles/mixins';
+
+.h1 {
+  @include h1();
+}

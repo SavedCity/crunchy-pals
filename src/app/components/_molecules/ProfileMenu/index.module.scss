@@ -6,15 +6,21 @@
 
   &__avatar {
     cursor: pointer;
+    border-radius: $full-radius;
   }
 
   &__menu {
-    outline: 1px solid;
+    @include flex($direction: column);
+    outline: 1px solid $light-gray;
     position: absolute;
     right: 0;
     background-color: $soft-white;
-    padding: $spacing-2 $spacing-5;
-    @include flex($direction: column);
+    padding: $spacing-2 $spacing-4;
     row-gap: $spacing-1;
+    width: $spacing-40;
+
+    > p {
+      margin: 0.5em 0;
+    }
   }
 }
