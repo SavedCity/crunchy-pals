@@ -1,7 +1,7 @@
 import { useSession, signOut } from 'next-auth/react'
 import Link from 'next/link'
 
-export default function LoginBtn() {
+export default function LoginOption() {
   const { data: session } = useSession()
 
   if (session) {

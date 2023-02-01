@@ -7,6 +7,7 @@ import P from 'components/_atoms/P'
 
 import styles from './index.module.scss'
 import Router from 'next/router'
+import LoginOption from 'components/Auth/LoginOption'
 
 function useOutsideAlerter(ref: any, setOpenMenu: any, openMenu: boolean) {
   useEffect(() => {
@@ -43,11 +44,18 @@ export default function ProfileMenu() {
       </section>
 
       {openMenu && (
-        <section className={styles.profile__menu}>
-          <P>Signed in as {username} </P>
-          <Link href={'/profile'}>Profile</Link>
-          <Link href={'/favorites'}>Favorites</Link>
-        </section>
+        <div className={styles.profile__menu}>
+          <section className={styles.profile__signedAs}>
+            <P>Signed in as {username} </P>
+          </section>
+          <section className={styles.profile__links}>
+            <Link href={'/profile'}>Profile</Link>
+            <Link href={'/favorites'}>Favorites</Link>
+          </section>
+          <section className={styles.profile__loginOption}>
+            <LoginOption />
+          </section>
+        </div>
       )}
     </div>
   )

@@ -9,18 +9,47 @@
     border-radius: $full-radius;
   }
 
+  &__signedAs > p {
+    margin: 0.5em 0 1em;
+  }
+
   &__menu {
-    @include flex($direction: column);
     outline: 1px solid $light-gray;
     position: absolute;
     right: 0;
+    transform: translateY($spacing-2);
     background-color: $soft-white;
     padding: $spacing-2 $spacing-4;
-    row-gap: $spacing-1;
     width: $spacing-40;
 
-    > p {
-      margin: 0.5em 0;
+    &::before {
+      content: '';
+      border-top: 1px solid $light-gray;
+      border-right: 1px solid $light-gray;
+      width: 9.5px;
+      height: 9.5px;
+      transform: rotate(-45deg);
+      position: absolute;
+      top: -6px;
+      right: 10px;
+      background-color: $soft-white;
     }
+  }
+
+  &__links {
+    @include flex($direction: column);
+    row-gap: $spacing-2;
+    transition: background-color 0.3s;
+
+    & a {
+      transition: background-color 0.1s;
+    }
+    & a:hover {
+      background-color: $light-gray;
+    }
+  }
+
+  &__loginOption {
+    margin-top: 1em;
   }
 }
