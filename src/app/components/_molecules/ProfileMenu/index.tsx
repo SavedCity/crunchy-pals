@@ -1,27 +1,50 @@
 import cat from 'public/avatars/cat.png'
 import Avatar from 'components/_atoms/Avatar'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState, useRef } from 'react'
 import UserContext from 'contexts/user'
 import Link from 'next/link'
 import P from 'components/_atoms/P'
 
 import styles from './index.module.scss'
+import Router from 'next/router'
+
+function useOutsideAlerter(ref: any, setOpenMenu: any, openMenu: boolean) {
+  useEffect(() => {
+    function handleClickOutside(e: any) {
+      let clickedMenuLink = Array.from(document.getElementsByTagName('a')).includes(e.target)
+      if ((openMenu && !ref.current?.contains(e.target)) || clickedMenuLink) {
+        // if the click is inside the menu and the click is an anchor tag ('<a>' tag)
+        if (ref.current?.contains(e.target) && clickedMenuLink) {
+          Router.push(e.target.href)
+        }
+        setOpenMenu(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [ref, openMenu])
+}
 
 export default function ProfileMenu() {
-  const [openMenu, setOpenMenu] = useState<boolean>(true)
+  const [openMenu, setOpenMenu] = useState<boolean>(false)
 
-  // const { userData }: object | any = useContext(UserContext)
-  // const { username, email, createdAt } = userData
+  const { userData }: object | any = useContext(UserContext)
+  const { username } = userData
+
+  const wrapperRef = useRef(null)
+  useOutsideAlerter(wrapperRef, setOpenMenu, openMenu)
 
   return (
-    <div className={styles.profile}>
+    <div ref={wrapperRef} className={styles.profile}>
       <section className={styles.profile__avatar} onClick={() => setOpenMenu(!openMenu)}>
         <Avatar src={cat?.src} size={40} />
       </section>
 
       {openMenu && (
         <section className={styles.profile__menu}>
-          <P>Signed in as </P>
+          <P>Signed in as {username} </P>
           <Link href={'/profile'}>Profile</Link>
           <Link href={'/favorites'}>Favorites</Link>
         </section>

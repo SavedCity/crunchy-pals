@@ -9,6 +9,8 @@ export default function ProfilePage() {
   const { userData }: object | any = useContext(UserContext)
   const { username, email, createdAt } = userData
 
+  console.table(userData)
+
   return (
     <div>
       <Avatar src={cat?.src} size={80} />
