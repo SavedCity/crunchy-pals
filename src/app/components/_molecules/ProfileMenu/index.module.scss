@@ -10,6 +10,7 @@
   }
 
   &__signedAs > p {
+    padding: $spacing-1 $spacing-3;
     margin: 0.5em 0 1em;
   }
 
@@ -19,7 +20,7 @@
     right: 0;
     transform: translateY($spacing-2);
     background-color: $soft-white;
-    padding: $spacing-2 $spacing-4;
+    padding: $spacing-2 0;
     width: $spacing-40;
 
     &::before {
@@ -38,14 +39,13 @@
 
   &__links {
     @include flex($direction: column);
-    row-gap: $spacing-2;
-    transition: background-color 0.3s;
 
     & a {
-      transition: background-color 0.1s;
+      transition: background-color 0.2s;
+      padding: $spacing-1 $spacing-3;
     }
     & a:hover {
-      background-color: $light-gray;
+      background-color: $trans-reviewt;
     }
   }
 

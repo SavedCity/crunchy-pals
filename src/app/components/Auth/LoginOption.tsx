@@ -1,11 +1,21 @@
 import { useSession, signOut } from 'next-auth/react'
 import Link from 'next/link'
 
+import styles from './index.module.scss'
+
 export default function LoginOption() {
   const { data: session } = useSession()
 
   if (session) {
-    return <button onClick={() => signOut()}>Sign out</button>
+    return (
+      <button className={styles.signOut} onClick={() => signOut()}>
+        Sign out
+      </button>
+    )
   }
-  return <Link href={'/login'}>Sign in</Link>
+  return (
+    <Link className={styles.signIn} href={'/login'}>
+      Sign in
+    </Link>
+  )
 }

@@ -1,0 +1,23 @@
+@import 'styles/variables';
+
+.signOut {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  padding: $spacing-1 $spacing-3;
+  font-size: $medium;
+  transition: background-color 0.2s;
+  width: 100%;
+  text-align: start;
+}
+
+.signIn {
+  transition: background-color 0.2s;
+  padding: $spacing-1 $spacing-3;
+  display: block;
+}
+
+.signOut:hover,
+.signIn:hover {
+  background-color: $trans-reviewt;
+}

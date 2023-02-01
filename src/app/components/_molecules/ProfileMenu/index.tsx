@@ -4,10 +4,10 @@ import { useContext, useEffect, useState, useRef } from 'react'
 import UserContext from 'contexts/user'
 import Link from 'next/link'
 import P from 'components/_atoms/P'
+import LoginOption from 'components/Auth/LoginOption'
+import Router from 'next/router'
 
 import styles from './index.module.scss'
-import Router from 'next/router'
-import LoginOption from 'components/Auth/LoginOption'
 
 function useOutsideAlerter(ref: any, setOpenMenu: any, openMenu: boolean) {
   useEffect(() => {
