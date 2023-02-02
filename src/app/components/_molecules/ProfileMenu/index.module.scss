@@ -41,7 +41,7 @@
     @include flex($direction: column);
 
     & a {
-      transition: background-color 0.2s;
+      transition: background-color 0.1s;
       padding: $spacing-1 $spacing-3;
     }
     & a:hover {
