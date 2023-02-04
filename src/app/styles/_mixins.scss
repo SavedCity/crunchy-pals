@@ -100,6 +100,17 @@
   font-size: $small;
   font-weight: normal;
 }
+
+@mixin divider-top($color: $light-gray, $padding: $spacing-1) {
+  border-top: 1px solid $color;
+  padding-top: $spacing-2;
+}
+
+@mixin divider-bottom($color: $light-gray, $padding: $spacing-1) {
+  border-bottom: 1px solid $color;
+  padding-bottom: $padding;
+}
+
 @mixin caption() {
 }
 

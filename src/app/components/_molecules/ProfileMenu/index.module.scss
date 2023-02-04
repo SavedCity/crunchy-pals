@@ -11,7 +11,8 @@
 
   &__signedAs > p {
     padding: $spacing-1 $spacing-3;
-    margin: 0.5em 0 1em;
+    margin: 0 0 1em;
+    @include divider-bottom($padding: $spacing-3);
   }
 
   &__menu {
@@ -50,6 +51,7 @@
   }
 
   &__loginOption {
+    @include divider-top();
     margin-top: 1em;
   }
 }
