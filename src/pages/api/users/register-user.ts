@@ -58,6 +58,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     .save()
     .then(() => res.status(200).json({ msg: 'Successfuly created new User: ' + newUser }))
     .catch((err: string) =>
-      res.status(400).json({ error: "Error on '/api/auth/register-user': " + err })
+      res.status(400).json({ error: "Error on '/api/users/register-user': " + err })
     )
 }

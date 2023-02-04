@@ -17,7 +17,7 @@ export const UserProvider = ({ children }: Props) => {
 
   const getUserData = async () => {
     const res = await axios
-      .post('/api/auth/get-user', {
+      .post('/api/users/get-user', {
         email,
       })
       .then(res => {

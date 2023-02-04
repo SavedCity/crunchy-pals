@@ -12,7 +12,7 @@ export default function SignUpPage() {
     e.preventDefault()
     const res = await axios
       .post(
-        '/api/auth/register-user',
+        '/api/users/register-user',
         {
           username,
           email,

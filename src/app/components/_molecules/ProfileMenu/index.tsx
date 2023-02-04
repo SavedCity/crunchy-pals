@@ -47,7 +47,7 @@ export default function ProfileMenu() {
         <div className={styles.profile__menu}>
           <section className={styles.profile__signedAs}>
             <P>
-              Signed in as <em>{username}</em>{' '}
+              Signed in as <em>{username}</em>
             </P>
           </section>
           <section className={styles.profile__links}>
