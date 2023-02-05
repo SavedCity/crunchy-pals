@@ -21,7 +21,7 @@
     right: 0;
     transform: translateY($spacing-2);
     background-color: $soft-white;
-    padding: $spacing-2 0;
+    padding: $spacing-1 0;
     width: $spacing-40;
 
     &::before {
@@ -43,7 +43,7 @@
 
     & a {
       transition: background-color 0.1s;
-      padding: $spacing-1 $spacing-3;
+      // padding: $spacing-1 $spacing-3;
     }
     & a:hover {
       background-color: $trans-reviewt;
@@ -51,7 +51,8 @@
   }
 
   &__loginOption {
-    @include divider-top();
+    @include divider-top($padding: $spacing-1);
+    text-align: center;
     margin-top: 1em;
   }
 }

@@ -1,0 +1,30 @@
+@import 'styles/mixins';
+
+.icon {
+  // @include flex(center, center);
+  color: inherit;
+
+  &__sm {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+
+  &__md {
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+  }
+
+  &__lg {
+    font-size: 26px;
+    width: 26px;
+    height: 26px;
+  }
+
+  &__xl {
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+  }
+}

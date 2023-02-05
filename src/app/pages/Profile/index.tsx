@@ -4,6 +4,8 @@ import UserContext from 'contexts/user'
 
 import cat from 'public/avatars/cat.png'
 import Avatar from 'components/_atoms/Avatar'
+import FieldInput from 'components/_atoms/FieldInput'
+import Icon from 'components/_atoms/Icon'
 
 export default function ProfilePage() {
   const { userData }: object | any = useContext(UserContext)
@@ -24,6 +26,8 @@ export default function ProfilePage() {
       <span>
         Member since - <b>{createdAt}</b>
       </span>
+      <FieldInput placeholder='Where do you live?' />
+      <Icon name='star' />
     </div>
   )
 }

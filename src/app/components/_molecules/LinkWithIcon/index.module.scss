@@ -1,0 +1,7 @@
+@import 'styles/mixins';
+
+.link {
+  @include flex($align-items: center);
+  column-gap: $spacing-1;
+  padding-left: $spacing-1;
+}

@@ -5,6 +5,7 @@ import UserContext from 'contexts/user'
 import Link from 'next/link'
 import P from 'components/_atoms/P'
 import LoginOption from 'components/Auth/LoginOption'
+import LinkWithIcon from 'components/_molecules/LinkWithIcon'
 import Router from 'next/router'
 
 import styles from './index.module.scss'
@@ -13,7 +14,10 @@ function useOutsideAlerter(ref: any, setOpenMenu: any, openMenu: boolean) {
   useEffect(() => {
     function handleClickOutside(e: any) {
       let clickedMenuLink = Array.from(document.getElementsByTagName('a')).includes(e.target)
-      if ((openMenu && !ref.current?.contains(e.target)) || clickedMenuLink) {
+      let clickedMenuIcon = Array.from(document.getElementsByClassName('material-icons')).includes(
+        e.target
+      )
+      if ((openMenu && !ref.current?.contains(e.target)) || clickedMenuLink || clickedMenuIcon) {
         // if the click is inside the menu and the click is an anchor tag ('<a>' tag)
         if (ref.current?.contains(e.target) && clickedMenuLink) {
           Router.push(e.target.href)
@@ -51,8 +55,12 @@ export default function ProfileMenu() {
             </P>
           </section>
           <section className={styles.profile__links}>
-            <Link href={'/profile'}>Profile</Link>
-            <Link href={'/favorites'}>Favorites</Link>
+            <LinkWithIcon href='/profile' IconName='account_circle'>
+              Profile
+            </LinkWithIcon>
+            <LinkWithIcon href='/favorites' IconName='favorite'>
+              Favorites
+            </LinkWithIcon>
           </section>
           <section className={styles.profile__loginOption}>
             <LoginOption />

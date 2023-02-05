@@ -1,7 +1,6 @@
-import LoginOption from 'components/Auth/LoginOption'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
-import ProfileMenu from 'components/_molecules/ProfileMenu'
+import ProfileMenu from 'components/ProfileMenu'
 
 import styles from './index.module.scss'
 
@@ -15,9 +14,7 @@ export default function Nav() {
         ReviewT
       </Link>
 
-      <section className={styles.linksContainer}>
-        <ProfileMenu />
-      </section>
+      <ProfileMenu />
     </div>
   )
 }

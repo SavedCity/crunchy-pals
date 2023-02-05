@@ -1,0 +1,21 @@
+@import 'styles/variables';
+
+.input {
+  width: 100%;
+  outline: 1px solid #0000;
+  border: none;
+  padding: $spacing-1 0;
+  font-size: 16px;
+  letter-spacing: 0.0175em;
+  color: $black;
+  background-color: transparent;
+  border-radius: 2px;
+
+  &::placeholder {
+    color: $concrete;
+  }
+
+  &:disabled {
+    color: $concrete;
+  }
+}

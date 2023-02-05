@@ -12,8 +12,3 @@
   margin: 0;
   font-size: $large;
 }
-
-.linksContainer {
-  @include flex($align-items: center);
-  column-gap: $spacing-4;
-}
