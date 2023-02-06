@@ -1,11 +1,9 @@
-import Image from 'next/image'
 import React, { useContext } from 'react'
 import UserContext from 'contexts/user'
 
 import cat from 'public/avatars/cat.png'
 import Avatar from 'components/_atoms/Avatar'
-import FieldInput from 'components/_atoms/FieldInput'
-import Icon from 'components/_atoms/Icon'
+import Field from 'components/_molecules/Field'
 
 export default function ProfilePage() {
   const { userData }: object | any = useContext(UserContext)
@@ -26,8 +24,13 @@ export default function ProfilePage() {
       <span>
         Member since - <b>{createdAt}</b>
       </span>
-      <FieldInput placeholder='Where do you live?' />
-      <Icon name='star' />
+      <Field
+        type='text'
+        placeholder='Username'
+        label='Username'
+        leftIcon='person'
+        rightIcon='help'
+      />
     </div>
   )
 }

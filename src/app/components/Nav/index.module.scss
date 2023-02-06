@@ -1,14 +1,19 @@
 @import 'styles/variables';
 @import 'styles/mixins';
 
-.navContainer {
+.nav {
+  @include flex($align-items: center, $justify-content: space-between);
   height: $nav-height;
   border-bottom: 1px solid $trans-black-3;
   padding: 0 $spacing-5;
-  @include flex($align-items: center, $justify-content: space-between);
-}
 
-.brandName {
-  margin: 0;
-  font-size: $large;
+  &__brandName {
+    margin: 0;
+    font-size: $large;
+  }
+
+  &__rightSide {
+    @include flex($align-items: center);
+    column-gap: $spacing-5;
+  }
 }

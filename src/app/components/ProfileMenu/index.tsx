@@ -14,13 +14,13 @@ function useOutsideAlerter(ref: any, setOpenMenu: any, openMenu: boolean) {
   useEffect(() => {
     function handleClickOutside(e: any) {
       let clickedMenuLink = Array.from(document.getElementsByTagName('a')).includes(e.target)
-      let clickedMenuIcon = Array.from(document.getElementsByClassName('material-icons')).includes(
-        e.target
-      )
-      if ((openMenu && !ref.current?.contains(e.target)) || clickedMenuLink || clickedMenuIcon) {
+      let clickedMenuIcon = Array.from(
+        document.getElementsByClassName('material-symbols-outlined')
+      ).includes(e.target)
+      if (openMenu && (!ref.current?.contains(e.target) || clickedMenuLink || clickedMenuIcon)) {
         // if the click is inside the menu and the click is an anchor tag ('<a>' tag)
-        if (ref.current?.contains(e.target) && clickedMenuLink) {
-          Router.push(e.target.href)
+        if (ref.current?.contains(e.target) && (clickedMenuLink || clickedMenuIcon)) {
+          Router.push(e.target.href || e.target.parentNode.href)
         }
         setOpenMenu(false)
       }
@@ -54,6 +54,7 @@ export default function ProfileMenu() {
               Signed in as <em>{username}</em>
             </P>
           </section>
+
           <section className={styles.profile__links}>
             <LinkWithIcon href='/profile' IconName='account_circle'>
               Profile
@@ -62,6 +63,7 @@ export default function ProfileMenu() {
               Favorites
             </LinkWithIcon>
           </section>
+
           <section className={styles.profile__loginOption}>
             <LoginOption />
           </section>

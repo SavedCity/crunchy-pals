@@ -5,9 +5,10 @@ import styles from './index.module.scss'
 
 export interface FieldInputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
 
-const FieldInput = ({ className = '', ...props }: FieldInputProps) => {
+const FieldInput = ({ className = '', id, ...props }: FieldInputProps) => {
   return (
     <input
+      id={id}
       {...props}
       className={classNames({
         [styles.input]: true,

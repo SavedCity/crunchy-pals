@@ -10,9 +10,10 @@
   }
 
   &__signedAs > p {
-    padding: $spacing-1 $spacing-3;
-    margin: 0 0 1em;
     @include divider-bottom($padding: $spacing-3);
+    padding: $spacing-2;
+    margin: 0 0 1em;
+    font-size: $medium;
   }
 
   &__menu {
@@ -43,10 +44,10 @@
 
     & a {
       transition: background-color 0.1s;
-      // padding: $spacing-1 $spacing-3;
+      padding: 2px $spacing-1;
     }
     & a:hover {
-      background-color: $trans-reviewt;
+      background-color: $gray-4;
     }
   }
 

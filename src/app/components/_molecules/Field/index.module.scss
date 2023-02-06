@@ -1,0 +1,11 @@
+@import 'styles/variables';
+@import 'styles/mixins';
+
+.field {
+  &__wrapper {
+    @include flex();
+    border: 1px solid $concrete;
+    border-radius: 3px;
+    padding: $spacing-1 $spacing-2;
+  }
+}

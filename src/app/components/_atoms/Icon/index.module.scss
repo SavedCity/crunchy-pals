@@ -3,6 +3,11 @@
 .icon {
   // @include flex(center, center);
   color: inherit;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+
+  &__filled {
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+  }
 
   &__sm {
     font-size: 18px;

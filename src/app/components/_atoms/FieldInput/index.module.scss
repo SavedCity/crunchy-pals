@@ -2,10 +2,10 @@
 
 .input {
   width: 100%;
-  outline: 1px solid #0000;
+  outline: none;
   border: none;
   padding: $spacing-1 0;
-  font-size: 16px;
+  font-size: $medium;
   letter-spacing: 0.0175em;
   color: $black;
   background-color: transparent;
