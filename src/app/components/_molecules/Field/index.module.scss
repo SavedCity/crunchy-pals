@@ -2,8 +2,10 @@
 @import 'styles/mixins';
 
 .field {
+  @include flex($direction: column, $row-gap: $spacing-1);
+  cursor: default;
   &__wrapper {
-    @include flex();
+    @include flex($column-gap: $spacing-1);
     border: 1px solid $concrete;
     border-radius: 3px;
     padding: $spacing-1 $spacing-2;

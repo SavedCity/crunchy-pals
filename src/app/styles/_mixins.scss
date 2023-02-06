@@ -28,13 +28,17 @@
   $justify-content: flex-start,
   $direction: row,
   $wrap: nowrap,
-  $flex: flex
+  $flex: flex,
+  $row-gap: 0,
+  $column-gap: 0
 ) {
   display: $flex;
   align-items: $align-items;
   justify-content: $justify-content;
   flex-direction: $direction;
   flex-wrap: $wrap;
+  row-gap: $row-gap;
+  column-gap: $column-gap;
 }
 
 @mixin flex-container(

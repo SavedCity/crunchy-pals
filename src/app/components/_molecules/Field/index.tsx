@@ -1,9 +1,9 @@
 import classNames from 'classnames'
 import FieldInput from 'components/_atoms/FieldInput'
-
-import styles from './index.module.scss'
 import FieldLabel from 'components/_atoms/FieldLabel'
 import Icon from 'components/_atoms/Icon'
+
+import styles from './index.module.scss'
 
 interface fieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string

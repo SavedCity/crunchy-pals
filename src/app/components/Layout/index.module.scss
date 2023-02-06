@@ -2,4 +2,5 @@
 
 .main {
   padding: $spacing-10;
+  min-height: calc(100vh - $nav-height);
 }

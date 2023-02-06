@@ -3,7 +3,7 @@
 
 .footerContainer {
   height: $nav-height;
-  border-top: 1px solid $trans-black-3;
   padding: $spacing-10;
   @include flex($direction: column);
+  @include divider-top();
 }
