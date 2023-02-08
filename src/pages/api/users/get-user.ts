@@ -14,5 +14,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.json({ status: 400, error: 'Bad request' })
     }
   }
-  return res.json({ status: 400, error: 'This API call only accepts GET methods' })
+  return res.json({ status: 400, error: 'This API call only accepts POST methods' })
 }

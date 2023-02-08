@@ -8,8 +8,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       const { id } = req.query
       const formData = req.body
+
       if (id && formData) {
-        const user = await User.findByIdAndUpdate(id, formData)
+        const user = await User.findByIdAndUpdate(id, formData, { new: true })
         return res.json({ status: 200, user })
       }
       return res.json({ status: 404, error: 'No user id or data passed' })

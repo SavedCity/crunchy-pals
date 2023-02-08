@@ -36,7 +36,7 @@ export default function ProfileMenu() {
   const [openMenu, setOpenMenu] = useState<boolean>(false)
 
   const { userData }: object | any = useContext(UserContext)
-  const { username } = userData
+  const { username } = userData || {}
 
   const wrapperRef = useRef(null)
   useOutsideAlerter(wrapperRef, setOpenMenu, openMenu)

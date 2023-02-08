@@ -17,7 +17,7 @@ export const UserProvider = ({ children }: Props) => {
 
   const getUserData = async () => {
     const res = await axios
-      .post('/api/users/get-user', {
+      .post(`/api/users/get-user`, {
         email,
       })
       .then(res => {
@@ -32,7 +32,9 @@ export const UserProvider = ({ children }: Props) => {
     }
   }, [email])
 
-  return <UserContext.Provider value={{ userData }}>{children}</UserContext.Provider>
+  return (
+    <UserContext.Provider value={{ userData, setUserData, email }}>{children}</UserContext.Provider>
+  )
 }
 
 export default UserContext

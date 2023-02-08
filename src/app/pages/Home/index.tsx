@@ -4,7 +4,7 @@ import UserContext from 'contexts/user'
 
 export default function HomePage() {
   const { userData }: object | any = useContext(UserContext)
-  const { username } = userData
+  const { username } = userData || {}
 
   return (
     <>
