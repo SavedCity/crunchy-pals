@@ -7,18 +7,21 @@ import axios from 'axios'
 
 import styles from './index.module.scss'
 
-export default function EditProfile() {
-  const { userData, setUserData }: object | any = useContext(UserContext)
-  const { _id } = userData || {}
+interface EditProfileProps {
+  username: string
+  id: string
+}
 
-  const [username, setUsername] = useState<string>('')
+export default function EditProfile({ username, id }: EditProfileProps) {
+  const { setUserData }: object | any = useContext(UserContext)
+  // const { id, username } = userData || {}
 
-  console.log(userData)
+  const [newUsername, setNewUsername] = useState<string>(username || '')
 
   const updateProfile = async () => {
     const res = await axios
-      .put(`/api/users/update-user/${_id}`, {
-        username,
+      .put(`/api/users/update-user/${id}`, {
+        username: newUsername,
       })
       .then(res => {
         console.log(res?.data?.user)
@@ -26,8 +29,6 @@ export default function EditProfile() {
       })
       .catch(err => console.log(err))
   }
-
-  // useEffect(() => {}, [])
 
   return (
     <div
@@ -40,8 +41,8 @@ export default function EditProfile() {
         placeholder='Username'
         label='Username'
         leftIcon='person'
-        value={username}
-        onChange={e => setUsername(e.target.value)}
+        value={newUsername}
+        onChange={e => setNewUsername(e.target.value)}
       />
       <button onClick={updateProfile}>Update</button>
     </div>

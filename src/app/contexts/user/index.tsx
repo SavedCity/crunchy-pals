@@ -32,9 +32,7 @@ export const UserProvider = ({ children }: Props) => {
     }
   }, [email])
 
-  return (
-    <UserContext.Provider value={{ userData, setUserData, email }}>{children}</UserContext.Provider>
-  )
+  return <UserContext.Provider value={{ userData, setUserData }}>{children}</UserContext.Provider>
 }
 
 export default UserContext

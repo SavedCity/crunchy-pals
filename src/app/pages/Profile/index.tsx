@@ -10,7 +10,7 @@ import EditProfile from './EditProfile'
 
 export default function ProfilePage() {
   const { userData }: object | any = useContext(UserContext)
-  let { username, email, createdAt } = userData || {}
+  const { _id, username, email, createdAt } = userData || {}
 
   return (
     <div
@@ -32,7 +32,7 @@ export default function ProfilePage() {
         Member since: <b>{createdAt}</b>
       </span>
 
-      <EditProfile />
+      <EditProfile username={username} id={_id} />
     </div>
   )
 }
