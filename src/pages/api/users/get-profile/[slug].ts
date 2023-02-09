@@ -3,12 +3,12 @@ import dbConnect from 'lib/dbConnect'
 import User from 'utils/schema/User'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { email } = req.body
+  const { slug } = req.query
 
   if (req.method === 'POST') {
     await dbConnect()
     try {
-      const user = await User.findOne({ email }, { hashedPassword: 0 })
+      const user = await User.findOne({ username: slug }, { hashedPassword: 0 })
       return res.json({ status: 200, user })
     } catch (error) {
       return res.json({ status: 400, error: 'Bad request' })

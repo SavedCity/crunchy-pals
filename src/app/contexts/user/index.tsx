@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const UserProvider = ({ children }: Props) => {
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
   const user: object | undefined | any = session ? session.user : {}
   const { email } = user
 
@@ -21,7 +21,7 @@ export const UserProvider = ({ children }: Props) => {
         email,
       })
       .then(res => {
-        setUserData(res!.data?.user[0])
+        setUserData(res.data.user)
       })
       .catch(err => console.log(err))
   }
@@ -32,7 +32,11 @@ export const UserProvider = ({ children }: Props) => {
     }
   }, [email])
 
-  return <UserContext.Provider value={{ userData, setUserData }}>{children}</UserContext.Provider>
+  return (
+    <UserContext.Provider value={{ userData, status, setUserData }}>
+      {children}
+    </UserContext.Provider>
+  )
 }
 
 export default UserContext

@@ -55,7 +55,7 @@ export default function ProfileMenu() {
           </section>
 
           <section className={styles.profile__links}>
-            <LinkWithIcon href='/profile' IconName='account_circle'>
+            <LinkWithIcon href={`/profile/${username}`} IconName='account_circle'>
               Profile
             </LinkWithIcon>
             <LinkWithIcon href='/favorites' IconName='favorite'>

@@ -4,6 +4,7 @@ import { compare } from 'bcrypt'
 import clientPromise from 'lib/mongodb'
 import dbConnect from 'lib/dbConnect'
 import User from 'utils/schema/User'
+import type { NextAuthOptions } from 'next-auth'
 
 // import AppleProvider from 'next-auth/providers/apple'
 // import FacebookProvider from 'next-auth/providers/facebook'
@@ -11,7 +12,7 @@ import GoogleProvider from 'next-auth/providers/google'
 // import EmailProvider from 'next-auth/providers/email'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
-export default NextAuth({
+export const authOptions: NextAuthOptions = {
   providers: [
     // AppleProvider({
     //   clientId: process.env.APPLE_ID,
@@ -69,4 +70,6 @@ export default NextAuth({
     secret: process.env.NEXTAUTH_JWT_SECRET,
   },
   secret: process.env.NEXTAUTH_SECRET,
-})
+}
+
+export default NextAuth(authOptions)

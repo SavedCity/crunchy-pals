@@ -1,16 +1,12 @@
-import React, { useContext } from 'react'
-import UserContext from 'contexts/user'
-
+import classNames from 'classnames'
 import cat from 'public/avatars/cat.png'
 import Avatar from 'components/_atoms/Avatar'
-import classNames from 'classnames'
-
-import styles from './index.module.scss'
 import EditProfile from './EditProfile'
 
-export default function ProfilePage() {
-  const { userData }: object | any = useContext(UserContext)
-  const { _id, username, email, createdAt } = userData || {}
+import styles from './index.module.scss'
+
+export default function ProfilePage({ user }: any) {
+  const { _id, username, email, createdAt } = user || {}
 
   return (
     <div
@@ -32,7 +28,7 @@ export default function ProfilePage() {
         Member since: <b>{createdAt}</b>
       </span>
 
-      <EditProfile username={username} id={_id} />
+      <EditProfile user={user} />
     </div>
   )
 }
