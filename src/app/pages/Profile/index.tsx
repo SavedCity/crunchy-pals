@@ -6,15 +6,20 @@ import EditProfile from './EditProfile'
 import styles from './index.module.scss'
 
 export default function ProfilePage({ user }: any) {
-  const { _id, username, email, createdAt } = user || {}
-
+  const { _id, username, email, createdAt, image } = user || {}
   return (
     <div
       className={classNames({
         [styles.profile]: true,
       })}
     >
-      <Avatar src={cat?.src} size={80} />
+      <section
+        className={classNames({
+          [styles.profile__avatar]: true,
+        })}
+      >
+        <Avatar fill src={image} />
+      </section>
       <br />
       <span>
         Username: <b>{username}</b>

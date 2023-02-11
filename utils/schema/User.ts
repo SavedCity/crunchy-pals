@@ -6,7 +6,7 @@ const UserSchema = new Schema({
   username: {
     type: String,
     required: true,
-    // unique: true,
+    unique: true,
   },
   email: {
     type: String,
@@ -19,6 +19,9 @@ const UserSchema = new Schema({
     minlength: 5,
   },
   image: {
+    type: String,
+  },
+  dob: {
     type: String,
   },
   createdAt: { type: Date, default: Date.now },

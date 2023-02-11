@@ -12,20 +12,25 @@ interface EditProfileProps {
   user: {
     username: string
     _id: string
+    image: string
+    dob: string
   }
 }
 
 export default function EditProfile({ user }: EditProfileProps) {
   const { setUserData }: object | any = useContext(UserContext)
-  const { _id, username } = user || {}
+  const { _id, username, image, dob } = user || {}
 
   const [newUsername, setNewUsername] = useState<string>(username || '')
-  const [newImageUrl, setNewImageUrl] = useState<string>(username || '')
+  const [newImageUrl, setNewImageUrl] = useState<string>(image || '')
+  const [newDob, setNewDob] = useState<string>(dob || '')
 
   const updateProfile = async () => {
     const res = await axios
-      .put(`/api/users/update-user/${_id}`, {
+      .patch(`/api/users/update-user/${_id}`, {
         username: newUsername,
+        image: newImageUrl,
+        dob: newDob,
       })
       .then(res => {
         console.log(res?.data?.user)
@@ -54,6 +59,14 @@ export default function EditProfile({ user }: EditProfileProps) {
         leftIcon='image'
         value={newImageUrl}
         onChange={e => setNewImageUrl(e.target.value)}
+      />
+      <Field
+        // type='date'
+        placeholder='Date of birth'
+        label='Date of birth'
+        leftIcon='calendar_month'
+        value={newDob}
+        onChange={e => setNewDob(e.target.value)}
       />
       <button onClick={updateProfile}>Update</button>
     </div>
