@@ -4,6 +4,7 @@ import Avatar from 'components/_atoms/Avatar'
 import EditProfile from './EditProfile'
 
 import styles from './index.module.scss'
+import FileUploader from 'components/_molecules/FileUploader'
 
 export default function ProfilePage({ user }: any) {
   const { _id, username, email, createdAt, image } = user || {}
@@ -20,6 +21,8 @@ export default function ProfilePage({ user }: any) {
       >
         <Avatar fill src={image} />
       </section>
+      <FileUploader />
+
       <br />
       <span>
         Username: <b>{username}</b>
