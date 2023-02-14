@@ -1,25 +1,29 @@
 import { useState } from 'react'
-import Head from 'next/head'
 import styles from './index.module.scss'
 
 export default function FileUploader() {
-  const [imageSrc, setImageSrc] = useState()
-  const [uploadData, setUploadData] = useState()
+  const [imageSrc, setImageSrc] = useState<string>('')
+  const [uploadedData, setUploadedData] = useState()
+  // const [uploadedData, setUploadedData] = useState<boolean>()
 
   /**
    * handleOnChange
    * @description Triggers when the file input changes (ex: when a file is selected)
    */
 
-  function handleOnChange(changeEvent: { target: { files: Blob[] } }) {
+  function handleOnChange(changeEvent: React.ChangeEvent | any) {
     const reader = new FileReader()
 
-    reader.onload = function (onLoadEvent) {
+    reader.onload = function (onLoadEvent: any) {
       setImageSrc(onLoadEvent.target.result)
-      setUploadData(undefined)
+      setUploadedData(undefined)
     }
 
-    reader?.readAsDataURL(changeEvent?.target?.files?.[0])
+    if (changeEvent.target.files.length > 0) {
+      reader.readAsDataURL(changeEvent.target.files[0])
+    } else {
+      setImageSrc('')
+    }
   }
 
   /**
@@ -27,11 +31,11 @@ export default function FileUploader() {
    * @description Triggers when the main form is submitted
    */
 
-  async function handleOnSubmit(event: { preventDefault: () => void; currentTarget: any }) {
-    event.preventDefault()
+  async function handleOnSubmit(e: { preventDefault: () => void; currentTarget: any }) {
+    e.preventDefault()
 
-    const form = event.currentTarget
-    const fileInput: any = Array.from(form.elements).find(({ name }) => name === 'file')
+    const form = e.currentTarget
+    const fileInput: any = Array.from(form.elements).find(({ name }: any) => name === 'file')
 
     const formData = new FormData()
 
@@ -47,8 +51,11 @@ export default function FileUploader() {
     }).then(r => r.json())
 
     setImageSrc(data.secure_url)
-    setUploadData(data)
+    setUploadedData(data)
+    fileInput.value = ''
   }
+
+  // TODO: store imageSrc into database then we can fetch it and apply it
 
   return (
     <div className={styles.container}>
@@ -63,18 +70,13 @@ export default function FileUploader() {
             <input type='file' name='file' />
           </p>
 
-          <img src={imageSrc} />
-
-          {imageSrc && !uploadData && (
-            <p>
-              <button>Upload Files</button>
-            </p>
-          )}
-
-          {uploadData && (
-            <code>
-              <pre>{JSON.stringify(uploadData, null, 2)}</pre>
-            </code>
+          {imageSrc && !uploadedData && (
+            <div>
+              <img src={imageSrc} />
+              <p>
+                <button>Upload Files</button>
+              </p>
+            </div>
           )}
         </form>
       </main>
