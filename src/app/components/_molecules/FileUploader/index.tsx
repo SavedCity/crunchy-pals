@@ -61,7 +61,6 @@ export default function FileUploader({ id, username }: FileUploaderProps) {
     setImageSrc(data.secure_url)
     setUploadedData(data)
     fileInput.value = ''
-    // console.log(data);
   }
 
   const updateProfile = async (image: string) => {
