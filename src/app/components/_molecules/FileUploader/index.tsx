@@ -75,8 +75,6 @@ export default function FileUploader({ id, username }: FileUploaderProps) {
       .catch(err => console.log(err))
   }
 
-  // TODO: store imageSrc into database then we can fetch it and apply it
-
   return (
     <div className={styles.container}>
       <main className={styles.main}>
