@@ -1,13 +1,24 @@
 import classNames from 'classnames'
-import cat from 'public/avatars/cat.png'
 import Avatar from 'components/_atoms/Avatar'
 import EditProfile from './EditProfile'
+import FileUploader from 'components/_molecules/FileUploader'
+import UserContext from 'contexts/user'
+import { useContext, useEffect, useState } from 'react'
 
 import styles from './index.module.scss'
-import FileUploader from 'components/_molecules/FileUploader'
 
 export default function ProfilePage({ user }: any) {
-  const { _id, username, email, createdAt, image } = user || {}
+  const { userData }: object | any = useContext(UserContext)
+
+  const [data, setData] = useState(user)
+  const { _id, username, email, createdAt, image } = data || {}
+
+  useEffect(() => {
+    if (Object.keys(userData).length) {
+      setData(userData)
+    }
+  }, [userData])
+
   return (
     <div
       className={classNames({
@@ -21,7 +32,8 @@ export default function ProfilePage({ user }: any) {
       >
         <Avatar fill src={image} />
       </section>
-      <FileUploader />
+
+      <FileUploader id={_id} username={username}/>
 
       <br />
       <span>
@@ -35,6 +47,10 @@ export default function ProfilePage({ user }: any) {
       <span>
         Member since: <b>{createdAt}</b>
       </span>
+
+      <br />
+      <br />
+      {image}
 
       <EditProfile user={user} />
     </div>
