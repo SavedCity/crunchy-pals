@@ -33,7 +33,7 @@ export default function ProfilePage({ user }: any) {
         <Avatar fill src={image} />
       </section>
 
-      <FileUploader id={_id} username={username}/>
+      <FileUploader id={_id} />
 
       <br />
       <span>

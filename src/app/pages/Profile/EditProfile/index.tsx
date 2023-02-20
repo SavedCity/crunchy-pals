@@ -53,13 +53,13 @@ export default function EditProfile({ user }: EditProfileProps) {
         value={newUsername}
         onChange={e => setNewUsername(e.target.value)}
       />
-      <Field
+      {/* <Field
         placeholder='Image'
         label='Image'
         leftIcon='image'
         value={newImageUrl}
         onChange={e => setNewImageUrl(e.target.value)}
-      />
+      /> */}
       <Field
         // type='date'
         placeholder='Date of birth'

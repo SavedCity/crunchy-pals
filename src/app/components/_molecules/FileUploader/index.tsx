@@ -2,15 +2,17 @@ import { useContext, useState } from 'react'
 import axios from 'axios'
 import UserContext from 'contexts/user'
 
+import FieldInput from 'components/_atoms/FieldInput'
+import H4 from 'components/_atoms/H4'
+
 import styles from './index.module.scss'
-import Router from 'next/router'
+
 
 interface FileUploaderProps {
   id: string
-  username: string
 }
 
-export default function FileUploader({ id, username }: FileUploaderProps) {
+export default function FileUploader({ id }: FileUploaderProps) {
   const { setUserData }: object | any = useContext(UserContext)
 
   const [imageSrc, setImageSrc] = useState<string>('')
@@ -75,28 +77,28 @@ export default function FileUploader({ id, username }: FileUploaderProps) {
   }
 
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <form
-          className={styles.form}
-          method='post'
-          onChange={handleOnChange}
-          onSubmit={handleOnSubmit}
-        >
-          <p>
-            <input type='file' name='file' />
-          </p>
+    <div className={styles.fileUploader}>
+      <form
+        className={styles.fileUploader__form}
+        method='post'
+        onChange={handleOnChange}
+        onSubmit={handleOnSubmit}
+      >
+        <div>
+          <FieldInput type='file' name='file' />
+        </div>
 
-          {imageSrc && !uploadedData && (
-            <div>
-              <img src={imageSrc} />
-              <p>
-                <button>Upload Files</button>
-              </p>
-            </div>
-          )}
-        </form>
-      </main>
+        {imageSrc && !uploadedData && (
+          <div>
+            <img src={imageSrc} />
+            <p>
+              <button>Upload Files</button>
+            </p>
+          </div>
+        )}
+
+        {uploadedData && <H4>Uploaded!</H4>}
+      </form>
     </div>
   )
 }

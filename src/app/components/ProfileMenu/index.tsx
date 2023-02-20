@@ -35,7 +35,7 @@ export default function ProfileMenu() {
   const [openMenu, setOpenMenu] = useState<boolean>(false)
 
   const { userData }: object | any = useContext(UserContext)
-  const { username } = userData || {}
+  const { username, image } = userData || {}
 
   const wrapperRef = useRef(null)
   useOutsideAlerter(wrapperRef, setOpenMenu, openMenu)
@@ -43,7 +43,7 @@ export default function ProfileMenu() {
   return (
     <div ref={wrapperRef} className={styles.profile}>
       <section className={styles.profile__avatar} onClick={() => setOpenMenu(!openMenu)}>
-        <Avatar src={cat?.src} size={40} />
+        <Avatar src={image} size={40} />
       </section>
 
       {openMenu && (
