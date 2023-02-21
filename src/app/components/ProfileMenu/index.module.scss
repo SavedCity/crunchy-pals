@@ -7,6 +7,11 @@
   &__avatar {
     cursor: pointer;
     border-radius: $full-radius;
+
+    img {
+      border-radius: $full-radius;
+      object-fit: cover;
+    }
   }
 
   &__signedAs > p {

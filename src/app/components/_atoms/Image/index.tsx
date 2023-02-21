@@ -1,14 +1,20 @@
-import React from 'react'
-import classNames from 'classnames'
-import Image, { ImageProps } from 'next/image'
+import React from "react";
+import classNames from "classnames";
+import Image, { ImageProps } from "next/image";
 
-import styles from './index.module.scss'
+import styles from "./index.module.scss";
 
 export interface ImageProps_ extends ImageProps {
-  lazy?: Boolean
+  lazy?: Boolean;
+  // src: string;
 }
 
-const Image_ = ({ children, lazy = true, className = '', ...props }: ImageProps_) => {
+const Image_ = ({
+  children,
+  lazy = true,
+  className = "",
+  ...props
+}: ImageProps_) => {
   return (
     <Image
       // placeholder={lazy ? 'blur' : 'empty'}
@@ -18,7 +24,7 @@ const Image_ = ({ children, lazy = true, className = '', ...props }: ImageProps_
       })}
       {...props}
     />
-  )
-}
+  );
+};
 
-export default Image_
+export default Image_;

@@ -22,14 +22,14 @@ export default function EditProfile({ user }: EditProfileProps) {
   const { _id, username, image, dob } = user || {}
 
   const [newUsername, setNewUsername] = useState<string>(username || '')
-  const [newImageUrl, setNewImageUrl] = useState<string>(image || '')
   const [newDob, setNewDob] = useState<string>(dob || '')
+  // const [newImageUrl, setNewImageUrl] = useState<string>(image || '')
 
   const updateProfile = async () => {
     const res = await axios
       .patch(`/api/users/update-user/${_id}`, {
         username: newUsername,
-        image: newImageUrl,
+        // image: newImageUrl,
         dob: newDob,
       })
       .then(res => {

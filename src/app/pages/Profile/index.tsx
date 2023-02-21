@@ -48,10 +48,6 @@ export default function ProfilePage({ user }: any) {
         Member since: <b>{createdAt}</b>
       </span>
 
-      <br />
-      <br />
-      {image}
-
       <EditProfile user={user} />
     </div>
   )
