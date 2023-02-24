@@ -7,6 +7,7 @@ export default async function handler(
 ) {
   // const client = await clientPromise
   // const db = client.db('ReviewT_App')
+  // console.log(req);
 
   if (req.method === "GET") {
     try {

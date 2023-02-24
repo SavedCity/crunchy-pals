@@ -8,14 +8,14 @@ interface AvatarProps {
 }
 
 export default function Avatar({ src, size = 50, fill = false }: AvatarProps) {
-  const altText =
-    src?.match(/^.*?([^\\/.]*)[^\\/]*$/)?.[1] + " avatar" || "Avatar";
+  // const altText =
+  //   src?.match(/^.*?([^\\/.]*)[^\\/]*$/)?.[1] + " avatar" || "Avatar";
 
   return (
     <Image
+      // alt={altText}
       fill={fill}
-      src={src || placeholder}
-      alt={altText}
+      src={src || placeholder.src}
       width={!fill ? size : undefined}
       height={!fill ? size : undefined}
     />

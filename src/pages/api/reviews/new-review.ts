@@ -10,14 +10,15 @@ export default async function handler(
       .status(200)
       .json({ error: "This API call only accepts POST methods" });
   }
-  const {
-    productName,
-    rating,
-    image,
-    description,
-    placeOfPurchase,
-    createdBy,
-  } = req.body;
+
+  // const {
+  //   productName,
+  //   rating,
+  //   image,
+  //   description,
+  //   placeOfPurchase,
+  //   createdBy,
+  // } = req.body;
 
   const bodyData = req.body;
 
