@@ -11,9 +11,6 @@ export async function getServerSideProps() {
     })
     .catch(err => console.log(err));
 
-  // const res = await fetch(`${base_url}/api/reviews/get-reviews/`);
-  // const data = await res.json();
-
   return {
     props: { reviews: reviews },
   };
