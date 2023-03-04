@@ -49,7 +49,6 @@
   $flex: flex
 ) {
   @include flex($align-items, $justify-content, $direction, $wrap, $flex);
-
   width: 100%;
 }
 
@@ -73,7 +72,9 @@
   $min_: strip-unit($min);
   $max_: strip-unit($max);
 
-  font-size: calc(#{$min} + (#{$max_} - #{$min_}) * ((100vw - 300px) / (1440 - 300)));
+  font-size: calc(
+    #{$min} + (#{$max_} - #{$min_}) * ((100vw - 300px) / (1440 - 300))
+  );
 
   @include breakpoint($desktop) {
     font-size: $max;

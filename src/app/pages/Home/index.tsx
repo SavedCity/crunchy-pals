@@ -3,9 +3,9 @@ import UserContext from 'contexts/user'
 import H3 from 'components/_atoms/H3'
 import P from 'components/_atoms/P'
 import Image from 'components/_atoms/Image'
+import ReviewsContext from 'contexts/reviews'
 
 import styles from './index.module.scss'
-import ReviewsContext from 'contexts/reviews'
 
 export default function HomePage() {
   const { userData }: object | any = useContext(UserContext)
@@ -16,12 +16,10 @@ export default function HomePage() {
 
   if (reviewsLoaded) {
     return (
-      <>
-        <div className={styles.homeContainer}>
-          Great Home Page Content by {username}
-        </div>
+      <div className={styles.homeContainer}>
+        <div>Great Home Page Content by {username}</div>
 
-        <div>
+        <div className={styles.homeContainer__reviews}>
           {reviews.map((review: any, i: number) => {
             const { productName, rating, image, createdBy } = review
             return (
@@ -34,7 +32,7 @@ export default function HomePage() {
             )
           })}
         </div>
-      </>
+      </div>
     )
   } else {
     return <h1>Loading...</h1>

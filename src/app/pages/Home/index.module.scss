@@ -1,7 +1,14 @@
-@import "styles/variables";
-@import "styles/mixins";
+@import 'styles/variables';
+@import 'styles/mixins';
 
 .homeContainer {
-  height: 100px;
-  @include flex-container(center, center);
+  // height: 100px;
+  @include flex-container($direction: column);
+
+  &__reviews {
+    @include flex-container($wrap: wrap, $justify-content: center);
+    > div {
+      width: 25%;
+    }
+  }
 }
