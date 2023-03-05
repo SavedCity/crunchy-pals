@@ -52,6 +52,17 @@
   width: 100%;
 }
 
+@mixin grid(
+  $template-columns: 300px 300px 300px,
+  $template-rows: auto,
+  $justify-content: center
+) {
+  display: grid;
+  grid-template-columns: $template-columns;
+  grid-template-rows: $template-rows;
+  justify-content: $justify-content;
+}
+
 @mixin center-screen {
   @include flex-container(center, center, column);
   min-height: calc(100vh - #{$nav-height});

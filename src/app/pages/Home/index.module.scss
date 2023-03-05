@@ -6,9 +6,11 @@
   @include flex-container($direction: column);
 
   &__reviews {
-    @include flex-container($wrap: wrap, $justify-content: center);
+    // @include flex-container($wrap: wrap, $justify-content: center);
+    @include grid();
     > div {
-      width: 25%;
+      outline: 1px solid;
+      // width: 25%;
     }
   }
 }
