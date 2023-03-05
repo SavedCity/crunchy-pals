@@ -1,19 +1,18 @@
 import { useContext, useState } from 'react'
 import axios from 'axios'
-import UserContext from 'contexts/user'
+import { useAllUsers } from 'contexts/users'
 
 import FieldInput from 'components/_atoms/FieldInput'
 import H4 from 'components/_atoms/H4'
 
 import styles from './index.module.scss'
 
-
 interface FileUploaderProps {
   id: string
 }
 
 export default function FileUploader({ id }: FileUploaderProps) {
-  const { setUserData }: object | any = useContext(UserContext)
+  const { setUserData } = useAllUsers()
 
   const [imageSrc, setImageSrc] = useState<string>('')
   const [uploadedData, setUploadedData] = useState()
@@ -44,20 +43,28 @@ export default function FileUploader({ id }: FileUploaderProps) {
    * @description Triggers when the main form is submitted
    */
 
-  async function handleOnSubmit(e: { preventDefault: () => void; currentTarget: any }) {
+  async function handleOnSubmit(e: {
+    preventDefault: () => void
+    currentTarget: any
+  }) {
     e.preventDefault()
     const form = e.currentTarget
-    const fileInput: any = Array.from(form.elements).find(({ name }: any) => name === 'file')
+    const fileInput: any = Array.from(form.elements).find(
+      ({ name }: any) => name === 'file'
+    )
     const formData = new FormData()
     for (const file of fileInput.files) {
       formData.append('file', file)
     }
     formData.append('upload_preset', 'profile_avatar')
 
-    const data = await fetch('https://api.cloudinary.com/v1_1/savedcity/image/upload', {
-      method: 'POST',
-      body: formData,
-    }).then(r => r.json())
+    const data = await fetch(
+      'https://api.cloudinary.com/v1_1/savedcity/image/upload',
+      {
+        method: 'POST',
+        body: formData,
+      }
+    ).then(r => r.json())
 
     updateProfile(data.secure_url)
     setImageSrc(data.secure_url)
@@ -68,7 +75,7 @@ export default function FileUploader({ id }: FileUploaderProps) {
   const updateProfile = async (image: string) => {
     const res = await axios
       .patch(`/api/users/update-user/${id}`, {
-        image
+        image,
       })
       .then(res => {
         setUserData(res.data.user)

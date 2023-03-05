@@ -1,4 +1,10 @@
-import { ReactNode, createContext, useEffect, useState } from 'react'
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import axios from 'axios'
 
 const ReviewsContext = createContext({})
@@ -30,4 +36,9 @@ export const ReviewsProvider = ({ children }: Props) => {
   )
 }
 
-export default ReviewsContext
+const useReviewsContext = () => useContext(ReviewsContext)
+
+export const useAllReviews = () => {
+  const { reviews }: object | any = useReviewsContext()
+  return { reviews }
+}

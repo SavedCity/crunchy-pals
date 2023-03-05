@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import UserContext from 'contexts/user'
+import { useAllUsers } from 'contexts/users'
 
 import Field from 'components/_molecules/Field'
 import classNames from 'classnames'
@@ -18,7 +18,7 @@ interface EditProfileProps {
 }
 
 export default function EditProfile({ user }: EditProfileProps) {
-  const { setUserData }: object | any = useContext(UserContext)
+  const { setUserData } = useAllUsers()
   const { _id, username, image, dob } = user || {}
 
   const [newUsername, setNewUsername] = useState<string>(username || '')

@@ -1,5 +1,11 @@
 import { useSession } from 'next-auth/react'
-import { ReactNode, createContext, useEffect, useState } from 'react'
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import axios from 'axios'
 
 const UserContext = createContext({})
@@ -39,4 +45,9 @@ export const UserProvider = ({ children }: Props) => {
   )
 }
 
-export default UserContext
+const useUserContext = () => useContext(UserContext)
+
+export const useAllUsers = () => {
+  const { userData, setUserData }: object | any = useUserContext()
+  return { users: userData, setUserData }
+}

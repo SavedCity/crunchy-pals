@@ -1,23 +1,23 @@
-import classNames from "classnames";
-import Avatar from "components/_atoms/Avatar";
-import EditProfile from "./EditProfile";
-import FileUploader from "components/_molecules/FileUploader";
-import UserContext from "contexts/user";
-import { useContext, useEffect, useState } from "react";
+import classNames from 'classnames'
+import Avatar from 'components/_atoms/Avatar'
+import EditProfile from './EditProfile'
+import FileUploader from 'components/_molecules/FileUploader'
+import { useAllUsers } from 'contexts/users'
+import { useEffect, useState } from 'react'
 
-import styles from "./index.module.scss";
+import styles from './index.module.scss'
 
 export default function ProfilePage({ user }: any) {
-  const { userData }: object | any = useContext(UserContext);
+  const { users } = useAllUsers()
 
-  const [data, setData] = useState(user);
-  const { _id, username, email, createdAt, image } = data || {};
+  const [data, setData] = useState(user)
+  const { _id, username, email, createdAt, image } = data || {}
 
   useEffect(() => {
-    if (Object.keys(userData).length) {
-      setData(userData);
+    if (Object.keys(users).length) {
+      setData(users)
     }
-  }, [userData]);
+  }, [users])
 
   return (
     <div
@@ -50,5 +50,5 @@ export default function ProfilePage({ user }: any) {
 
       <EditProfile user={user} />
     </div>
-  );
+  )
 }

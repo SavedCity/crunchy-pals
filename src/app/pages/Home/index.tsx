@@ -1,16 +1,16 @@
-import React, { useContext } from 'react'
-import UserContext from 'contexts/user'
+import React from 'react'
+import { useAllUsers } from 'contexts/users'
+import { useAllReviews } from 'contexts/reviews'
 import H3 from 'components/_atoms/H3'
 import P from 'components/_atoms/P'
 import Image from 'components/_atoms/Image'
-import ReviewsContext from 'contexts/reviews'
 
 import styles from './index.module.scss'
 
 export default function HomePage() {
-  const { userData }: object | any = useContext(UserContext)
-  const { reviews }: object | any = useContext(ReviewsContext)
-  const { username } = userData || {}
+  const { users } = useAllUsers()
+  const { reviews } = useAllReviews()
+  const { username } = users || {}
 
   const reviewsLoaded = Object.keys(reviews).length > 0
 
