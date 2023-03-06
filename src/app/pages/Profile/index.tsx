@@ -5,13 +5,13 @@ import FileUploader from 'components/_molecules/FileUploader'
 import { useAllUsers } from 'contexts/users'
 import { useMyReviews } from 'contexts/reviews/my-reviews'
 import { useEffect, useState } from 'react'
-
-import styles from './index.module.scss'
 import { useRouter } from 'next/router'
 import { useAllReviews } from 'contexts/reviews/all-reviews'
 import H3 from 'components/_atoms/H3'
 import P from 'components/_atoms/P'
 import H1 from 'components/_atoms/H1'
+
+import styles from './index.module.scss'
 
 export default function ProfilePage({ user }: any) {
   const { users } = useAllUsers()

@@ -15,12 +15,13 @@ interface Props {
 }
 
 export const MyReviewsProvider = ({ children }: Props) => {
-  const [myReviews, setMyReviews] = useState<object>({})
   const router = useRouter()
+
+  const [myReviews, setMyReviews] = useState<object>({})
 
   const getMyReviewsData = async () => {
     const reviews = await axios
-      .get(`/api/reviews/my-reviews/saved@reviewt.com`)
+      .get(`/api/reviews/my-reviews/${router.query.slug}`)
       .then(res => {
         setMyReviews(res.data.myReviews)
       })

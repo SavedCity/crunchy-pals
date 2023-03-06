@@ -60,7 +60,7 @@
   display: grid;
   grid-template-columns: $template-columns;
   grid-template-rows: $template-rows;
-  justify-content: $justify-content;
+  // justify-content: $justify-content;
 }
 
 @mixin center-screen {
