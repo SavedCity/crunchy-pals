@@ -9,8 +9,8 @@ export default async function handler(
     const { slug } = req.query
 
     try {
-      const reviews = await Reviews.find({ createdBy: slug })
-      return res.json({ status: 200, reviews })
+      const myReviews = await Reviews.find({ createdBy: slug })
+      return res.json({ status: 200, myReviews })
     } catch (error) {
       return res.json({ status: 400, error: 'Bad request' })
     }
