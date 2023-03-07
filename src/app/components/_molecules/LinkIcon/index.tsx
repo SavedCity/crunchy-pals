@@ -5,7 +5,7 @@ import { IconSize } from 'components/_atoms/Icon'
 
 import styles from './index.module.scss'
 
-interface LinkWithIconProps {
+interface IconLinkProps {
   href: string
   IconName: string
   className?: string
@@ -14,14 +14,14 @@ interface LinkWithIconProps {
   filled?: boolean
 }
 
-export default function LinkWithIcon({
+export default function IconLink({
   href = '/',
   IconName,
   className = '',
   children,
   size,
   filled,
-}: LinkWithIconProps) {
+}: IconLinkProps) {
   return (
     <Link
       className={classNames({
@@ -30,7 +30,7 @@ export default function LinkWithIcon({
       })}
       href={href}
     >
-      <Icon name={IconName} size={size} filled={filled} />
+      <Icon iconName={IconName} size={size} filled={filled} />
       {children}
     </Link>
   )

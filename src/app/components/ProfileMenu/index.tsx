@@ -4,7 +4,7 @@ import { useContext, useEffect, useState, useRef } from 'react'
 import { useAllUsers } from 'contexts/users'
 import P from 'components/_atoms/P'
 import LoginOption from 'components/Auth/LoginOption'
-import LinkWithIcon from 'components/_molecules/LinkWithIcon'
+import IconLink from 'components/_molecules/LinkIcon'
 import Router from 'next/router'
 
 import styles from './index.module.scss'
@@ -66,15 +66,12 @@ export default function ProfileMenu() {
           </section>
 
           <section className={styles.profile__links}>
-            <LinkWithIcon
-              href={`/profile/${username}`}
-              IconName='account_circle'
-            >
+            <IconLink href={`/profile/${username}`} IconName='account_circle'>
               Profile
-            </LinkWithIcon>
-            <LinkWithIcon href='/favorites' IconName='favorite'>
+            </IconLink>
+            <IconLink href='/favorites' IconName='favorite'>
               Favorites
-            </LinkWithIcon>
+            </IconLink>
           </section>
 
           <section className={styles.profile__loginOption}>

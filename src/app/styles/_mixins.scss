@@ -55,12 +55,14 @@
 @mixin grid(
   $template-columns: 300px 300px 300px,
   $template-rows: auto,
-  $justify-content: center
+  $justify-content: start,
+  $align-items: normal
 ) {
   display: grid;
   grid-template-columns: $template-columns;
   grid-template-rows: $template-rows;
-  // justify-content: $justify-content;
+  justify-content: $justify-content;
+  align-items: $align-items;
 }
 
 @mixin center-screen {

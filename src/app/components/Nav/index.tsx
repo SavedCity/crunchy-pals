@@ -3,7 +3,7 @@ import Link from 'next/link'
 import ProfileMenu from 'components/ProfileMenu'
 
 import styles from './index.module.scss'
-import LinkWithIcon from 'components/_molecules/LinkWithIcon'
+import IconLink from 'components/_molecules/LinkIcon'
 import classNames from 'classnames'
 
 export default function Nav() {
@@ -23,7 +23,7 @@ export default function Nav() {
       </section>
 
       <section className={styles.nav__rightSide}>
-        <LinkWithIcon IconName='favorite' href='/favorites' />
+        <IconLink IconName='favorite' href='/favorites' />
         <ProfileMenu />
       </section>
     </div>

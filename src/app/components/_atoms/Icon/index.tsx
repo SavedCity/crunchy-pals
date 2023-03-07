@@ -8,12 +8,17 @@ import styles from './index.module.scss'
 export type IconSize = 'sm' | 'md' | 'lg' | 'xl'
 
 export interface IconProps extends React.HTMLAttributes<HTMLElement> {
-  name: string
+  iconName: string
   size?: IconSize
   filled?: boolean
 }
 
-const Icon = ({ name, className = '', size = 'lg', filled = false }: IconProps) => {
+const Icon = ({
+  iconName,
+  className = '',
+  size = 'lg',
+  filled = false,
+}: IconProps) => {
   return (
     <span
       className={classNames({
@@ -24,7 +29,7 @@ const Icon = ({ name, className = '', size = 'lg', filled = false }: IconProps) 
         [className]: !!className,
       })}
     >
-      {name}
+      {iconName}
     </span>
   )
 }
