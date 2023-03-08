@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-// import Icon from '@mui/material/Icon'
 
 import styles from './index.module.scss'
 

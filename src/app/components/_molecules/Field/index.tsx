@@ -39,9 +39,9 @@ export default function Field({
           [styles.field__wrapper]: true,
         })}
       >
-        {leftIcon && <Icon name={leftIcon} />}
+        {leftIcon && <Icon iconName={leftIcon} />}
         {renderInput(type)}
-        {rightIcon && <Icon name={rightIcon} />}
+        {rightIcon && <Icon iconName={rightIcon} />}
       </div>
     </div>
   )
