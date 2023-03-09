@@ -10,6 +10,7 @@ export interface IconProps extends React.HTMLAttributes<HTMLElement> {
   iconName: string
   size?: IconSize
   filled?: boolean
+  handleClick?: () => void
 }
 
 const Icon = ({
@@ -17,6 +18,7 @@ const Icon = ({
   className = '',
   size = 'lg',
   filled = false,
+  handleClick = undefined,
 }: IconProps) => {
   return (
     <span
@@ -27,6 +29,7 @@ const Icon = ({
         [styles['icon__filled']]: filled,
         [className]: !!className,
       })}
+      onClick={handleClick}
     >
       {iconName}
     </span>

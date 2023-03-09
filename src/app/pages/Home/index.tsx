@@ -14,6 +14,10 @@ export default function HomePage() {
   const { allReviews } = useAllReviews()
   const { username } = users || {}
 
+  const addToFavorites = (product: any) => {
+    console.log(product)
+  }
+
   return (
     <div className={styles.homeContainer}>
       <div>Great Home Page Content by {username}</div>
@@ -25,7 +29,10 @@ export default function HomePage() {
             const { productName, rating, image, createdBy } = review
             return (
               <div key={i}>
-                <Icon iconName='favorite' />
+                <Icon
+                  iconName='favorite'
+                  handleClick={() => addToFavorites(review)}
+                />
                 <P>{createdBy}</P>
                 <H3>{productName}</H3>
                 {/* <Image src={''} /> */}
