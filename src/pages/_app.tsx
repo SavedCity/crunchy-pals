@@ -1,7 +1,6 @@
 import type { AppProps } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
-import { UserProvider } from 'contexts/users'
-
+import { UserProvider } from 'contexts/users/my'
 import Layout from 'components/Layout'
 
 import 'styles/base.scss'

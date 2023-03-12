@@ -1,7 +1,7 @@
 import cat from 'public/avatars/cat.png'
 import Avatar from 'components/_atoms/Avatar'
 import { useContext, useEffect, useState, useRef } from 'react'
-import { useAllUsers } from 'contexts/users'
+import { useMyUser } from 'contexts/users/my'
 import P from 'components/_atoms/P'
 import LoginOption from 'components/Auth/LoginOption'
 import IconLink from 'components/_molecules/LinkIcon'
@@ -42,8 +42,8 @@ function useOutsideAlerter(ref: any, setOpenMenu: any, openMenu: boolean) {
 export default function ProfileMenu() {
   const [openMenu, setOpenMenu] = useState<boolean>(false)
 
-  const { users } = useAllUsers()
-  const { username, image } = users || {}
+  const { user } = useMyUser()
+  const { username, image } = user || {}
 
   const wrapperRef = useRef(null)
   useOutsideAlerter(wrapperRef, setOpenMenu, openMenu)

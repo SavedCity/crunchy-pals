@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React, { useContext, useState } from 'react'
 import { loginUser } from 'helpers/login'
-import { UserProvider } from '../../contexts/users'
+import { UserProvider } from '../../contexts/users/my'
 
 export default function LoginPage() {
   const [email, setEmail] = useState<string>('')

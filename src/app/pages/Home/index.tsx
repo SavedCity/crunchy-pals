@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAllUsers } from 'contexts/users'
+import { useMyUser } from 'contexts/users/my'
 import { useAllReviews } from 'contexts/reviews/all-reviews'
 import H1 from 'components/_atoms/H1'
 import H3 from 'components/_atoms/H3'
@@ -10,12 +10,12 @@ import Icon from 'components/_atoms/Icon'
 import styles from './index.module.scss'
 
 export default function HomePage() {
-  const { users } = useAllUsers()
+  const { user } = useMyUser()
   const { allReviews } = useAllReviews()
-  const { username } = users || {}
+  const { username } = user || {}
 
-  const addToFavorites = (product: any) => {
-    console.log(product)
+  const addToFavorites = (reivew: any) => {
+    console.log(reivew)
   }
 
   return (

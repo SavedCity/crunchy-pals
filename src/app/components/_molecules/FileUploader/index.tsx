@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import axios from 'axios'
-import { useAllUsers } from 'contexts/users'
+import { useMyUser } from 'contexts/users/my'
 
 import FieldInput from 'components/_atoms/FieldInput'
 import H4 from 'components/_atoms/H4'
@@ -12,7 +12,7 @@ interface FileUploaderProps {
 }
 
 export default function FileUploader({ id }: FileUploaderProps) {
-  const { setUserData } = useAllUsers()
+  const { setUserData } = useMyUser()
 
   const [imageSrc, setImageSrc] = useState<string>('')
   const [uploadedData, setUploadedData] = useState()

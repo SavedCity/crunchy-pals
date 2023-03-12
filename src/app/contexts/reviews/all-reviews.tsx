@@ -9,16 +9,16 @@ import axios from 'axios'
 
 const AllReviewsContext = createContext({})
 
-interface Props {
+interface ReviewsProviderProps {
   children: ReactNode
 }
 
-export const ReviewsProvider = ({ children }: Props) => {
-  const [allReviews, setAllReviews] = useState<object>({})
+export const ReviewsProvider = ({ children }: ReviewsProviderProps) => {
+  const [allReviews, setAllReviews] = useState([])
 
   const getAllReviewsData = async () => {
     const reviews = await axios
-      .get(`/api/reviews/all-reviews/`)
+      .get(`/api/reviews/all-reviews`)
       .then(res => {
         setAllReviews(res.data.reviews)
       })

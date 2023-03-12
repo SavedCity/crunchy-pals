@@ -7,21 +7,24 @@ import {
 } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
+import { useMyUser } from 'contexts/users/my'
 
 const MyReviewsContext = createContext({})
 
-interface Props {
+interface MyReviewsProviderProps {
   children: ReactNode
 }
 
-export const MyReviewsProvider = ({ children }: Props) => {
-  const router = useRouter()
+export const MyReviewsProvider = ({ children }: MyReviewsProviderProps) => {
+  const { user } = useMyUser()
+  const { query } = useRouter()
+  const [myReviews, setMyReviews] = useState([])
 
-  const [myReviews, setMyReviews] = useState<object>({})
+  const slug = query.slug
 
   const getMyReviewsData = async () => {
     const reviews = await axios
-      .get(`/api/reviews/my-reviews/${router.query.slug}`)
+      .get(`/api/reviews/my-reviews/${slug}`)
       .then(res => {
         setMyReviews(res.data.myReviews)
       })
@@ -29,8 +32,10 @@ export const MyReviewsProvider = ({ children }: Props) => {
   }
 
   useEffect(() => {
-    getMyReviewsData()
-  }, [])
+    if (slug) {
+      getMyReviewsData()
+    }
+  }, [user])
 
   return (
     <MyReviewsContext.Provider value={{ myReviews, setMyReviews }}>

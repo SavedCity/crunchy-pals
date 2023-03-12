@@ -24,6 +24,17 @@ const UserSchema = new Schema({
   dob: {
     type: String,
   },
+  favoriteReviews: [
+    {
+      productName: String,
+      rating: Number,
+      image: String,
+      description: String,
+      placeOfPurchase: String,
+      createdBy: String,
+      createdAt: Date,
+    },
+  ],
   createdAt: { type: Date, default: Date.now },
 })
 

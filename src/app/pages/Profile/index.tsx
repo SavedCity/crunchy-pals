@@ -2,8 +2,8 @@ import classNames from 'classnames'
 import Avatar from 'components/_atoms/Avatar'
 import EditProfile from './EditProfile'
 import FileUploader from 'components/_molecules/FileUploader'
-import { useAllUsers } from 'contexts/users'
-import { useMyReviews } from 'contexts/reviews/my-reviews'
+import { useMyUser } from 'contexts/users/my'
+import { useMyReviews } from 'contexts/reviews/my'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useAllReviews } from 'contexts/reviews/all-reviews'
@@ -13,18 +13,11 @@ import H1 from 'components/_atoms/H1'
 
 import styles from './index.module.scss'
 
-export default function ProfilePage({ user }: any) {
-  const { users } = useAllUsers()
+export default function ProfilePage() {
+  const { user } = useMyUser()
   const { myReviews } = useMyReviews()
 
-  const [data, setData] = useState(user)
-  const { _id, username, email, createdAt, image } = data || {}
-
-  useEffect(() => {
-    if (Object.keys(users).length) {
-      setData(users)
-    }
-  }, [users])
+  const { _id, username, email, createdAt, image } = user || {}
 
   return (
     <div
@@ -32,11 +25,7 @@ export default function ProfilePage({ user }: any) {
         [styles.profile]: true,
       })}
     >
-      <section
-        className={classNames({
-          [styles.profile__avatar]: true,
-        })}
-      >
+      <section className={styles.profile__avatar}>
         <Avatar fill src={image} />
       </section>
 

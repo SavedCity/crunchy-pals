@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useAllUsers } from 'contexts/users'
+import { useMyUser } from 'contexts/users/my'
 
 import Field from 'components/_molecules/Field'
 import classNames from 'classnames'
@@ -10,19 +10,19 @@ import Router from 'next/router'
 
 interface EditProfileProps {
   user: {
-    username: string
     _id: string
+    username: string
     image: string
     dob: string
   }
 }
 
 export default function EditProfile({ user }: EditProfileProps) {
-  const { setUserData } = useAllUsers()
+  const { setUserData } = useMyUser()
   const { _id, username, image, dob } = user || {}
 
-  const [newUsername, setNewUsername] = useState<string>(username || '')
-  const [newDob, setNewDob] = useState<string>(dob || '')
+  const [newUsername, setNewUsername] = useState<string>('')
+  const [newDob, setNewDob] = useState<string>('')
   // const [newImageUrl, setNewImageUrl] = useState<string>(image || '')
 
   const updateProfile = async () => {
@@ -39,6 +39,18 @@ export default function EditProfile({ user }: EditProfileProps) {
       })
       .catch(err => console.log(err))
   }
+
+  const setInputValues = () => {
+    setNewUsername(username)
+    setNewDob(dob)
+    // setNewImageUrl(image)
+  }
+
+  useEffect(() => {
+    if (Object.keys(user).length !== 0) {
+      setInputValues()
+    }
+  }, [user])
 
   return (
     <div

@@ -10,11 +10,11 @@ import axios from 'axios'
 
 const UserContext = createContext({})
 
-interface Props {
+interface UserProviderProps {
   children: ReactNode
 }
 
-export const UserProvider = ({ children }: Props) => {
+export const UserProvider = ({ children }: UserProviderProps) => {
   const { data: session, status } = useSession()
   const user: object | undefined | any = session ? session.user : {}
   const { email } = user
@@ -33,10 +33,10 @@ export const UserProvider = ({ children }: Props) => {
   }
 
   useEffect(() => {
-    if (email) {
+    if (status === 'authenticated') {
       getUserData()
     }
-  }, [email])
+  }, [status])
 
   return (
     <UserContext.Provider value={{ userData, status, setUserData }}>
@@ -47,7 +47,7 @@ export const UserProvider = ({ children }: Props) => {
 
 const useUserContext = () => useContext(UserContext)
 
-export const useAllUsers = () => {
+export const useMyUser = () => {
   const { userData, setUserData }: object | any = useUserContext()
-  return { users: userData, setUserData }
+  return { user: userData, setUserData }
 }
