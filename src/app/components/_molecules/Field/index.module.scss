@@ -4,6 +4,12 @@
 .field {
   @include flex($direction: column, $row-gap: $spacing-1);
   cursor: default;
+
+  // for icon
+  span {
+    cursor: default;
+  }
+
   &__wrapper {
     @include flex($column-gap: $spacing-1);
     border: 1px solid $concrete;

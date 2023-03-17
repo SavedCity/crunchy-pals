@@ -1,26 +1,24 @@
 import React from 'react'
-import { useMyUser } from 'contexts/users/my'
 import { useAllReviews } from 'contexts/reviews/all-reviews'
 import H1 from 'components/_atoms/H1'
 import H3 from 'components/_atoms/H3'
 import P from 'components/_atoms/P'
 import Image from 'components/_atoms/Image'
 import Icon from 'components/_atoms/Icon'
+import HomeHeroContent from 'components/HomeHeroContent'
 
 import styles from './index.module.scss'
 
 export default function HomePage() {
-  const { user } = useMyUser()
   const { allReviews } = useAllReviews()
-  const { username } = user || {}
 
-  const addToFavorites = (reivew: any) => {
-    console.log(reivew)
+  const addToFavorites = (review: any) => {
+    console.log(review)
   }
 
   return (
     <div className={styles.homeContainer}>
-      <div>Great Home Page Content by {username}</div>
+      <HomeHeroContent />
 
       <div className={styles.homeContainer__reviewsContainer}>
         <H1>Reviews:</H1>

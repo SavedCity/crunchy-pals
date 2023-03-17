@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import Avatar from 'components/_atoms/Avatar'
-import EditProfile from './EditProfile'
+import EditProfile from '../../components/_organisms/EditProfile'
 import FileUploader from 'components/_molecules/FileUploader'
 import { useMyUser } from 'contexts/users/my'
 import { useMyReviews } from 'contexts/reviews/my'

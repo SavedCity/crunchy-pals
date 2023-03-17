@@ -29,8 +29,8 @@ export default function EditProfile({ user }: EditProfileProps) {
     const res = await axios
       .patch(`/api/users/update-user/${_id}`, {
         username: newUsername,
-        // image: newImageUrl,
         dob: newDob,
+        // image: newImageUrl,
       })
       .then(res => {
         console.log(res?.data?.user)

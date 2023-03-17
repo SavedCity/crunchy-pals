@@ -2,7 +2,10 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import dbConnect from 'lib/dbConnect'
 import User from 'utils/schema/User'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method === 'PATCH') {
     await dbConnect()
     try {
@@ -18,5 +21,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.json({ status: 400, error: 'Bad request' })
     }
   }
-  return res.json({ status: 400, error: 'This API call only accepts PATCH methods' })
+  return res.json({
+    status: 400,
+    error: 'This API call only accepts PATCH methods',
+  })
 }

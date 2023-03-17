@@ -3,7 +3,8 @@ import classNames from 'classnames'
 
 import styles from './index.module.scss'
 
-export interface FieldInputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
+export interface FieldInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 const FieldInput = ({ className = '', id, ...props }: FieldInputProps) => {
   return (
