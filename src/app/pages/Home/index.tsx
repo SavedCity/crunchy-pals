@@ -6,37 +6,23 @@ import P from 'components/_atoms/P'
 import Image from 'components/_atoms/Image'
 import Icon from 'components/_atoms/Icon'
 import HomeHeroContent from 'components/HomeHeroContent'
+import Tile from 'components/_atoms/Tile'
 
 import styles from './index.module.scss'
+import ReviewTiles from 'components/_organisms/ReviewTiles'
 
 export default function HomePage() {
   const { allReviews } = useAllReviews()
 
-  const addToFavorites = (review: any) => {
-    console.log(review)
-  }
-
   return (
-    <div className={styles.homeContainer}>
+    <div className={styles.home}>
       <HomeHeroContent />
 
-      <div className={styles.homeContainer__reviewsContainer}>
+      <div className={styles.home__reviews}>
         <H1>Reviews:</H1>
-        <div className={styles.homeContainer__reviewTiles}>
+        <div className={styles['home__reviews--tiles']}>
           {allReviews?.map((review: any, i: number) => {
-            const { productName, rating, image, createdBy } = review
-            return (
-              <div key={i}>
-                <Icon
-                  iconName='favorite'
-                  handleClick={() => addToFavorites(review)}
-                />
-                <P>{createdBy}</P>
-                <H3>{productName}</H3>
-                {/* <Image src={''} /> */}
-                <P>{rating}</P>
-              </div>
-            )
+            return <ReviewTiles review={review} key={i} />
           })}
         </div>
       </div>

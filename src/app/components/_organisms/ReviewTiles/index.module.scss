@@ -1,2 +1,8 @@
 @import 'styles/variables';
 @import 'styles/mixins';
+
+.reviewTile {
+  &__icon {
+    float: right;
+  }
+}

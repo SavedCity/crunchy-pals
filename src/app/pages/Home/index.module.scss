@@ -1,20 +1,14 @@
 @import 'styles/variables';
 @import 'styles/mixins';
 
-.homeContainer {
-  // height: 100px;
+.home {
   @include flex-container($direction: column);
 
-  &__reviewsContainer {
+  &__reviews {
     margin: 0 auto;
-  }
 
-  &__reviewTiles {
-    // @include flex-container($wrap: wrap, $justify-content: center);
-    @include grid();
-    > div {
-      outline: 1px solid;
-      // width: 25%;
+    &--tiles {
+      @include grid();
     }
   }
 }

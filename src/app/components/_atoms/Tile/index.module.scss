@@ -1,0 +1,7 @@
+@import 'styles/variables';
+@import 'styles/mixins';
+
+.tile {
+  padding: $spacing-2;
+  outline: 1px solid;
+}

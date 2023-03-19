@@ -14,13 +14,6 @@
     }
   }
 
-  &__signedAs > p {
-    @include divider-bottom($padding: $spacing-3);
-    padding: $spacing-2;
-    margin: 0 0 1em;
-    font-size: $medium;
-  }
-
   &__menu {
     outline: 1px solid $light-gray;
     position: absolute;
@@ -28,7 +21,7 @@
     transform: translateY($spacing-2);
     background-color: $soft-white;
     padding: $spacing-1 0;
-    width: $spacing-40;
+    width: $spacing-50;
 
     &::before {
       content: '';
@@ -42,6 +35,13 @@
       right: 10px;
       background-color: $soft-white;
     }
+  }
+
+  &__signedAs > p {
+    @include divider-bottom($padding: $spacing-3);
+    padding: $spacing-2;
+    margin: 0 0 1em;
+    font-size: $medium;
   }
 
   &__links {

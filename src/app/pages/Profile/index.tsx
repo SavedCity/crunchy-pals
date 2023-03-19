@@ -10,6 +10,7 @@ import { useAllReviews } from 'contexts/reviews/all-reviews'
 import H3 from 'components/_atoms/H3'
 import P from 'components/_atoms/P'
 import H1 from 'components/_atoms/H1'
+import ReviewTiles from 'components/_organisms/ReviewTiles'
 
 import styles from './index.module.scss'
 
@@ -48,15 +49,7 @@ export default function ProfilePage() {
 
       <H1>My Reviews: </H1>
       {myReviews?.map((review: any, i: number) => {
-        const { productName, rating, image, createdBy } = review
-        return (
-          <div key={i}>
-            <P>{createdBy}</P>
-            <H3>{productName}</H3>
-            {/* <Image src={''} /> */}
-            <P>{rating}</P>
-          </div>
-        )
+        return <ReviewTiles review={review} key={i} />
       })}
     </div>
   )

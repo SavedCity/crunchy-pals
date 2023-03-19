@@ -1,20 +1,20 @@
-import React from "react";
-import classNames from "classnames";
-import Image, { ImageProps, ImageLoaderProps } from "next/image";
+import React from 'react'
+import classNames from 'classnames'
+import Image, { ImageProps, ImageLoaderProps } from 'next/image'
 
-import styles from "./index.module.scss";
+import styles from './index.module.scss'
 
-export interface ImageProps_ extends Omit<ImageProps, "alt"> {
+export interface ImageProps_ extends Omit<ImageProps, 'alt'> {
   // lazy?: Boolean;
-  src: string;
-  alt?: any;
+  src: string
+  alt: any
 }
 
 const Image_ = ({
   children,
   src,
-  alt = src?.match(/^.*?([^\\/.]*)[^\\/]*$/)?.[1],
-  className = "",
+  alt,
+  className = '',
   // lazy = true,
   ...props
 }: ImageProps_) => {
@@ -31,7 +31,7 @@ const Image_ = ({
       })}
       {...props}
     />
-  );
-};
+  )
+}
 
-export default Image_;
+export default Image_
