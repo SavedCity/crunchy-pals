@@ -12,4 +12,10 @@
     margin-top: 30px;
     max-width: 400px;
   }
+
+  &__reviews {
+    &--tiles {
+      @include grid();
+    }
+  }
 }

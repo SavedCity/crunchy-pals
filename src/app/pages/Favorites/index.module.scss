@@ -1,0 +1,10 @@
+@import 'styles/variables';
+@import 'styles/mixins';
+
+.favorites {
+  &__reviews {
+    &--tiles {
+      @include grid();
+    }
+  }
+}

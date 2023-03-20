@@ -51,3 +51,9 @@ export const useMyUser = () => {
   const { userData, setUserData }: object | any = useUserContext()
   return { user: userData, setUserData }
 }
+
+export const useFavoriteReviews = () => {
+  const { userData }: object | any = useUserContext()
+
+  return { favoriteReviews: userData.favoriteReviews }
+}

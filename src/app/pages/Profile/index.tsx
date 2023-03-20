@@ -47,10 +47,14 @@ export default function ProfilePage() {
 
       <EditProfile user={user} />
 
-      <H1>My Reviews: </H1>
-      {myReviews?.map((review: any, i: number) => {
-        return <ReviewTiles review={review} key={i} />
-      })}
+      <div className={styles.profile__reviews}>
+        <H1>My Reviews: </H1>
+        <div className={styles['profile__reviews--tiles']}>
+          {myReviews?.map((review: any, i: number) => {
+            return <ReviewTiles review={review} key={i} />
+          })}
+        </div>
+      </div>
     </div>
   )
 }
