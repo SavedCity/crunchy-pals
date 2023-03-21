@@ -18,11 +18,26 @@ interface ReviewTilesProps {
 }
 
 export default function ReviewTiles({ review }: ReviewTilesProps) {
+  const { productName, rating, image, createdBy } = review
+
   const addToFavorites = (review: any) => {
     console.log(review)
   }
 
-  const { productName, rating, image, createdBy } = review
+  const generateStarRatings = (num: number) =>
+    new Array(num)
+      .fill('')
+      .map((_, i) => (
+        <Icon
+          className={styles.reviewTile__ratingIcon}
+          key={i}
+          iconName='star'
+          size='md'
+          filled
+        />
+      ))
+  console.log(rating)
+
   return (
     <Tile className={styles.reviewTile}>
       <Icon
@@ -33,7 +48,7 @@ export default function ReviewTiles({ review }: ReviewTilesProps) {
       <P className={styles.reviewTile__createdby}>{createdBy}</P>
       <H3 className={styles.reviewTile__productName}>{productName}</H3>
       {/* <Image className={styles.reviewTile__image} src={''} /> */}
-      <P className={styles.reviewTile__rating}>{rating}</P>
+      {rating ? generateStarRatings(rating) : 'No rating'}
     </Tile>
   )
 }

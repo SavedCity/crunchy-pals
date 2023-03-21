@@ -22,7 +22,7 @@ export default function HomePage() {
         <H1>Reviews:</H1>
         <div className={styles['home__reviews--tiles']}>
           {allReviews?.map((review: any, i: number) => {
-            return <ReviewTiles review={review} key={i} />
+            return <ReviewTiles key={i} review={review} />
           })}
         </div>
       </div>
