@@ -11,20 +11,8 @@ export default async function handler(
       .json({ error: 'This API call only accepts POST methods' })
   }
 
-  // const {
-  //   productName,
-  //   rating,
-  //   image,
-  //   description,
-  //   placeOfPurchase,
-  //   createdBy,
-  // } = req.body;
-
   const bodyData = req.body
-
   const newReview = new Reviews(bodyData)
-
-  console.log(newReview)
 
   await newReview
     .save()
