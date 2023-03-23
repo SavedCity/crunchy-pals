@@ -10,7 +10,6 @@ export default async function handler(
     await dbConnect()
     try {
       const { _id } = req.body
-      console.log(_id)
 
       if (_id) {
         const review = await Review.findByIdAndDelete(_id)

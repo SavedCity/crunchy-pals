@@ -15,18 +15,18 @@ interface ReviewTilesProps {
     image: string
     createdBy: string
   }
+  deleteReview?: (reviewId: string) => void
 }
 
-export default function ReviewTiles({ review }: ReviewTilesProps) {
+export default function ReviewTiles({
+  review,
+  deleteReview,
+}: ReviewTilesProps) {
   const { user } = useMyUser()
   const { _id, productName, rating, image, createdBy } = review
 
   const addToFavorites = () => {
     console.log(review)
-  }
-
-  const deleteReview = () => {
-    console.log(_id)
   }
 
   const generateStarRatings = (num: number) =>
@@ -47,7 +47,7 @@ export default function ReviewTiles({ review }: ReviewTilesProps) {
       <Icon
         className={styles.reviewTile__deleteIcon}
         iconName='delete'
-        handleClick={deleteReview}
+        handleClick={() => deleteReview?.(_id)}
       />
       {user.username !== createdBy && (
         <Icon

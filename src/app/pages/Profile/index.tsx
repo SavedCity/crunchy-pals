@@ -13,12 +13,27 @@ import H1 from 'components/_atoms/H1'
 import ReviewTiles from 'components/_organisms/ReviewTiles'
 
 import styles from './index.module.scss'
+import axios from 'axios'
 
 export default function ProfilePage() {
   const { user } = useMyUser()
-  const { myReviews } = useMyReviews()
+  const { myReviews, setMyReviews } = useMyReviews()
 
   const { _id, username, email, createdAt, image } = user || {}
+
+  const deleteReview = async (reviewId: string) => {
+    const reviews = await axios
+      .delete(`/api/reviews/delete-review`, {
+        data: {
+          _id: reviewId,
+        },
+      })
+      .then(res => {
+        console.log(res.data.review)
+        setMyReviews(myReviews)
+      })
+      .catch(err => console.log(err))
+  }
 
   return (
     <div
@@ -51,7 +66,13 @@ export default function ProfilePage() {
         <H1>My Reviews: </H1>
         <div className={styles['profile__reviews--tiles']}>
           {myReviews?.map((review: any, i: number) => {
-            return <ReviewTiles review={review} key={i} />
+            return (
+              <ReviewTiles
+                key={i}
+                review={review}
+                deleteReview={deleteReview}
+              />
+            )
           })}
         </div>
       </div>

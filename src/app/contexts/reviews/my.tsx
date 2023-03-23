@@ -47,8 +47,8 @@ export const MyReviewsProvider = ({ children }: MyReviewsProviderProps) => {
 const useReviewsContext = () => useContext(MyReviewsContext)
 
 export const useMyReviews = () => {
-  const { myReviews }: object | any = useReviewsContext()
+  const { myReviews, setMyReviews }: object | any = useReviewsContext()
   const reviewsLoaded = Object.keys(myReviews).length > 0
 
-  return reviewsLoaded ? { myReviews } : {}
+  return reviewsLoaded ? { myReviews, setMyReviews } : {}
 }
