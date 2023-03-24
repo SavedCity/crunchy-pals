@@ -53,16 +53,20 @@
 }
 
 @mixin grid(
-  $template-columns: 300px 300px 300px,
   $template-rows: auto,
-  $justify-content: start,
-  $align-items: normal
+  $justify-content: space-between,
+  $align-items: normal,
+  $row-gap: $spacing-3,
+  $column-gap: $spacing-3,
+  $template-columns: repeat(auto-fill, calc(33.333% - $column-gap))
 ) {
   display: grid;
   grid-template-columns: $template-columns;
   grid-template-rows: $template-rows;
   justify-content: $justify-content;
   align-items: $align-items;
+  row-gap: $row-gap;
+  column-gap: $column-gap;
 }
 
 @mixin center-screen {

@@ -1,19 +1,14 @@
 import classNames from 'classnames'
+import axios from 'axios'
 import Avatar from 'components/_atoms/Avatar'
 import EditProfile from '../../components/_organisms/EditProfile'
 import FileUploader from 'components/_molecules/FileUploader'
 import { useMyUser } from 'contexts/users/my'
 import { useMyReviews } from 'contexts/reviews/my'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import { useAllReviews } from 'contexts/reviews/all-reviews'
-import H3 from 'components/_atoms/H3'
-import P from 'components/_atoms/P'
 import H1 from 'components/_atoms/H1'
 import ReviewTiles from 'components/_organisms/ReviewTiles'
 
 import styles from './index.module.scss'
-import axios from 'axios'
 
 export default function ProfilePage() {
   const { user } = useMyUser()
@@ -30,7 +25,11 @@ export default function ProfilePage() {
       })
       .then(res => {
         console.log(res.data.review)
-        setMyReviews(myReviews)
+        setMyReviews(
+          myReviews.filter(
+            (r: { _id: string }) => r._id !== res.data.review._id
+          )
+        )
       })
       .catch(err => console.log(err))
   }

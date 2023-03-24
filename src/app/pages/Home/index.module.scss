@@ -5,8 +5,6 @@
   @include flex-container($direction: column);
 
   &__reviews {
-    margin: 0 auto;
-
     &--tiles {
       @include grid();
     }

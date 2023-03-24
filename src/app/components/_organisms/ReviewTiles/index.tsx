@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import Icon from 'components/_atoms/Icon'
 import Tile from 'components/_atoms/Tile'
 import P from 'components/_atoms/P'
@@ -6,6 +5,7 @@ import H3 from 'components/_atoms/H3'
 import { useMyUser } from 'contexts/users/my'
 
 import styles from './index.module.scss'
+import classNames from 'classnames'
 
 interface ReviewTilesProps {
   review: {
@@ -16,18 +16,16 @@ interface ReviewTilesProps {
     createdBy: string
   }
   deleteReview?: (reviewId: string) => void
+  favoriteProfile?: (userId: string, favoriteReview: object) => void
 }
 
 export default function ReviewTiles({
   review,
   deleteReview,
+  favoriteProfile,
 }: ReviewTilesProps) {
   const { user } = useMyUser()
   const { _id, productName, rating, image, createdBy } = review
-
-  const addToFavorites = () => {
-    console.log(review)
-  }
 
   const generateStarRatings = (num: number) =>
     new Array(num)
@@ -53,7 +51,7 @@ export default function ReviewTiles({
         <Icon
           className={styles.reviewTile__heartIcon}
           iconName='favorite'
-          handleClick={addToFavorites}
+          handleClick={() => favoriteProfile?.(user._id, review)}
         />
       )}
       <P className={styles.reviewTile__createdby}>{createdBy}</P>

@@ -1,18 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import dbConnect from 'lib/dbConnect'
-import Review from 'utils/schema/Review'
+import Reviews from 'utils/schema/Review'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   if (req.method === 'DELETE') {
-    await dbConnect()
     try {
       const { _id } = req.body
 
       if (_id) {
-        const review = await Review.findByIdAndDelete(_id)
+        const review = await Reviews.findByIdAndDelete(_id)
         return res.json({ status: 200, review })
       }
       return res.json({ status: 404, error: 'No user id passed' })

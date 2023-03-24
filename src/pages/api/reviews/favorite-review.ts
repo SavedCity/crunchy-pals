@@ -9,18 +9,18 @@ export default async function handler(
   if (req.method === 'PATCH') {
     await dbConnect()
     try {
-      const { favoriteReview, _id } = req.body
-      console.log(favoriteReview, _id)
+      const { favoriteReview, userId } = req.body
+      console.log(favoriteReview, userId)
 
-      if (favoriteReview && _id) {
+      if (favoriteReview && userId) {
         const user = await User.findByIdAndUpdate(
-          _id,
+          { _id: userId },
           { $push: { favoriteReviews: favoriteReview } },
           {
             new: true,
           }
         )
-        return res.json({ status: 200, user })
+        return res.json({ status: 200, favoriteReview })
       }
       return res.json({ status: 404, error: 'No user id or data passed' })
     } catch (error) {

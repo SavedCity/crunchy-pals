@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema
 
 const ProductSchema = new Schema({
   productName: {
@@ -10,6 +10,8 @@ const ProductSchema = new Schema({
   },
   rating: {
     type: Number,
+    max: 5,
+    min: 1,
     // required: true,
   },
   image: {
@@ -32,9 +34,9 @@ const ProductSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-});
+})
 
 const Reviews =
-  mongoose.models.Review || mongoose.model("Review", ProductSchema);
+  mongoose.models.Review || mongoose.model('Review', ProductSchema)
 
-export default Reviews;
+export default Reviews
