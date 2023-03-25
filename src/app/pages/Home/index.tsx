@@ -12,7 +12,10 @@ export default function HomePage() {
   const { user, setUserData } = useMyUser()
   const { allReviews } = useAllReviews()
 
-  const favoriteReview = async (userId: string, favoriteReview: object) => {
+  const favoriteReview = async (
+    userId: string,
+    favoriteReview: { _id?: string }
+  ) => {
     const res = await axios
       .patch(`/api/reviews/favorite-review`, {
         userId,

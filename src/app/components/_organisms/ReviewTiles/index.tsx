@@ -8,7 +8,7 @@ import styles from './index.module.scss'
 
 interface ReviewTilesProps {
   review: {
-    _id: string
+    _id?: string
     productName: string
     rating: number
     image: string
@@ -33,9 +33,8 @@ export default function ReviewTiles({
   const { _id, productName, rating, image, createdBy } = review
 
   const generateStarRatings = (num: number) =>
-    new Array(num)
-      .fill('')
-      .map((_, i) => (
+    new Array(num).fill('').map((_, i) => {
+      return (
         <Icon
           className={styles.reviewTile__ratingIcon}
           key={i}
@@ -43,17 +42,17 @@ export default function ReviewTiles({
           size='md'
           filled
         />
-      ))
+      )
+    })
 
-  console.log(Object.keys(review).filter(r => r !== _id))
   return (
     <Tile className={styles.reviewTile}>
-      {_id}
+      <P>{_id}</P>
       {deleteReview && (
         <Icon
           className={styles.reviewTile__deleteIcon}
           iconName='delete'
-          handleClick={() => deleteReview?.(_id)}
+          handleClick={() => deleteReview?.(_id!)}
         />
       )}
       {user?.username !== createdBy && handleFavoriteReview && (

@@ -10,22 +10,29 @@ export default function FavoritesPage() {
   const { user, setUserData } = useMyUser()
   const { favoriteReviews } = useFavoriteReviews()
 
-  const unfavoriteReview = async (userId: string, favoriteReview: object) => {
+  const unfavoriteReview = async (userId: string, unfavoriteReview: object) => {
     // const newFavoriteReviewsArr = user.favoriteReviews.filter(
-    //   (rev: { _id: string }) => rev._id !== favoriteReview._id
+    //   (rev: { _id: string }) => rev !== unfavoriteReview
     // )
     // console.log(newFavoriteReviewsArr)
 
-    // setUserData({ favoriteReviews: newFavoriteReviewsArr, ...user })
+    // console.log(unfavoriteReview)
+    // console.log(user.favoriteReviews)
+    // console.log(
+    //   setUserData({ favoriteReviews: newFavoriteReviewsArr, ...user })
+    // )
+
     const res = await axios
-      .patch(`/api/reviews/favorite-review`, {
+      .patch(`/api/reviews/unfavorite-review`, {
         userId,
-        favoriteReview,
+        unfavoriteReview,
       })
       .then(res => {
-        const newFavoriteReviewsArr = user.favoriteReviews.push(
-          res.data.favoriteReview
+        const newFavoriteReviewsArr = user.favoriteReviews.filter(
+          (rev: { _id: string }) => rev !== unfavoriteReview
         )
+        console.log(newFavoriteReviewsArr)
+
         setUserData({ favoriteReviews: newFavoriteReviewsArr, ...user })
       })
       .catch(err => console.log(err))
