@@ -4,10 +4,14 @@
 .reviewTile {
   &__heartIcon {
     float: right;
+
+    &--isFavoritePage {
+      color: $night-blue;
+    }
   }
 
   &__ratingIcon {
-    color: #08968f;
+    color: $night-blue;
     cursor: default;
   }
 }

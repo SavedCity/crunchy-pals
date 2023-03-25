@@ -4,15 +4,15 @@ import { useAllReviews } from 'contexts/reviews/all-reviews'
 import H1 from 'components/_atoms/H1'
 import HomeHeroContent from 'components/HomeHeroContent'
 import ReviewTiles from 'components/_organisms/ReviewTiles'
+import { useMyUser } from 'contexts/users/my'
 
 import styles from './index.module.scss'
-import { useMyUser } from 'contexts/users/my'
 
 export default function HomePage() {
   const { user, setUserData } = useMyUser()
   const { allReviews } = useAllReviews()
 
-  const favoriteProfile = async (userId: string, favoriteReview: object) => {
+  const favoriteReview = async (userId: string, favoriteReview: object) => {
     const res = await axios
       .patch(`/api/reviews/favorite-review`, {
         userId,
@@ -39,7 +39,8 @@ export default function HomePage() {
               <ReviewTiles
                 key={i}
                 review={review}
-                favoriteProfile={favoriteProfile}
+                handleFavoriteReview={favoriteReview}
+                user={user}
               />
             )
           })}

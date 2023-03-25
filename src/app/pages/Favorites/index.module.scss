@@ -5,10 +5,6 @@
   &__reviews {
     &--tiles {
       @include grid();
-
-      .icon {
-        color: yellow;
-      }
     }
   }
 }

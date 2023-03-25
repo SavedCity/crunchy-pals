@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import dbConnect from 'lib/dbConnect'
 import User from 'utils/schema/User'
+import { ObjectId } from 'mongodb'
 
 export default async function handler(
   req: NextApiRequest,
@@ -15,7 +16,7 @@ export default async function handler(
       if (favoriteReview && userId) {
         const user = await User.findByIdAndUpdate(
           { _id: userId },
-          { $push: { favoriteReviews: favoriteReview } },
+          { $push: { _id: new ObjectId(), favoriteReviews: favoriteReview } },
           {
             new: true,
           }

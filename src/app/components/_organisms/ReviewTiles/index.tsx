@@ -1,11 +1,10 @@
+import classNames from 'classnames'
 import Icon from 'components/_atoms/Icon'
 import Tile from 'components/_atoms/Tile'
 import P from 'components/_atoms/P'
 import H3 from 'components/_atoms/H3'
-import { useMyUser } from 'contexts/users/my'
 
 import styles from './index.module.scss'
-import classNames from 'classnames'
 
 interface ReviewTilesProps {
   review: {
@@ -15,16 +14,22 @@ interface ReviewTilesProps {
     image: string
     createdBy: string
   }
+  user?: {
+    _id: string
+    username: string
+  }
+  isFavoritePage?: boolean
   deleteReview?: (reviewId: string) => void
-  favoriteProfile?: (userId: string, favoriteReview: object) => void
+  handleFavoriteReview?: (userId: string, favoriteReview: object) => void
 }
 
 export default function ReviewTiles({
   review,
+  user,
+  isFavoritePage = false,
   deleteReview,
-  favoriteProfile,
+  handleFavoriteReview,
 }: ReviewTilesProps) {
-  const { user } = useMyUser()
   const { _id, productName, rating, image, createdBy } = review
 
   const generateStarRatings = (num: number) =>
@@ -40,18 +45,26 @@ export default function ReviewTiles({
         />
       ))
 
+  console.log(Object.keys(review).filter(r => r !== _id))
   return (
     <Tile className={styles.reviewTile}>
-      <Icon
-        className={styles.reviewTile__deleteIcon}
-        iconName='delete'
-        handleClick={() => deleteReview?.(_id)}
-      />
-      {user.username !== createdBy && (
+      {_id}
+      {deleteReview && (
         <Icon
-          className={styles.reviewTile__heartIcon}
+          className={styles.reviewTile__deleteIcon}
+          iconName='delete'
+          handleClick={() => deleteReview?.(_id)}
+        />
+      )}
+      {user?.username !== createdBy && handleFavoriteReview && (
+        <Icon
+          className={classNames({
+            [styles.reviewTile__heartIcon]: true,
+            [styles['reviewTile__heartIcon--isFavoritePage']]: true,
+          })}
           iconName='favorite'
-          handleClick={() => favoriteProfile?.(user._id, review)}
+          handleClick={() => handleFavoriteReview?.(user?._id!, review)}
+          filled={isFavoritePage}
         />
       )}
       <P className={styles.reviewTile__createdby}>{createdBy}</P>
