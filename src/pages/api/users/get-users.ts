@@ -1,12 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import clientPromise from 'lib/mongodb'
 import User from 'utils/schema/User'
+import dbConnect from 'lib/dbConnect'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   // const client = await clientPromise
   // const db = client.db('ReviewT_App')
 
   if (req.method === 'GET') {
+    await dbConnect()
     try {
       const users = await User.find({}, { hashedPassword: 0 })
       return res.json({ status: 200, users })

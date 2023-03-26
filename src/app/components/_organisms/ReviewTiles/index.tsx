@@ -17,8 +17,9 @@ interface ReviewTilesProps {
   user?: {
     _id: string
     username: string
+    favoriteReviews: object
   }
-  isFavoritePage?: boolean
+  filledHeart?: boolean
   deleteReview?: (reviewId: string) => void
   handleFavoriteReview?: (userId: string, favoriteReview: object) => void
 }
@@ -26,7 +27,7 @@ interface ReviewTilesProps {
 export default function ReviewTiles({
   review,
   user,
-  isFavoritePage = false,
+  filledHeart = false,
   deleteReview,
   handleFavoriteReview,
 }: ReviewTilesProps) {
@@ -45,9 +46,14 @@ export default function ReviewTiles({
       )
     })
 
+  const favoritedReview = user?.favoriteReviews?.find(
+    ({ _id }: any) => _id === review._id
+  )
+  console.log(favoritedReview);
+  
+
   return (
     <Tile className={styles.reviewTile}>
-      <P>{_id}</P>
       {deleteReview && (
         <Icon
           className={styles.reviewTile__deleteIcon}
@@ -59,11 +65,11 @@ export default function ReviewTiles({
         <Icon
           className={classNames({
             [styles.reviewTile__heartIcon]: true,
-            [styles['reviewTile__heartIcon--isFavoritePage']]: true,
+            // [styles['reviewTile__heartIcon--isFavoritePage']]: true,
           })}
           iconName='favorite'
           handleClick={() => handleFavoriteReview?.(user?._id!, review)}
-          filled={isFavoritePage}
+          filled={filledHeart || favoritedReview}
         />
       )}
       <P className={styles.reviewTile__createdby}>{createdBy}</P>

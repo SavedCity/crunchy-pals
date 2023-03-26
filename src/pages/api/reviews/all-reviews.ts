@@ -1,3 +1,4 @@
+import dbConnect from 'lib/dbConnect'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import Reviews from 'utils/schema/Review'
 
@@ -6,6 +7,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'GET') {
+    await dbConnect()
     try {
       const reviews = await Reviews.find({})
       return res.json({ status: 200, reviews })

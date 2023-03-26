@@ -19,7 +19,7 @@ export default async function handler(
             new: true,
           }
         )
-        return res.json({ status: 200, unfavoriteReview })
+        return res.json({ status: 200, 'Unfavorited review': unfavoriteReview })
       }
       return res.json({ status: 404, error: 'No user id or data passed' })
     } catch (error) {

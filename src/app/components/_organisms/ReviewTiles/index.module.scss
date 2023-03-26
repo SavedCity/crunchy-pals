@@ -3,11 +3,12 @@
 
 .reviewTile {
   &__heartIcon {
+    color: $night-blue;
     float: right;
 
-    &--isFavoritePage {
-      color: $night-blue;
-    }
+    // &--isFavoritePage {
+    //   color: $night-blue;
+    // }
   }
 
   &__ratingIcon {

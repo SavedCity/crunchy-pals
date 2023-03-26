@@ -11,17 +11,6 @@ export default function FavoritesPage() {
   const { favoriteReviews } = useFavoriteReviews()
 
   const unfavoriteReview = async (userId: string, unfavoriteReview: object) => {
-    // const newFavoriteReviewsArr = user.favoriteReviews.filter(
-    //   (rev: { _id: string }) => rev !== unfavoriteReview
-    // )
-    // console.log(newFavoriteReviewsArr)
-
-    // console.log(unfavoriteReview)
-    // console.log(user.favoriteReviews)
-    // console.log(
-    //   setUserData({ favoriteReviews: newFavoriteReviewsArr, ...user })
-    // )
-
     const res = await axios
       .patch(`/api/reviews/unfavorite-review`, {
         userId,
@@ -31,9 +20,7 @@ export default function FavoritesPage() {
         const newFavoriteReviewsArr = user.favoriteReviews.filter(
           (rev: { _id: string }) => rev !== unfavoriteReview
         )
-        console.log(newFavoriteReviewsArr)
-
-        setUserData({ favoriteReviews: newFavoriteReviewsArr, ...user })
+        setUserData({ ...user, favoriteReviews: newFavoriteReviewsArr })
       })
       .catch(err => console.log(err))
   }
@@ -50,7 +37,7 @@ export default function FavoritesPage() {
                 key={i}
                 user={user}
                 handleFavoriteReview={unfavoriteReview}
-                isFavoritePage={true}
+                filledHeart={true}
               />
             )
           })}

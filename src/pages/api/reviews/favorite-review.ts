@@ -10,7 +10,7 @@ export default async function handler(
     await dbConnect()
     try {
       const { favoriteReview, userId } = req.body
-      delete favoriteReview._id
+      // delete favoriteReview._id
 
       if (favoriteReview && userId) {
         const user = await User.findByIdAndUpdate(
