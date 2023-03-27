@@ -49,8 +49,9 @@ export default function ReviewTiles({
   const favoritedReview = user?.favoriteReviews?.find(
     ({ _id }: any) => _id === review._id
   )
-  console.log(favoritedReview);
+  // console.log(user?.favoriteReviews?.include('fh'));
   
+  console.log(favoritedReview);
 
   return (
     <Tile className={styles.reviewTile}>
