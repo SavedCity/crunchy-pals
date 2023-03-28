@@ -16,16 +16,32 @@ export default function HomePage() {
     userId: string,
     favoriteReview: { _id?: string }
   ) => {
+    const favoriteReviews = user.favoriteReviews
+    const reviewIsFavorited =
+      favoriteReviews.findIndex(
+        ({ _id }: any) => _id === favoriteReview._id
+      ) !== -1
+
+    const handleFavoriteReviewUpdate = () => {
+      let newFavoriteReviewsArr
+      if (reviewIsFavorited) {
+        newFavoriteReviewsArr = favoriteReviews.filter(
+          (rev: object) => rev !== favoriteReview
+        )
+        setUserData({ ...user, favoriteReviews: newFavoriteReviewsArr })
+      } else {
+        newFavoriteReviewsArr = favoriteReviews.push(favoriteReview)
+        setUserData({ favoriteReviews: newFavoriteReviewsArr, ...user })
+      }
+    }
+
     const res = await axios
-      .patch(`/api/reviews/favorite-review`, {
+      .patch(`/api/reviews/${reviewIsFavorited ? 'un' : ''}favorite-review`, {
         userId,
         favoriteReview,
       })
-      .then(res => {
-        const newFavoriteReviewsArr = user.favoriteReviews.push(
-          res.data.favoriteReview
-        )
-        setUserData({ favoriteReviews: newFavoriteReviewsArr, ...user })
+      .then(() => {
+        handleFavoriteReviewUpdate()
       })
       .catch(err => console.log(err))
   }

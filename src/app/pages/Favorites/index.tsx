@@ -18,7 +18,7 @@ export default function FavoritesPage() {
       })
       .then(res => {
         const newFavoriteReviewsArr = user.favoriteReviews.filter(
-          (rev: { _id: string }) => rev !== unfavoriteReview
+          (rev: object) => rev !== unfavoriteReview
         )
         setUserData({ ...user, favoriteReviews: newFavoriteReviewsArr })
       })
