@@ -1,11 +1,5 @@
 import { useSession } from 'next-auth/react'
-import {
-  ReactNode,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from 'react'
+import { ReactNode, createContext, useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 
 const UserContext = createContext({})
@@ -49,10 +43,5 @@ const useUserContext = () => useContext(UserContext)
 
 export const useMyUser = () => {
   const { userData, setUserData }: object | any = useUserContext()
-  return { user: userData, setUserData }
-}
-
-export const useFavoriteReviews = () => {
-  const { userData }: object | any = useUserContext()
-  return { favoriteReviews: userData.favoriteReviews }
+  return { user: userData, favoriteReviews: userData.favoriteReviews, setUserData }
 }

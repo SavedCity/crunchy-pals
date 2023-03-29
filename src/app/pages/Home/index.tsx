@@ -12,25 +12,20 @@ export default function HomePage() {
   const { user, setUserData } = useMyUser()
   const { allReviews } = useAllReviews()
 
-  const favoriteReview = async (
-    userId: string,
-    favoriteReview: { _id?: string }
-  ) => {
+  const favoriteReview = async (userId: string, review: { _id?: string }) => {
+    console.log(review)
+    console.log(user)
+
     const favoriteReviews = user.favoriteReviews
-    const reviewIsFavorited =
-      favoriteReviews.findIndex(
-        ({ _id }: any) => _id === favoriteReview._id
-      ) !== -1
+    const reviewIsFavorited = favoriteReviews.findIndex(({ _id }: any) => _id === review._id) !== -1
 
     const handleFavoriteReviewUpdate = () => {
       let newFavoriteReviewsArr
       if (reviewIsFavorited) {
-        newFavoriteReviewsArr = favoriteReviews.filter(
-          (rev: object) => rev !== favoriteReview
-        )
+        newFavoriteReviewsArr = favoriteReviews.filter((rev: object) => rev !== review)
         setUserData({ ...user, favoriteReviews: newFavoriteReviewsArr })
       } else {
-        newFavoriteReviewsArr = favoriteReviews.push(favoriteReview)
+        newFavoriteReviewsArr = favoriteReviews.push(review)
         setUserData({ favoriteReviews: newFavoriteReviewsArr, ...user })
       }
     }
@@ -38,7 +33,7 @@ export default function HomePage() {
     const res = await axios
       .patch(`/api/reviews/${reviewIsFavorited ? 'un' : ''}favorite-review`, {
         userId,
-        favoriteReview,
+        review,
       })
       .then(() => {
         handleFavoriteReviewUpdate()

@@ -1,25 +1,25 @@
 import React from 'react'
 import axios from 'axios'
-import { useFavoriteReviews, useMyUser } from 'contexts/users/my'
+import { useMyUser } from 'contexts/users/my'
 import ReviewTiles from 'components/_organisms/ReviewTiles'
 import H1 from 'components/_atoms/H1'
 
 import styles from './index.module.scss'
 
 export default function FavoritesPage() {
-  const { user, setUserData } = useMyUser()
-  const { favoriteReviews } = useFavoriteReviews()
+  const { user, favoriteReviews, setUserData } = useMyUser()
 
-  const unfavoriteReview = async (userId: string, unfavoriteReview: object) => {
+  const unfavoriteReview = async (userId: string, review: object) => {
+    console.log(review)
+    console.log(user)
+
     const res = await axios
       .patch(`/api/reviews/unfavorite-review`, {
         userId,
-        unfavoriteReview,
+        review,
       })
-      .then(res => {
-        const newFavoriteReviewsArr = user.favoriteReviews.filter(
-          (rev: object) => rev !== unfavoriteReview
-        )
+      .then(() => {
+        const newFavoriteReviewsArr = user.favoriteReviews.filter((rev: object) => rev !== review)
         setUserData({ ...user, favoriteReviews: newFavoriteReviewsArr })
       })
       .catch(err => console.log(err))

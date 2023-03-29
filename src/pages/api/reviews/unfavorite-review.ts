@@ -2,24 +2,22 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import dbConnect from 'lib/dbConnect'
 import User from 'utils/schema/User'
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'PATCH') {
     await dbConnect()
     try {
-      const { unfavoriteReview, userId } = req.body
+      const { review, userId } = req.body
+      // console.log('unfavorite', review)
 
-      if (unfavoriteReview && userId) {
+      if (review && userId) {
         const user = await User.findByIdAndUpdate(
           { _id: userId },
-          { $pull: { favoriteReviews: unfavoriteReview } },
+          { $pull: { favoriteReviews: review } },
           {
             new: true,
           }
         )
-        return res.json({ status: 200, 'Unfavorited review': unfavoriteReview })
+        return res.json({ status: 200, 'Unfavorited review': review })
       }
       return res.json({ status: 404, error: 'No user id or data passed' })
     } catch (error) {

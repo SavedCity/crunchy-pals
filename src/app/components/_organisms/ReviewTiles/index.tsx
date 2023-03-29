@@ -32,23 +32,18 @@ export default function ReviewTiles({
   handleFavoriteReview,
 }: ReviewTilesProps) {
   const { _id, productName, rating, image, createdBy } = review
+  // if (review._id === '63f408c3d6ace9bf906b3471') {
+  //   console.log(review)
+  // }
 
   const generateStarRatings = (num: number) =>
     new Array(num).fill('').map((_, i) => {
       return (
-        <Icon
-          className={styles.reviewTile__ratingIcon}
-          key={i}
-          iconName='star'
-          size='md'
-          filled
-        />
+        <Icon className={styles.reviewTile__ratingIcon} key={i} iconName='star' size='md' filled />
       )
     })
 
-  const isReviewFavorited = !!user?.favoriteReviews?.find(
-    ({ _id }: any) => _id === review._id
-  )
+  const isReviewFavorited = !!user?.favoriteReviews?.find(({ _id }: any) => _id === review._id)
 
   return (
     <Tile className={styles.reviewTile}>
