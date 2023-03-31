@@ -13,18 +13,19 @@ export default function HomePage() {
   const { allReviews } = useAllReviews()
 
   const favoriteReview = async (userId: string, review: { _id?: string }) => {
-    console.log(review)
-    console.log(user)
-
     const favoriteReviews = user.favoriteReviews
     const reviewIsFavorited = favoriteReviews.findIndex(({ _id }: any) => _id === review._id) !== -1
 
     const handleFavoriteReviewUpdate = () => {
       let newFavoriteReviewsArr
       if (reviewIsFavorited) {
-        newFavoriteReviewsArr = favoriteReviews.filter((rev: object) => rev !== review)
+        // unfavorite review
+        newFavoriteReviewsArr = favoriteReviews.filter(
+          (rev: { _id: string }) => rev._id !== review._id
+        )
         setUserData({ ...user, favoriteReviews: newFavoriteReviewsArr })
       } else {
+        // favorite review
         newFavoriteReviewsArr = favoriteReviews.push(review)
         setUserData({ favoriteReviews: newFavoriteReviewsArr, ...user })
       }

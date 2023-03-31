@@ -7,7 +7,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     await dbConnect()
     try {
       const { review, userId } = req.body
-      // console.log('favorite', review)
 
       if (review && userId) {
         const user = await User.findByIdAndUpdate(

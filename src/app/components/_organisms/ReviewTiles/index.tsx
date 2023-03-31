@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import classNames from 'classnames'
 import Icon from 'components/_atoms/Icon'
 import Tile from 'components/_atoms/Tile'
@@ -21,7 +22,7 @@ interface ReviewTilesProps {
   }
   filledHeart?: boolean
   deleteReview?: (reviewId: string) => void
-  handleFavoriteReview?: (userId: string, favoriteReview: object) => void
+  handleFavoriteReview?: (userId: string, review: object) => void
 }
 
 export default function ReviewTiles({
@@ -32,9 +33,9 @@ export default function ReviewTiles({
   handleFavoriteReview,
 }: ReviewTilesProps) {
   const { _id, productName, rating, image, createdBy } = review
-  // if (review._id === '63f408c3d6ace9bf906b3471') {
-  //   console.log(review)
-  // }
+  const [filteredReview] = useState(
+    Object.fromEntries(Object.entries(review).filter(([key]) => key !== '__v'))
+  )
 
   const generateStarRatings = (num: number) =>
     new Array(num).fill('').map((_, i) => {
@@ -43,7 +44,9 @@ export default function ReviewTiles({
       )
     })
 
-  const isReviewFavorited = !!user?.favoriteReviews?.find(({ _id }: any) => _id === review._id)
+  const isReviewFavorited = !!user?.favoriteReviews?.find(
+    ({ _id }: any) => _id === filteredReview._id
+  )
 
   return (
     <Tile className={styles.reviewTile}>
@@ -61,7 +64,7 @@ export default function ReviewTiles({
             // [styles['reviewTile__heartIcon--isFavoritePage']]: true,
           })}
           iconName='favorite'
-          handleClick={() => handleFavoriteReview?.(user?._id!, review)}
+          handleClick={() => handleFavoriteReview?.(user?._id!, filteredReview)}
           filled={filledHeart || isReviewFavorited}
         />
       )}

@@ -9,17 +9,16 @@ import styles from './index.module.scss'
 export default function FavoritesPage() {
   const { user, favoriteReviews, setUserData } = useMyUser()
 
-  const unfavoriteReview = async (userId: string, review: object) => {
-    console.log(review)
-    console.log(user)
-
+  const unfavoriteReview = async (userId: string, review: any) => {
     const res = await axios
       .patch(`/api/reviews/unfavorite-review`, {
         userId,
         review,
       })
       .then(() => {
-        const newFavoriteReviewsArr = user.favoriteReviews.filter((rev: object) => rev !== review)
+        const newFavoriteReviewsArr = user.favoriteReviews.filter(
+          (rev: { _id: string }) => rev._id !== review._id
+        )
         setUserData({ ...user, favoriteReviews: newFavoriteReviewsArr })
       })
       .catch(err => console.log(err))
