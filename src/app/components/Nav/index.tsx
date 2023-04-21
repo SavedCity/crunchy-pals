@@ -19,7 +19,7 @@ export default function Nav() {
     >
       <section>
         <Link href={'/'} className={styles.nav__brandName}>
-          ReviewT
+          Crunchy Pals
         </Link>
       </section>
 

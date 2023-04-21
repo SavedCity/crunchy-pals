@@ -1,10 +1,6 @@
-# ReviewT
+# Crunchy Pals
 
-ReviewT is an innovative app that allows users to post their purchased products and leave reviews for others to see. With ReviewT, you can easily share your thoughts and experiences on the everyday products you purchase, and help others make informed decisions when they're shopping.
-
-Its user-friendly interface makes it easy for anyone to post a review and its rating system allows users to find the best products with the best reviews. The app also allows users to search for products and reviews based on specific criteria, making the process of finding the perfect product a breeze.
-
-With ReviewT, you'll never have to worry about making a bad purchase again.
+Overview coming soon...
 
 <hr>
 
