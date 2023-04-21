@@ -1,6 +1,6 @@
 import dbConnect from 'lib/dbConnect'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import Reviews from 'utils/schema/Review'
+import Discussions from 'utils/schema/Discussion'
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,8 +9,8 @@ export default async function handler(
   if (req.method === 'GET') {
     await dbConnect()
     try {
-      const reviews = await Reviews.find({})
-      return res.json({ status: 200, reviews })
+      const discussions = await Discussions.find({})
+      return res.json({ status: 200, discussions })
     } catch (error) {
       return res.json({ status: 400, error: 'Bad request' })
     }

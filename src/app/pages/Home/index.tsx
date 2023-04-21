@@ -11,6 +11,7 @@ import styles from './index.module.scss'
 export default function HomePage() {
   const { user, setUserData } = useMyUser()
   const { allReviews } = useAllReviews()
+  console.log(allReviews)
 
   const favoriteReview = async (userId: string, review: { _id?: string }) => {
     const favoriteReviews = user.favoriteReviews
@@ -47,7 +48,7 @@ export default function HomePage() {
       <HomeHeroContent />
 
       <div className={styles.home__reviews}>
-        <H1>Reviews:</H1>
+        <H1>Discussions:</H1>
         <div className={styles['home__reviews--tiles']}>
           {allReviews?.map((review: any, i: number) => {
             return (

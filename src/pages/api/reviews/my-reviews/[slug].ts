@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import Reviews from 'utils/schema/Review'
+import Reviews from 'utils/schema/Discussion'
 
 export default async function handler(
   req: NextApiRequest,

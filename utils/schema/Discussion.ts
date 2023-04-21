@@ -36,7 +36,7 @@ const ProductSchema = new Schema({
   },
 })
 
-const Reviews =
-  mongoose.models.Review || mongoose.model('Review', ProductSchema)
+const Discussions =
+  mongoose.models.Discussion || mongoose.model('Discussion', ProductSchema)
 
-export default Reviews
+export default Discussions

@@ -1,10 +1,4 @@
-import {
-  ReactNode,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from 'react'
+import { ReactNode, createContext, useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 
 const AllReviewsContext = createContext({})
@@ -20,7 +14,7 @@ export const ReviewsProvider = ({ children }: ReviewsProviderProps) => {
     const reviews = await axios
       .get(`/api/reviews/all-reviews`)
       .then(res => {
-        setAllReviews(res.data.reviews)
+        setAllReviews(res.data.discussions)
       })
       .catch(err => console.log(err))
   }
@@ -40,7 +34,7 @@ const useReviewsContext = () => useContext(AllReviewsContext)
 
 export const useAllReviews = () => {
   const { allReviews }: object | any = useReviewsContext()
-  const reviewsLoaded = Object.keys(allReviews).length > 0
+  const reviewsLoaded = Object.keys(allReviews || {}).length > 0
 
   return reviewsLoaded ? { allReviews } : {}
 }
