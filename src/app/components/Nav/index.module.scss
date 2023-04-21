@@ -15,5 +15,23 @@
   &__rightSide {
     @include flex($align-items: center);
     column-gap: $spacing-5;
+
+    // &--icon {
+    //   position: relative;
+
+    &--numberOfReviews {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: $green;
+      border-radius: $full-radius;
+      padding: 3px 7px;
+      font-size: $xx-small;
+
+      a & {
+        position: relative;
+      }
+      // }
+    }
   }
 }

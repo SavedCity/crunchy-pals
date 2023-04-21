@@ -1,14 +1,15 @@
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
-import ProfileMenu from 'components/ProfileMenu'
-
-import styles from './index.module.scss'
+import ProfileMenu from 'components/_organisms/ProfileMenu'
 import IconLink from 'components/_molecules/LinkIcon'
 import classNames from 'classnames'
+import { useMyUser } from 'contexts/users/my'
+
+import styles from './index.module.scss'
 
 export default function Nav() {
-  const { data: session } = useSession()
-  const user: object | undefined | any = session ? session.user : {}
+  const { user } = useMyUser()
+  const numberOfReviews = user?.favoriteReviews?.length
 
   return (
     <div
@@ -23,7 +24,11 @@ export default function Nav() {
       </section>
 
       <section className={styles.nav__rightSide}>
-        <IconLink IconName='favorite' href='/favorites' />
+        {/* <div className={styles[`nav__rightSide--icon`]}> */}
+        <IconLink IconName='favorite' href='/favorites'>
+          <div className={styles[`nav__rightSide--numberOfReviews`]}>{numberOfReviews}</div>
+        </IconLink>
+        {/* </div> */}
         <ProfileMenu />
       </section>
     </div>

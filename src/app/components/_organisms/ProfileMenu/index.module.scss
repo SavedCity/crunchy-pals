@@ -22,6 +22,7 @@
     background-color: $soft-white;
     padding: $spacing-1 0;
     width: $spacing-50;
+    z-index: 99;
 
     &::before {
       content: '';
