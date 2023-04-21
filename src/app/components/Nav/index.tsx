@@ -29,6 +29,7 @@ export default function Nav() {
           <div className={styles[`nav__rightSide--numberOfReviews`]}>{numberOfReviews}</div>
         </IconLink>
         {/* </div> */}
+
         <ProfileMenu />
       </section>
     </div>
