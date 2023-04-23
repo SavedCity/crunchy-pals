@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import Replies from './Reply'
+import Comments from './Comment'
 
 const Schema = mongoose.Schema
 
@@ -9,7 +9,7 @@ const threadSchema = new Schema({
   author: { type: String, required: true },
   content: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
-  replies: [{ type: mongoose.Schema.Types.ObjectId, ref: Replies }],
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: Comments }],
 })
 
 const Thread = mongoose.models.Thread || mongoose.model('Thread', threadSchema)

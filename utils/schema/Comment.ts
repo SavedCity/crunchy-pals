@@ -2,12 +2,12 @@ import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema
 
-const replySchema = new Schema({
+const commentSchema = new Schema({
   author: { type: String, required: true },
   date: { type: Date, default: Date.now },
   content: { type: String, required: true },
 })
 
-const Replies = mongoose.models.Replies || mongoose.model('Replies', replySchema)
+const Comment = mongoose.models.Comment || mongoose.model('Comment', commentSchema)
 
-export default Replies
+export default Comment
