@@ -1,17 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import Reviews from 'utils/schema/Discussion'
+import Forums from 'utils/schema/Forum'
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'DELETE') {
     try {
       const { _id } = req.body
 
       if (_id) {
-        const review = await Reviews.findByIdAndDelete(_id)
-        return res.json({ status: 200, review })
+        const forum = await Forums.findByIdAndDelete(_id)
+        return res.json({ status: 200, forum })
       }
       return res.json({ status: 404, error: 'No user id passed' })
     } catch (error) {

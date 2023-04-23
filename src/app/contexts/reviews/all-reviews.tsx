@@ -14,7 +14,7 @@ export const ReviewsProvider = ({ children }: ReviewsProviderProps) => {
     const reviews = await axios
       .get(`/api/reviews/all-reviews`)
       .then(res => {
-        setAllReviews(res.data.discussions)
+        setAllReviews(res.data.forums)
       })
       .catch(err => console.log(err))
   }

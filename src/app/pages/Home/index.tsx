@@ -48,7 +48,7 @@ export default function HomePage() {
       <HomeHeroContent />
 
       <div className={styles.home__reviews}>
-        <H1>Discussions:</H1>
+        <H1>Forums:</H1>
         <div className={styles['home__reviews--tiles']}>
           {allReviews?.map((review: any, i: number) => {
             return (

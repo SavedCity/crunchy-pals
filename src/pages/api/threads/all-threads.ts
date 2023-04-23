@@ -1,16 +1,13 @@
+import dbConnect from 'lib/dbConnect'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import Reviews from 'utils/schema/Discussion'
+import Forums from 'utils/schema/Forum'
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
-    const { slug } = req.query
-
+    await dbConnect()
     try {
-      const myReviews = await Reviews.find({ createdBy: slug })
-      return res.json({ status: 200, myReviews })
+      const forums = await Forums.find({})
+      return res.json({ status: 200, forums })
     } catch (error) {
       return res.json({ status: 400, error: 'Bad request' })
     }

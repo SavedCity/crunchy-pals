@@ -6,17 +6,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method === 'PATCH') {
     await dbConnect()
     try {
-      const { review, userId } = req.body
+      const { forum, userId } = req.body
 
-      if (review && userId) {
+      if (forum && userId) {
         const user = await User.findByIdAndUpdate(
           { _id: userId },
-          { $pull: { favoriteReviews: review } },
+          { $push: { favoriteReviews: forum } },
           {
             new: true,
           }
         )
-        return res.json({ status: 200, 'Unfavorited review': review })
+        return res.json({ status: 200, 'Favorited forum': forum })
       }
       return res.json({ status: 404, error: 'No user id or data passed' })
     } catch (error) {

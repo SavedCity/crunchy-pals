@@ -24,7 +24,7 @@ const UserSchema = new Schema({
   dob: {
     type: String,
   },
-  favoriteReviews: [
+  favoriteForums: [
     {
       productName: String,
       rating: Number,
