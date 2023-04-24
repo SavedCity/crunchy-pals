@@ -1,19 +1,19 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import dbConnect from 'lib/dbConnect'
-import Forums from 'utils/schema/Forum'
+import Forum from 'utils/schema/Forum'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
     await dbConnect()
 
     try {
-      const { forumId } = req.body
-
-      if (forumId) {
-        const forum = await Forums.findById(forumId).populate('threads')
-        return res.status(200).json({ forum })
-      }
-      return res.status(404).json({ error: 'No forum id provided' })
+      const forum = await Forum.find().populate({
+        path: 'threads',
+        populate: {
+          path: 'comments',
+        },
+      })
+      return res.status(200).json({ forum })
     } catch (error) {
       return res.status(500).json({ error })
     }

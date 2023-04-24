@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import Forums from 'utils/schema/Forum'
+import Forum from 'utils/schema/Forum'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -7,7 +7,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const bodyData = req.body
-  const newForum = new Forums(bodyData)
+  const newForum = new Forum(bodyData)
 
   await newForum
     .save()

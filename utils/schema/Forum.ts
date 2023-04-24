@@ -9,6 +9,6 @@ const forumSchema = new Schema({
   threads: [{ type: mongoose.Schema.Types.ObjectId, ref: Thread }],
 })
 
-const Forums = mongoose.models.Forum || mongoose.model('Forum', forumSchema)
+const Forum = mongoose.models.Forum || mongoose.model('Forum', forumSchema)
 
-export default Forums
+export default Forum
