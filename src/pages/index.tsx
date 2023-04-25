@@ -1,4 +1,4 @@
-import { ReviewsProvider } from 'contexts/reviews/all-reviews'
+import { ReviewsProvider } from 'contexts/forums/all-forums'
 import Home from 'pages/Home'
 
 export default function HomePage() {

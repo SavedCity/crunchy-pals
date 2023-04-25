@@ -4,7 +4,7 @@ import Avatar from 'components/_atoms/Avatar'
 import EditProfile from '../../components/_organisms/EditProfile'
 import FileUploader from 'components/_molecules/FileUploader'
 import { useMyUser } from 'contexts/users/my'
-import { useMyReviews } from 'contexts/reviews/my'
+import { useMyReviews } from 'contexts/forums/my'
 import H1 from 'components/_atoms/H1'
 import ReviewTiles from 'components/_organisms/ReviewTiles'
 
@@ -25,11 +25,7 @@ export default function ProfilePage() {
       })
       .then(res => {
         console.log(res.data.review)
-        setMyReviews(
-          myReviews.filter(
-            (r: { _id: string }) => r._id !== res.data.review._id
-          )
-        )
+        setMyReviews(myReviews.filter((r: { _id: string }) => r._id !== res.data.review._id))
       })
       .catch(err => console.log(err))
   }
@@ -65,13 +61,7 @@ export default function ProfilePage() {
         <H1>My Reviews: </H1>
         <div className={styles['profile__reviews--tiles']}>
           {myReviews?.map((review: any, i: number) => {
-            return (
-              <ReviewTiles
-                key={i}
-                review={review}
-                deleteReview={deleteReview}
-              />
-            )
+            return <ReviewTiles key={i} review={review} deleteReview={deleteReview} />
           })}
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { useAllReviews } from 'contexts/reviews/all-reviews'
+import { useAllForums } from 'contexts/forums/all-forums'
 import H1 from 'components/_atoms/H1'
 import HomeHeroContent from 'components/HomeHeroContent'
 import ReviewTiles from 'components/_organisms/ReviewTiles'
@@ -10,35 +10,35 @@ import styles from './index.module.scss'
 
 export default function HomePage() {
   const { user, setUserData } = useMyUser()
-  const { allReviews } = useAllReviews()
-  console.log(allReviews)
+  const { allForums } = useAllForums()
+  console.log(allForums)
 
-  const favoriteReview = async (userId: string, review: { _id?: string }) => {
-    const favoriteReviews = user.favoriteReviews
-    const reviewIsFavorited = favoriteReviews.findIndex(({ _id }: any) => _id === review._id) !== -1
+  const favoriteForum = async (userId: string, forum: { _id?: string }) => {
+    const favoriteForums = user.favoriteForums
+    const forumIsFavorited = favoriteForums.findIndex(({ _id }: any) => _id === forum._id) !== -1
 
-    const handleFavoriteReviewUpdate = () => {
-      let newFavoriteReviewsArr
-      if (reviewIsFavorited) {
-        // unfavorite review
-        newFavoriteReviewsArr = favoriteReviews.filter(
-          (rev: { _id: string }) => rev._id !== review._id
+    const handleFavoriteForumUpdate = () => {
+      let newFavoriteForumsArr
+      if (forumIsFavorited) {
+        // unfavorite forum
+        newFavoriteForumsArr = favoriteForums.filter(
+          (rev: { _id: string }) => rev._id !== forum._id
         )
-        setUserData({ ...user, favoriteReviews: newFavoriteReviewsArr })
+        setUserData({ ...user, favoriteForums: newFavoriteForumsArr })
       } else {
-        // favorite review
-        newFavoriteReviewsArr = favoriteReviews.push(review)
-        setUserData({ favoriteReviews: newFavoriteReviewsArr, ...user })
+        // favorite forum
+        newFavoriteForumsArr = favoriteForums.push(forum)
+        setUserData({ favoriteForums: newFavoriteForumsArr, ...user })
       }
     }
 
     const res = await axios
-      .patch(`/api/reviews/${reviewIsFavorited ? 'un' : ''}favorite-review`, {
+      .patch(`/api/forums/${forumIsFavorited ? 'un' : ''}favorite-forum`, {
         userId,
-        review,
+        forum,
       })
       .then(() => {
-        handleFavoriteReviewUpdate()
+        handleFavoriteForumUpdate()
       })
       .catch(err => console.log(err))
   }
@@ -50,14 +50,9 @@ export default function HomePage() {
       <div className={styles.home__reviews}>
         <H1>Forums:</H1>
         <div className={styles['home__reviews--tiles']}>
-          {allReviews?.map((review: any, i: number) => {
+          {allForums?.map((forum: any, i: number) => {
             return (
-              <ReviewTiles
-                key={i}
-                review={review}
-                handleFavoriteReview={favoriteReview}
-                user={user}
-              />
+              <ReviewTiles key={i} forum={forum} handleFavoriteForum={favoriteForum} user={user} />
             )
           })}
         </div>

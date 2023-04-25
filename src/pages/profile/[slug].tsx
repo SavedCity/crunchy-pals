@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { MyReviewsProvider } from 'contexts/reviews/my'
+import { MyReviewsProvider } from 'contexts/forums/my'
 import { NextPageContext } from 'next'
 import Profile from 'pages/Profile'
 
