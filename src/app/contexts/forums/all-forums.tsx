@@ -3,14 +3,14 @@ import axios from 'axios'
 
 const AllForumsContext = createContext({})
 
-interface ReviewsProviderProps {
+interface ForumsProviderProps {
   children: ReactNode
 }
 
-export const ReviewsProvider = ({ children }: ReviewsProviderProps) => {
+export const ForumsProvider = ({ children }: ForumsProviderProps) => {
   const [allForums, setAllForums] = useState([])
 
-  const getAllReviewsData = async () => {
+  const getAllForumsData = async () => {
     const forums = await axios
       .get(`/api/forums/all-forums`)
       .then(res => {
@@ -20,7 +20,7 @@ export const ReviewsProvider = ({ children }: ReviewsProviderProps) => {
   }
 
   useEffect(() => {
-    getAllReviewsData()
+    getAllForumsData()
   }, [])
 
   return (
@@ -30,11 +30,11 @@ export const ReviewsProvider = ({ children }: ReviewsProviderProps) => {
   )
 }
 
-const useReviewsContext = () => useContext(AllForumsContext)
+const useForumsContext = () => useContext(AllForumsContext)
 
 export const useAllForums = () => {
-  const { allForums }: object | any = useReviewsContext()
-  const reviewsLoaded = Object.keys(allForums || {}).length > 0
+  const { allForums }: object | any = useForumsContext()
+  const forumsLoaded = Object.keys(allForums || {}).length > 0
 
-  return reviewsLoaded ? { allForums } : {}
+  return forumsLoaded ? { allForums } : {}
 }

@@ -2,7 +2,7 @@
 @import 'styles/mixins';
 
 .favorites {
-  &__reviews {
+  &__forums {
     &--tiles {
       @include grid();
     }

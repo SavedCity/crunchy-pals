@@ -1,41 +1,43 @@
 import React from 'react'
 import axios from 'axios'
 import { useMyUser } from 'contexts/users/my'
-import ReviewTiles from 'components/_organisms/ReviewTiles'
+import Forum from 'components/_organisms/Forum'
 import H1 from 'components/_atoms/H1'
 
 import styles from './index.module.scss'
 
 export default function FavoritesPage() {
-  const { user, favoriteReviews, setUserData } = useMyUser()
+  const { user, favoriteForums, setUserData } = useMyUser()
 
-  const unfavoriteReview = async (userId: string, review: any) => {
+  console.log(favoriteForums)
+
+  const unfavoriteForum = async (userId: string, forum: any) => {
     const res = await axios
-      .patch(`/api/reviews/unfavorite-review`, {
+      .patch(`/api/forums/unfavorite-forum`, {
         userId,
-        review,
+        forum,
       })
       .then(() => {
-        const newFavoriteReviewsArr = user.favoriteReviews.filter(
-          (rev: { _id: string }) => rev._id !== review._id
+        const newFavoriteForumsArr = user.favoriteForums.filter(
+          (rev: { _id: string }) => rev._id !== forum._id
         )
-        setUserData({ ...user, favoriteReviews: newFavoriteReviewsArr })
+        setUserData({ ...user, favoriteForums: newFavoriteForumsArr })
       })
       .catch(err => console.log(err))
   }
 
   return (
     <div className={styles.favorites}>
-      <div className={styles.favorites__reviews}>
-        <H1>Favorite Reviews: </H1>
-        <div className={styles['favorites__reviews--tiles']}>
-          {favoriteReviews?.map((review: any, i: number) => {
+      <div className={styles.favorites__forums}>
+        <H1>Favorite Forums: </H1>
+        <div className={styles['favorites__forums--tiles']}>
+          {favoriteForums?.map((forum: any, i: number) => {
             return (
-              <ReviewTiles
-                review={review}
+              <Forum
+                forum={forum}
                 key={i}
                 user={user}
-                handleFavoriteReview={unfavoriteReview}
+                handleFavoriteForum={unfavoriteForum}
                 filledHeart={true}
               />
             )

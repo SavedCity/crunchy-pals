@@ -9,46 +9,46 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useMyUser } from 'contexts/users/my'
 
-const MyReviewsContext = createContext({})
+const MyForumsContext = createContext({})
 
-interface MyReviewsProviderProps {
+interface MyForumsProviderProps {
   children: ReactNode
 }
 
-export const MyReviewsProvider = ({ children }: MyReviewsProviderProps) => {
+export const MyForumsProvider = ({ children }: MyForumsProviderProps) => {
   const { user } = useMyUser()
   const { query } = useRouter()
-  const [myReviews, setMyReviews] = useState([])
+  const [myForums, setMyForums] = useState([])
 
   const slug = query.slug
 
-  const getMyReviewsData = async () => {
-    const reviews = await axios
-      .get(`/api/reviews/my-reviews/${slug}`)
+  const getMyForumsData = async () => {
+    const forums = await axios
+      .get(`/api/forums/my-forums/${slug}`)
       .then(res => {
-        setMyReviews(res.data.myReviews)
+        setMyForums(res.data.myForums)
       })
       .catch(err => console.log(err))
   }
 
   useEffect(() => {
     if (slug) {
-      getMyReviewsData()
+      getMyForumsData()
     }
   }, [user])
 
   return (
-    <MyReviewsContext.Provider value={{ myReviews, setMyReviews }}>
+    <MyForumsContext.Provider value={{ myForums, setMyForums }}>
       {children}
-    </MyReviewsContext.Provider>
+    </MyForumsContext.Provider>
   )
 }
 
-const useReviewsContext = () => useContext(MyReviewsContext)
+const useForumsContext = () => useContext(MyForumsContext)
 
-export const useMyReviews = () => {
-  const { myReviews, setMyReviews }: object | any = useReviewsContext()
-  const reviewsLoaded = Object.keys(myReviews).length > 0
+export const useMyForums = () => {
+  const { myForums, setMyForums }: object | any = useForumsContext()
+  const forumsLoaded = Object.keys(myForums).length > 0
 
-  return reviewsLoaded ? { myReviews, setMyReviews } : {}
+  return forumsLoaded ? { myForums, setMyForums } : {}
 }

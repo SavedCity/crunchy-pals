@@ -4,7 +4,7 @@
 .home {
   @include flex-container($direction: column);
 
-  &__reviews {
+  &__forums {
     &--tiles {
       @include grid();
     }

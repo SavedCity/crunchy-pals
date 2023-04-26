@@ -43,5 +43,5 @@ const useUserContext = () => useContext(UserContext)
 
 export const useMyUser = () => {
   const { userData, setUserData }: object | any = useUserContext()
-  return { user: userData, favoriteReviews: userData.favoriteReviews, setUserData }
+  return { user: userData, favoriteForums: userData?.favoriteForums, setUserData }
 }

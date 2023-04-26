@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useMyUser } from 'contexts/users/my'
-
+import Router from 'next/router'
 import Field from 'components/_molecules/Field'
 import classNames from 'classnames'
 import axios from 'axios'
 
 import styles from './index.module.scss'
-import Router from 'next/router'
 
 interface EditProfileProps {
   user: {
@@ -62,7 +61,7 @@ export default function EditProfile({ user }: EditProfileProps) {
         placeholder='Username'
         label='Username'
         leftIcon='person'
-        value={newUsername}
+        value={newUsername || ''}
         onChange={e => setNewUsername(e.target.value)}
       />
       {/* <Field
@@ -77,7 +76,7 @@ export default function EditProfile({ user }: EditProfileProps) {
         placeholder='Date of birth'
         label='Date of birth'
         leftIcon='calendar_month'
-        value={newDob}
+        value={newDob || ''}
         onChange={e => setNewDob(e.target.value)}
       />
       <button onClick={updateProfile}>Update</button>

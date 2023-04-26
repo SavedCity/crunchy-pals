@@ -18,14 +18,14 @@ interface ForumTilesProps {
   user?: {
     _id: string
     username: string
-    favoriteReviews: object[]
+    favoriteForums: object[]
   }
   filledHeart?: boolean
-  deleteForum?: (reviewId: string) => void
+  deleteForum?: (forumId: string) => void
   handleFavoriteForum?: (userId: string, forum: object) => void
 }
 
-export default function ReviewTiles({
+export default function Forum({
   forum,
   user,
   filledHeart = false,
@@ -40,19 +40,19 @@ export default function ReviewTiles({
   const generateStarRatings = (num: number) =>
     new Array(num).fill('').map((_, i) => {
       return (
-        <Icon className={styles.reviewTile__ratingIcon} key={i} iconName='star' size='md' filled />
+        <Icon className={styles.forumTile__ratingIcon} key={i} iconName='star' size='md' filled />
       )
     })
 
-  const isForumFavorited = !!user?.favoriteReviews?.find(
+  const isForumFavorited = !!user?.favoriteForums?.find(
     ({ _id }: any) => _id === filteredForum._id
   )
 
   return (
-    <Tile className={styles.reviewTile}>
+    <Tile className={styles.forumTile}>
       {deleteForum && (
         <Icon
-          className={styles.reviewTile__deleteIcon}
+          className={styles.forumTile__deleteIcon}
           iconName='delete'
           handleClick={() => deleteForum?.(_id!)}
         />
@@ -60,19 +60,19 @@ export default function ReviewTiles({
       {user?.username !== author && handleFavoriteForum && (
         <Icon
           className={classNames({
-            [styles.reviewTile__heartIcon]: true,
-            // [styles['reviewTile__heartIcon--isFavoritePage']]: true,
+            [styles.forumTile__heartIcon]: true,
+            // [styles['forumTile__heartIcon--isFavoritePage']]: true,
           })}
           iconName='favorite'
           handleClick={() => handleFavoriteForum?.(user?._id!, filteredForum)}
           filled={filledHeart || isForumFavorited}
         />
       )}
-      <P className={styles.reviewTile__createdby}>{author}</P>
-      <H3 className={styles.reviewTile__productName}>{name}</H3>
-      <P className={styles.reviewTile__createdby}>{description}</P>
-      <P className={styles.reviewTile__createdby}>{threads.length} thread/s</P>
-      {/* <Image className={styles.reviewTile__image} src={''} /> */}
+      <P className={styles.forumTile__createdby}>{author}</P>
+      <H3 className={styles.forumTile__productName}>{name}</H3>
+      <P className={styles.forumTile__createdby}>{description}</P>
+      <P className={styles.forumTile__createdby}>{threads?.length} thread/s</P>
+      {/* <Image className={styles.forumTile__image} src={''} /> */}
       {/* {rating ? generateStarRatings(rating) : 'No rating'} */}
     </Tile>
   )

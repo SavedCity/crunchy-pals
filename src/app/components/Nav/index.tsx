@@ -9,7 +9,7 @@ import styles from './index.module.scss'
 
 export default function Nav() {
   const { user } = useMyUser()
-  const numberOfReviews = user?.favoriteReviews?.length
+  const numberOfForums = user?.favoriteForums?.length
 
   return (
     <div
@@ -26,7 +26,7 @@ export default function Nav() {
       <section className={styles.nav__rightSide}>
         {/* <div className={styles[`nav__rightSide--icon`]}> */}
         <IconLink IconName='favorite' href='/favorites'>
-          <div className={styles[`nav__rightSide--numberOfReviews`]}>{numberOfReviews}</div>
+          <div className={styles[`nav__rightSide--numberOfForums`]}>{numberOfForums}</div>
         </IconLink>
         {/* </div> */}
 

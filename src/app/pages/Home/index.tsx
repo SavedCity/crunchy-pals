@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useAllForums } from 'contexts/forums/all-forums'
 import H1 from 'components/_atoms/H1'
 import HomeHeroContent from 'components/HomeHeroContent'
-import ReviewTiles from 'components/_organisms/ReviewTiles'
+import Forum from 'components/_organisms/Forum'
 import { useMyUser } from 'contexts/users/my'
 
 import styles from './index.module.scss'
@@ -47,12 +47,12 @@ export default function HomePage() {
     <div className={styles.home}>
       <HomeHeroContent />
 
-      <div className={styles.home__reviews}>
+      <div className={styles.home__forums}>
         <H1>Forums:</H1>
-        <div className={styles['home__reviews--tiles']}>
+        <div className={styles['home__forums--tiles']}>
           {allForums?.map((forum: any, i: number) => {
             return (
-              <ReviewTiles key={i} forum={forum} handleFavoriteForum={favoriteForum} user={user} />
+              <Forum key={i} forum={forum} handleFavoriteForum={favoriteForum} user={user} />
             )
           })}
         </div>

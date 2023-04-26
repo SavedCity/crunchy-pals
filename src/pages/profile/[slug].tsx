@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { MyReviewsProvider } from 'contexts/forums/my'
+import { MyForumsProvider } from 'contexts/forums/my'
 import { NextPageContext } from 'next'
 import Profile from 'pages/Profile'
 
@@ -20,8 +20,8 @@ import Profile from 'pages/Profile'
 
 export default function ProfilePage() {
   return (
-    <MyReviewsProvider>
+    <MyForumsProvider>
       <Profile />
-    </MyReviewsProvider>
+    </MyForumsProvider>
   )
 }

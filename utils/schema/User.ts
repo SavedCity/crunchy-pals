@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import Forum from './Forum'
 
 const Schema = mongoose.Schema
 
@@ -24,18 +25,8 @@ const UserSchema = new Schema({
   dob: {
     type: String,
   },
-  favoriteForums: [
-    {
-      productName: String,
-      rating: Number,
-      image: String,
-      description: String,
-      placeOfPurchase: String,
-      createdBy: String,
-      createdAt: Date,
-    },
-  ],
   createdAt: { type: Date, default: Date.now },
+  favoriteForums: [{ type: mongoose.Schema.Types.ObjectId, ref: Forum }],
 })
 
 const User = mongoose.models.User || mongoose.model('User', UserSchema)

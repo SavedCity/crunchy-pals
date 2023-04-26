@@ -6,7 +6,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { slug } = req.query
 
     try {
-      const myForums = await Forum.find({ createdBy: slug })
+      const myForums = await Forum.find({ author: slug })
       return res.json({ status: 200, myForums })
     } catch (error) {
       return res.json({ status: 400, error: 'Bad request' })

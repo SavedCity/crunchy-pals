@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (forum && userId) {
         const user = await User.findByIdAndUpdate(
           { _id: userId },
-          { $push: { favoriteReviews: forum } },
+          { $push: { favoriteForums: forum } },
           {
             new: true,
           }
