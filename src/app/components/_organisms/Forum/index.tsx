@@ -9,7 +9,7 @@ import styles from './index.module.scss'
 
 interface ForumTilesProps {
   forum: {
-    _id?: string
+    _id: string
     description: string
     name: string
     author: string
@@ -44,9 +44,7 @@ export default function Forum({
       )
     })
 
-  const isForumFavorited = !!user?.favoriteForums?.find(
-    ({ _id }: any) => _id === filteredForum._id
-  )
+  const isForumFavorited = !!user?.favoriteForums?.find((id: any) => id === forum._id)
 
   return (
     <Tile className={styles.forumTile}>
@@ -64,10 +62,11 @@ export default function Forum({
             // [styles['forumTile__heartIcon--isFavoritePage']]: true,
           })}
           iconName='favorite'
-          handleClick={() => handleFavoriteForum?.(user?._id!, filteredForum)}
+          handleClick={() => handleFavoriteForum?.(user?._id!, forum)}
           filled={filledHeart || isForumFavorited}
         />
       )}
+      {/* <P className={styles.forumTile__createdby}>{forum}</P> */}
       <P className={styles.forumTile__createdby}>{author}</P>
       <H3 className={styles.forumTile__productName}>{name}</H3>
       <P className={styles.forumTile__createdby}>{description}</P>

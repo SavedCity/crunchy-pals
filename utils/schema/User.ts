@@ -26,6 +26,7 @@ const UserSchema = new Schema({
     type: String,
   },
   createdAt: { type: Date, default: Date.now },
+  // user only favoriteForums: [Forum.schema] to store the entire forum object.
   favoriteForums: [{ type: mongoose.Schema.Types.ObjectId, ref: Forum }],
 })
 

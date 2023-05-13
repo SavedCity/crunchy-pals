@@ -11,23 +11,21 @@ import styles from './index.module.scss'
 export default function HomePage() {
   const { user, setUserData } = useMyUser()
   const { allForums } = useAllForums()
-  console.log(allForums)
+  console.log('USER', user.favoriteForums)
 
   const favoriteForum = async (userId: string, forum: { _id?: string }) => {
     const favoriteForums = user.favoriteForums
-    const forumIsFavorited = favoriteForums.findIndex(({ _id }: any) => _id === forum._id) !== -1
+    const forumIsFavorited = !!favoriteForums.find((id: string) => id === forum._id)
 
     const handleFavoriteForumUpdate = () => {
       let newFavoriteForumsArr
       if (forumIsFavorited) {
         // unfavorite forum
-        newFavoriteForumsArr = favoriteForums.filter(
-          (rev: { _id: string }) => rev._id !== forum._id
-        )
+        newFavoriteForumsArr = favoriteForums.filter((id: string) => id !== forum._id)
         setUserData({ ...user, favoriteForums: newFavoriteForumsArr })
       } else {
         // favorite forum
-        newFavoriteForumsArr = favoriteForums.push(forum)
+        newFavoriteForumsArr = favoriteForums.push(forum._id)
         setUserData({ favoriteForums: newFavoriteForumsArr, ...user })
       }
     }
@@ -35,7 +33,7 @@ export default function HomePage() {
     const res = await axios
       .patch(`/api/forums/${forumIsFavorited ? 'un' : ''}favorite-forum`, {
         userId,
-        forum,
+        forum: forumIsFavorited ? forum : forum._id,
       })
       .then(() => {
         handleFavoriteForumUpdate()
@@ -51,9 +49,7 @@ export default function HomePage() {
         <H1>Forums:</H1>
         <div className={styles['home__forums--tiles']}>
           {allForums?.map((forum: any, i: number) => {
-            return (
-              <Forum key={i} forum={forum} handleFavoriteForum={favoriteForum} user={user} />
-            )
+            return <Forum key={i} forum={forum} handleFavoriteForum={favoriteForum} user={user} />
           })}
         </div>
       </div>

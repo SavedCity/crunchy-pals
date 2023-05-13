@@ -7,12 +7,7 @@ interface AvatarProps {
   fill?: boolean
 }
 
-export default function Avatar({
-  src,
-  size = 50,
-  fill = false,
-  ...props
-}: AvatarProps) {
+export default function Avatar({ src, size = 50, fill = false, ...props }: AvatarProps) {
   return (
     <Image
       alt='profile avatar'
@@ -23,7 +18,8 @@ export default function Avatar({
       sizes='(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               33vw'
-      priority={!src}
+      // priority={!src}
+      blurDataURL={src}
       {...props}
     />
   )

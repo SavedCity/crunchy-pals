@@ -22,7 +22,6 @@ const Image_ = ({
 
   return (
     <Image
-      // placeholder={lazy ? 'blur' : 'empty'}
       src={src}
       alt={alt}
       className={classNames({
