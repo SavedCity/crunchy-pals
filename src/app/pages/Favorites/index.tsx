@@ -12,22 +12,20 @@ export default function FavoritesPage() {
   const { favoriteForums, setFavoriteForums } = useFavoriteForums()
 
   const unfavoriteForum = async (userId: string, forum: any) => {
-    const newFavoriteForumsArr = (favoriteForums: any) => {
-      return favoriteForums.filter(({ _id }: any) => _id !== forum._id)
+    const newFavoriteForumsArr = (favoriteForums: any, forUserData = false) => {
+      return favoriteForums.filter((f: any) => (forUserData ? f : f._id) !== forum._id)
     }
-    console.log(newFavoriteForumsArr(user.favoriteForums))
-    console.log(newFavoriteForumsArr(favoriteForums))
 
-    // const res = await axios
-    //   .patch(`/api/forums/unfavorite-forum`, {
-    //     userId,
-    //     forum,
-    //   })
-    //   .then(() => {
-    //     setUserData({ ...user, favoriteForums: newFavoriteForumsArr(user.favoriteForums) })
-    //     setFavoriteForums(newFavoriteForumsArr(favoriteForums))
-    //   })
-    //   .catch(err => console.log(err))
+    const res = await axios
+      .patch(`/api/forums/unfavorite-forum`, {
+        userId,
+        forum,
+      })
+      .then(() => {
+        setUserData({ ...user, favoriteForums: newFavoriteForumsArr(user.favoriteForums, true) })
+        setFavoriteForums(newFavoriteForumsArr(favoriteForums))
+      })
+      .catch(err => console.log(err))
   }
 
   return (

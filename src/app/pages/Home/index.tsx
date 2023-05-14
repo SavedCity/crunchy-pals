@@ -11,7 +11,6 @@ import styles from './index.module.scss'
 export default function HomePage() {
   const { user, setUserData } = useMyUser()
   const { allForums } = useAllForums()
-  console.log('USER', user.favoriteForums)
 
   const favoriteForum = async (userId: string, forum: { _id?: string }) => {
     const favoriteForums = user.favoriteForums
