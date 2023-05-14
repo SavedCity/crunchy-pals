@@ -25,8 +25,13 @@ export default function Nav() {
 
       <section className={styles.nav__rightSide}>
         {/* <div className={styles[`nav__rightSide--icon`]}> */}
-        <IconLink IconName='favorite' href='/favorites'>
-          <div className={styles[`nav__rightSide--numberOfForums`]}>{numberOfForums}</div>
+        <IconLink
+          size='xxl'
+          IconName='favorite'
+          href='/favorites'
+          className={styles[`nav__rightSide--favoriteLink`]}
+        >
+          <div>{numberOfForums}</div>
         </IconLink>
         {/* </div> */}
 

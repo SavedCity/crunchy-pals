@@ -4,7 +4,7 @@ import styles from './index.module.scss'
 
 // to search for icons: https://fonts.google.com/icons
 
-export type IconSize = 'sm' | 'md' | 'lg' | 'xl'
+export type IconSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 
 export interface IconProps extends React.HTMLAttributes<HTMLElement> {
   iconName: string
