@@ -37,7 +37,7 @@ export default function ProfilePage() {
       })}
     >
       <section className={styles.profile__avatar}>
-        <Avatar fill src={image} />
+        <Avatar src={image} size={200} />
       </section>
 
       <FileUploader id={_id} />

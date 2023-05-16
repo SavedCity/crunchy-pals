@@ -1,6 +1,8 @@
 import Image from '../Image'
 import placeholder from 'public/avatars/user-placeholder.png'
 
+import styles from './index.module.scss'
+
 interface AvatarProps {
   src: string
   size?: number
@@ -10,6 +12,7 @@ interface AvatarProps {
 export default function Avatar({ src, size = 50, fill = false, ...props }: AvatarProps) {
   return (
     <Image
+      className={styles.avatar}
       alt='profile avatar'
       fill={fill}
       src={src || placeholder.src}

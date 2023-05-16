@@ -14,7 +14,7 @@
 
   &__rightSide {
     @include flex($align-items: center);
-    column-gap: $spacing-5;
+    column-gap: $spacing-10;
 
     &--favoriteLink {
       position: relative;
