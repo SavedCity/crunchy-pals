@@ -7,12 +7,15 @@ import { useMyUser } from 'contexts/users/my'
 import { useMyForums } from 'contexts/forums/my'
 import H1 from 'components/_atoms/H1'
 import Forum from 'components/_organisms/Forum'
+import ImageCropper from 'components/_molecules/ImageCropper'
 
 import styles from './index.module.scss'
+import { useState } from 'react'
 
 export default function ProfilePage() {
   const { user } = useMyUser()
   const { myForums, setMyForums } = useMyForums()
+  const [showImageCropper, setShowImageCropper] = useState<boolean>()
 
   const { _id, username, email, createdAt, image } = user || {}
 
@@ -30,15 +33,21 @@ export default function ProfilePage() {
       .catch(err => console.log(err))
   }
 
+  const handleShowImageCropper = () => {
+    setShowImageCropper(true)
+  }
+
   return (
     <div
       className={classNames({
         [styles.profile]: true,
       })}
     >
-      <section className={styles.profile__avatar}>
+      <section className={styles.profile__avatar} onClick={handleShowImageCropper}>
         <Avatar src={image} size={200} />
       </section>
+
+      {showImageCropper && <ImageCropper imageSrc={image} />}
 
       <FileUploader id={_id} />
 
