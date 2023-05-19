@@ -1,53 +1,69 @@
 import { useCallback, useState } from 'react'
 import Cropper from 'react-easy-crop'
+import getCroppedImg from '../cropImage'
 
 import styles from './index.module.scss'
 
-interface FileUploaderProps {
+interface ImageCropperProps {
   imageSrc: string
+  setProfileImage: (image: string) => void
 }
 
-export default function ImageCropper({ imageSrc }: FileUploaderProps) {
+export default function ImageCropper({ imageSrc, setProfileImage }: ImageCropperProps) {
   const [crop, setCrop] = useState({ x: 0, y: 0 })
-  const [rotation, setRotation] = useState(0)
-  const [zoom, setZoom] = useState(1)
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
-  const [croppedImage, setCroppedImage] = useState(null)
+  const [rotation, setRotation] = useState<number>(0)
+  const [zoom, setZoom] = useState<number>(1)
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<{
+    x: number
+    y: number
+    width: number
+    height: number
+  }>({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+  })
+  const [croppedImage, setCroppedImage] = useState<string | null>(null)
 
-  const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+  const onCropComplete = useCallback((croppedArea: any, croppedAreaPixels: any) => {
     setCroppedAreaPixels(croppedAreaPixels)
   }, [])
 
   const showCroppedImage = useCallback(async () => {
     try {
-      const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels, rotation)
-      console.log('donee', { croppedImage })
+      const croppedImage: any = await getCroppedImg(imageSrc, croppedAreaPixels, rotation)
+      console.log('done', { croppedImage })
       setCroppedImage(croppedImage)
+      if (croppedImage) {
+        setProfileImage(croppedImage)
+      }
     } catch (e) {
       console.error(e)
     }
   }, [croppedAreaPixels, rotation])
 
-  const onClose = useCallback(() => {
-    setCroppedImage(null)
-  }, [])
+  // const onClose = useCallback(() => {
+  //   setCroppedImage(null)
+  // }, [])
 
   return (
-    <div>
+    <div className={styles.imageCropper}>
       <div>
         <Cropper
           image={imageSrc}
           crop={crop}
-          rotation={rotation}
-          zoom={zoom}
-          aspect={4 / 3}
           onCropChange={setCrop}
+          rotation={rotation}
           onRotationChange={setRotation}
-          onCropComplete={onCropComplete}
+          zoom={zoom}
           onZoomChange={setZoom}
+          aspect={5 / 5}
+          cropShape='round'
+          onCropComplete={onCropComplete}
         />
       </div>
-      <div>
+      <div style={{ position: 'relative' }}>
         <div>
           Zoom
           <input
@@ -55,12 +71,12 @@ export default function ImageCropper({ imageSrc }: FileUploaderProps) {
             value={zoom}
             min={1}
             max={3}
-            step={0.1}
+            step={0.01}
             aria-labelledby='Zoom'
-            onChange={(e, zoom) => setZoom(zoom)}
+            onChange={e => setZoom(Number(e.target.value))}
           />
         </div>
-        <div>
+        {/* <div>
           Rotation
           <input
             type='range'
@@ -69,14 +85,13 @@ export default function ImageCropper({ imageSrc }: FileUploaderProps) {
             max={360}
             step={1}
             aria-labelledby='Rotation'
-            onChange={(e, rotation) => setRotation(rotation)}
+            onChange={(e: any, rotation: SetStateAction<number>) => setRotation(rotation)}
           />
-        </div>
+        </div> */}
         <button onClick={showCroppedImage}>Show Result</button>
       </div>
-      {/* <ImgDialog img={croppedImage} onClose={onClose} /> */}
       <div>
-        <img src={imageSrc} alt='Cropped' />
+        <img src={croppedImage ?? ''} alt='Cropped image' />
       </div>
     </div>
   )

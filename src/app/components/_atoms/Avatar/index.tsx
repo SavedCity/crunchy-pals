@@ -1,5 +1,6 @@
 import Image from '../Image'
 import placeholder from 'public/avatars/user-placeholder.png'
+import classNames from 'classnames'
 
 import styles from './index.module.scss'
 
@@ -7,13 +8,23 @@ interface AvatarProps {
   src: string
   size?: number
   fill?: boolean
+  className?: string
 }
 
-export default function Avatar({ src, size = 50, fill = false, ...props }: AvatarProps) {
+export default function Avatar({
+  src,
+  className = '',
+  size = 50,
+  fill = false,
+  ...props
+}: AvatarProps) {
   return (
     <Image
-      className={styles.avatar}
-      alt='profile avatar'
+      className={classNames({
+        [styles.avatar]: true,
+        [className]: !!className,
+      })}
+      alt='Profile avatar'
       fill={fill}
       src={src || placeholder.src}
       width={!fill ? size : undefined}

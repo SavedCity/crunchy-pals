@@ -32,7 +32,6 @@ export default function EditProfile({ user }: EditProfileProps) {
         // image: newImageUrl,
       })
       .then(res => {
-        console.log(res?.data?.user)
         setUserData(res?.data?.user)
         Router.push(`/profile/${newUsername}`)
       })

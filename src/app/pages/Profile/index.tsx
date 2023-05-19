@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import axios from 'axios'
 import Avatar from 'components/_atoms/Avatar'
@@ -10,14 +11,19 @@ import Forum from 'components/_organisms/Forum'
 import ImageCropper from 'components/_molecules/ImageCropper'
 
 import styles from './index.module.scss'
-import { useState } from 'react'
 
 export default function ProfilePage() {
   const { user } = useMyUser()
+  const { _id, username, email, createdAt, image } = user || {}
+
   const { myForums, setMyForums } = useMyForums()
   const [showImageCropper, setShowImageCropper] = useState<boolean>()
+  const [profileImage, setProfileImage] = useState(image)
+  console.log(profileImage)
 
-  const { _id, username, email, createdAt, image } = user || {}
+  useEffect(() => {
+    setProfileImage(image)
+  }, [image])
 
   const deleteForum = async (forumId: string) => {
     const forum = await axios
@@ -34,7 +40,7 @@ export default function ProfilePage() {
   }
 
   const handleShowImageCropper = () => {
-    setShowImageCropper(true)
+    setShowImageCropper(!showImageCropper)
   }
 
   return (
@@ -43,15 +49,18 @@ export default function ProfilePage() {
         [styles.profile]: true,
       })}
     >
-      <section className={styles.profile__avatar} onClick={handleShowImageCropper}>
-        <Avatar src={image} size={200} />
-      </section>
+      <Avatar className={styles.profile__avatar} src={profileImage} size={200} />
 
-      {showImageCropper && <ImageCropper imageSrc={image} />}
+      <button onClick={handleShowImageCropper}>Edit</button>
+
+      {showImageCropper && (
+        <ImageCropper imageSrc={profileImage} setProfileImage={setProfileImage} />
+      )}
 
       <FileUploader id={_id} />
 
       <br />
+
       <span>
         Username: <b>{username}</b>
       </span>
