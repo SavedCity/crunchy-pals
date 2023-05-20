@@ -1,6 +1,18 @@
+@import 'styles/variables';
+@import 'styles/mixins';
+
 .imageCropper {
   position: relative;
   width: 100%;
-  height: 300px;
-  //   background: #fff;
+  height: 500px;
+
+  &__controls {
+    position: absolute;
+    background-color: $white;
+    height: 4rem;
+    bottom: -4rem;
+    width: 100%;
+
+    @include flex($justify-content: space-around, $align-items: center);
+  }
 }

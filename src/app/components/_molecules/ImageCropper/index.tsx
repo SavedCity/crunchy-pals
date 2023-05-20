@@ -63,7 +63,7 @@ export default function ImageCropper({ imageSrc, setProfileImage }: ImageCropper
           onCropComplete={onCropComplete}
         />
       </div>
-      <div style={{ position: 'relative' }}>
+      <div className={styles.imageCropper__controls}>
         <div>
           Zoom
           <input
@@ -90,9 +90,7 @@ export default function ImageCropper({ imageSrc, setProfileImage }: ImageCropper
         </div> */}
         <button onClick={showCroppedImage}>Show Result</button>
       </div>
-      <div>
-        <img src={croppedImage ?? ''} alt='Cropped image' />
-      </div>
+      <div>{/* <img src={croppedImage ?? ''} alt='Cropped image' /> */}</div>
     </div>
   )
 }

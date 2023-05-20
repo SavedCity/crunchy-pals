@@ -11,6 +11,7 @@ import Forum from 'components/_organisms/Forum'
 import ImageCropper from 'components/_molecules/ImageCropper'
 
 import styles from './index.module.scss'
+import Modal from 'components/_atoms/Modal'
 
 export default function ProfilePage() {
   const { user } = useMyUser()
@@ -19,7 +20,7 @@ export default function ProfilePage() {
   const { myForums, setMyForums } = useMyForums()
   const [showImageCropper, setShowImageCropper] = useState<boolean>()
   const [profileImage, setProfileImage] = useState(image)
-  console.log(profileImage)
+  // console.log('profileImage', profileImage)
 
   useEffect(() => {
     setProfileImage(image)
@@ -53,8 +54,14 @@ export default function ProfilePage() {
 
       <button onClick={handleShowImageCropper}>Edit</button>
 
-      {showImageCropper && (
+      {/* {showImageCropper && (
         <ImageCropper imageSrc={profileImage} setProfileImage={setProfileImage} />
+      )} */}
+
+      {showImageCropper && (
+        <Modal closeModal={handleShowImageCropper}>
+          <ImageCropper imageSrc={profileImage} setProfileImage={setProfileImage} />
+        </Modal>
       )}
 
       <FileUploader id={_id} />
