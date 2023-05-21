@@ -3,13 +3,15 @@ import Cropper from 'react-easy-crop'
 import getCroppedImg from '../cropImage'
 
 import styles from './index.module.scss'
+import FileUploader from '../FileUploader'
 
 interface ImageCropperProps {
-  imageSrc: string
+  id: string
+  profileImage: string
   setProfileImage: (image: string) => void
 }
 
-export default function ImageCropper({ imageSrc, setProfileImage }: ImageCropperProps) {
+export default function ImageCropper({ profileImage, id, setProfileImage }: ImageCropperProps) {
   const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [rotation, setRotation] = useState<number>(0)
   const [zoom, setZoom] = useState<number>(1)
@@ -24,34 +26,25 @@ export default function ImageCropper({ imageSrc, setProfileImage }: ImageCropper
     width: 0,
     height: 0,
   })
-  const [croppedImage, setCroppedImage] = useState<string | null>(null)
 
-  const onCropComplete = useCallback((croppedArea: any, croppedAreaPixels: any) => {
-    setCroppedAreaPixels(croppedAreaPixels)
-  }, [])
+  const handleCroppedImage = useCallback(async () => {
+    console.log('yo')
 
-  const showCroppedImage = useCallback(async () => {
     try {
-      const croppedImage: any = await getCroppedImg(imageSrc, croppedAreaPixels, rotation)
-      console.log('done', { croppedImage })
-      setCroppedImage(croppedImage)
+      const croppedImage: any = await getCroppedImg(profileImage, croppedAreaPixels, rotation)
       if (croppedImage) {
         setProfileImage(croppedImage)
       }
     } catch (e) {
       console.error(e)
     }
-  }, [croppedAreaPixels, rotation])
-
-  // const onClose = useCallback(() => {
-  //   setCroppedImage(null)
-  // }, [])
+  }, [profileImage, croppedAreaPixels, rotation, setProfileImage])
 
   return (
     <div className={styles.imageCropper}>
       <div>
         <Cropper
-          image={imageSrc}
+          image={profileImage}
           crop={crop}
           onCropChange={setCrop}
           rotation={rotation}
@@ -60,7 +53,7 @@ export default function ImageCropper({ imageSrc, setProfileImage }: ImageCropper
           onZoomChange={setZoom}
           aspect={5 / 5}
           cropShape='round'
-          onCropComplete={onCropComplete}
+          onCropComplete={(_, croppedAreaPixels) => setCroppedAreaPixels(croppedAreaPixels)}
         />
       </div>
       <div className={styles.imageCropper__controls}>
@@ -76,21 +69,13 @@ export default function ImageCropper({ imageSrc, setProfileImage }: ImageCropper
             onChange={e => setZoom(Number(e.target.value))}
           />
         </div>
-        {/* <div>
-          Rotation
-          <input
-            type='range'
-            value={rotation}
-            min={0}
-            max={360}
-            step={1}
-            aria-labelledby='Rotation'
-            onChange={(e: any, rotation: SetStateAction<number>) => setRotation(rotation)}
-          />
-        </div> */}
-        <button onClick={showCroppedImage}>Show Result</button>
+        <FileUploader
+          id={id}
+          croppedImage={profileImage}
+          isCroppingComponent
+          handleCroppedImage={handleCroppedImage}
+        />
       </div>
-      <div>{/* <img src={croppedImage ?? ''} alt='Cropped image' /> */}</div>
     </div>
   )
 }

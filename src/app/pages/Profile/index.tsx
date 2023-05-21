@@ -18,7 +18,7 @@ export default function ProfilePage() {
   const { _id, username, email, createdAt, image } = user || {}
 
   const { myForums, setMyForums } = useMyForums()
-  const [showImageCropper, setShowImageCropper] = useState<boolean>()
+  const [showImageCropper, setShowImageCropper] = useState<boolean>(false)
   const [profileImage, setProfileImage] = useState(image)
   // console.log('profileImage', profileImage)
 
@@ -60,7 +60,7 @@ export default function ProfilePage() {
 
       {showImageCropper && (
         <Modal closeModal={handleShowImageCropper}>
-          <ImageCropper imageSrc={profileImage} setProfileImage={setProfileImage} />
+          <ImageCropper profileImage={profileImage} setProfileImage={setProfileImage} id={_id} />
         </Modal>
       )}
 
