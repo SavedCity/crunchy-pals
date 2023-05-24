@@ -10,21 +10,19 @@ interface FileUploaderProps {
   id: string
   isCroppingComponent?: boolean
   handleCroppedImage?: () => void
-  croppedImage?: string
 }
 
 export default function FileUploader({
   id,
   isCroppingComponent = false,
   handleCroppedImage,
-  croppedImage,
 }: FileUploaderProps) {
   const { setUserData } = useMyUser()
 
   const [imageSrc, setImageSrc] = useState<string>('')
   const [uploadedData, setUploadedData] = useState<any>()
 
-  const handleFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file) {
       const reader = new FileReader()
@@ -39,7 +37,7 @@ export default function FileUploader({
     }
   }
 
-  const handleButtonClick = async () => {
+  const handleFileUpload = async () => {
     if (imageSrc) {
       try {
         const formData = new FormData()
@@ -63,7 +61,7 @@ export default function FileUploader({
 
   const handleCroppedImageUpload = async () => {
     try {
-      handleCroppedImage!()
+      const croppedImage: any = await handleCroppedImage!()
       const formData = new FormData()
       formData.append('file', croppedImage)
       formData.append('upload_preset', 'profile_avatar')
@@ -99,7 +97,7 @@ export default function FileUploader({
         {isCroppingComponent ? (
           <button onClick={handleCroppedImageUpload}>Upload Cropped Image</button>
         ) : (
-          <FieldInput type='file' name='file' onChange={handleFileInputChange} />
+          <FieldInput type='file' name='file' onChange={handleFileChange} />
         )}
       </div>
 
@@ -107,7 +105,7 @@ export default function FileUploader({
         <div>
           <img src={imageSrc} alt='Uploaded File' />
           <p>
-            <button onClick={handleButtonClick}>Upload File</button>
+            <button onClick={handleFileUpload}>Upload File</button>
           </p>
         </div>
       )}

@@ -20,7 +20,6 @@ export default function ProfilePage() {
   const { myForums, setMyForums } = useMyForums()
   const [showImageCropper, setShowImageCropper] = useState<boolean>(false)
   const [profileImage, setProfileImage] = useState(image)
-  // console.log('profileImage', profileImage)
 
   useEffect(() => {
     setProfileImage(image)
@@ -50,7 +49,7 @@ export default function ProfilePage() {
         [styles.profile]: true,
       })}
     >
-      <Avatar className={styles.profile__avatar} src={profileImage} size={200} />
+      <Avatar className={styles.profile__avatar} src={image} size={200} />
 
       <button onClick={handleShowImageCropper}>Edit</button>
 
@@ -60,7 +59,9 @@ export default function ProfilePage() {
 
       {showImageCropper && (
         <Modal closeModal={handleShowImageCropper}>
-          <ImageCropper profileImage={profileImage} setProfileImage={setProfileImage} id={_id} />
+          <ImageCropper
+            /* profileImage={profileImage} setProfileImage={setProfileImage} */ id={_id}
+          />
         </Modal>
       )}
 

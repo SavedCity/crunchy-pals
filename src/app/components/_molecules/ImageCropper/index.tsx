@@ -4,14 +4,16 @@ import getCroppedImg from '../cropImage'
 
 import styles from './index.module.scss'
 import FileUploader from '../FileUploader'
+import { useMyUser } from 'contexts/users/my'
 
 interface ImageCropperProps {
   id: string
-  profileImage: string
-  setProfileImage: (image: string) => void
 }
 
-export default function ImageCropper({ profileImage, id, setProfileImage }: ImageCropperProps) {
+export default function ImageCropper({ id }: ImageCropperProps) {
+  const { user } = useMyUser()
+  const { image } = user || {}
+
   const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [rotation, setRotation] = useState<number>(0)
   const [zoom, setZoom] = useState<number>(1)
@@ -26,25 +28,23 @@ export default function ImageCropper({ profileImage, id, setProfileImage }: Imag
     width: 0,
     height: 0,
   })
+  // const [profileImage, setProfileImage] = useState(image)
 
   const handleCroppedImage = useCallback(async () => {
-    console.log('yo')
-
     try {
-      const croppedImage: any = await getCroppedImg(profileImage, croppedAreaPixels, rotation)
-      if (croppedImage) {
-        setProfileImage(croppedImage)
-      }
-    } catch (e) {
-      console.error(e)
+      const croppedImage: any = await getCroppedImg(image, croppedAreaPixels, rotation)
+      return croppedImage
+    } catch (error) {
+      console.error(error)
+      return null
     }
-  }, [profileImage, croppedAreaPixels, rotation, setProfileImage])
+  }, [image, croppedAreaPixels, rotation])
 
   return (
     <div className={styles.imageCropper}>
       <div>
         <Cropper
-          image={profileImage}
+          image={image}
           crop={crop}
           onCropChange={setCrop}
           rotation={rotation}
@@ -69,12 +69,7 @@ export default function ImageCropper({ profileImage, id, setProfileImage }: Imag
             onChange={e => setZoom(Number(e.target.value))}
           />
         </div>
-        <FileUploader
-          id={id}
-          croppedImage={profileImage}
-          isCroppingComponent
-          handleCroppedImage={handleCroppedImage}
-        />
+        <FileUploader id={id} isCroppingComponent handleCroppedImage={handleCroppedImage} />
       </div>
     </div>
   )
