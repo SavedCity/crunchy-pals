@@ -29,12 +29,12 @@ export default function Avatar({
       src={src || placeholder.src}
       width={!fill ? size : undefined}
       height={!fill ? size : undefined}
-      priority={!src}
-      blurDataURL={src}
-      {...props}
+      placeholder='blur'
+      blurDataURL={placeholder.src}
       sizes='(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               33vw'
+      {...props}
     />
   )
 }

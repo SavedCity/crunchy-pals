@@ -19,11 +19,6 @@ export default function ProfilePage() {
 
   const { myForums, setMyForums } = useMyForums()
   const [showImageCropper, setShowImageCropper] = useState<boolean>(false)
-  const [profileImage, setProfileImage] = useState(image)
-
-  useEffect(() => {
-    setProfileImage(image)
-  }, [image])
 
   const deleteForum = async (forumId: string) => {
     const forum = await axios
@@ -51,19 +46,9 @@ export default function ProfilePage() {
     >
       <Avatar className={styles.profile__avatar} src={image} size={200} />
 
-      <button onClick={handleShowImageCropper}>Edit</button>
-
-      {/* {showImageCropper && (
-        <ImageCropper imageSrc={profileImage} setProfileImage={setProfileImage} />
-      )} */}
-
-      {showImageCropper && (
-        <Modal closeModal={handleShowImageCropper}>
-          <ImageCropper
-            /* profileImage={profileImage} setProfileImage={setProfileImage} */ id={_id}
-          />
-        </Modal>
-      )}
+      <Modal openButtonText='Crop Image'>
+        <ImageCropper id={_id} />
+      </Modal>
 
       <FileUploader id={_id} />
 

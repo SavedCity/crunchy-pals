@@ -1,26 +1,37 @@
+import { useState } from 'react'
 import classNames from 'classnames'
 
 import styles from './index.module.scss'
 
 interface Modal {
+  openButtonText: string
   children: React.ReactNode
-  closeModal: () => void
 }
 
-export default function Modal({ children, closeModal, ...props }: Modal) {
+export default function Modal({ children, openButtonText, ...props }: Modal) {
+  const [isModalOpened, setIsModalOpened] = useState<boolean>(false)
+
   return (
-    <div
-      className={classNames({
-        [styles.modal]: true,
-      })}
-      {...props}
-    >
-      <div className={styles.modal__content}>
-        {children}
-        <button className={styles['modal__content--close']} onClick={closeModal}>
-          Close
-        </button>
-      </div>
-    </div>
+    <>
+      <button onClick={() => setIsModalOpened(true)}>{openButtonText}</button>
+      {isModalOpened && (
+        <div
+          className={classNames({
+            [styles.modal]: true,
+          })}
+          {...props}
+        >
+          <div className={styles.modal__content}>
+            {children}
+            <button
+              className={styles['modal__content--close']}
+              onClick={() => setIsModalOpened(false)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+    </>
   )
 }
