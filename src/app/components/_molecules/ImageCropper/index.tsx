@@ -1,6 +1,6 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Cropper from 'react-easy-crop'
-import getCroppedImg from '../cropImage'
+import handleImageCrop from '../cropImage'
 
 import styles from './index.module.scss'
 import FileUploader from '../FileUploader'
@@ -23,22 +23,30 @@ export default function ImageCropper({ id }: ImageCropperProps) {
     width: number
     height: number
   }>({
-    x: 0,
-    y: 0,
     width: 0,
     height: 0,
+    x: 0,
+    y: 0,
   })
-  // const [profileImage, setProfileImage] = useState(image)
+  const [croppedImage, setCroppedImage] = useState<string>()
 
-  const handleCroppedImage = useCallback(async () => {
+  const getCroppedImage = useCallback(async () => {
     try {
-      const croppedImage: any = await getCroppedImg(image, croppedAreaPixels, rotation)
+      const croppedImage: any = await handleImageCrop(image, croppedAreaPixels)
+      setCroppedImage(croppedImage)
       return croppedImage
     } catch (error) {
       console.error(error)
       return null
     }
-  }, [image, croppedAreaPixels, rotation])
+  }, [image, croppedAreaPixels])
+
+  // const getCroppedImage = async () => {
+  //   const croppedImage: any = await getCroppedImage!()
+  //   return croppedImage
+  // }
+
+  console.log('crop', croppedImage)
 
   return (
     <div className={styles.imageCropper}>
@@ -69,7 +77,8 @@ export default function ImageCropper({ id }: ImageCropperProps) {
             onChange={e => setZoom(Number(e.target.value))}
           />
         </div>
-        <FileUploader id={id} isCroppingComponent handleCroppedImage={handleCroppedImage} />
+        <FileUploader id={id} isCroppingComponent getCroppedImage={getCroppedImage} />
+        <img src={croppedImage} alt='profile image' />
       </div>
     </div>
   )

@@ -9,13 +9,13 @@ import styles from './index.module.scss'
 interface FileUploaderProps {
   id: string
   isCroppingComponent?: boolean
-  handleCroppedImage?: () => void
+  getCroppedImage?: () => void
 }
 
 export default function FileUploader({
   id,
   isCroppingComponent = false,
-  handleCroppedImage,
+  getCroppedImage,
 }: FileUploaderProps) {
   const { setUserData } = useMyUser()
 
@@ -59,22 +59,22 @@ export default function FileUploader({
     }
   }
 
-  const handleCroppedImageUpload = async () => {
+  const getCroppedImageUpload = async () => {
     try {
-      const croppedImage: any = await handleCroppedImage!()
-      const formData = new FormData()
-      formData.append('file', croppedImage)
-      formData.append('upload_preset', 'profile_avatar')
+      const croppedImage: any = await getCroppedImage!()
+      // const formData = new FormData()
+      // formData.append('file', croppedImage)
+      // formData.append('upload_preset', 'profile_avatar')
 
-      const response = await axios.post(
-        'https://api.cloudinary.com/v1_1/savedcity/image/upload',
-        formData
-      )
+      // const response = await axios.post(
+      //   'https://api.cloudinary.com/v1_1/savedcity/image/upload',
+      //   formData
+      // )
 
-      const { secure_url } = response.data
+      // const { secure_url } = response.data
 
-      updateProfile(secure_url)
-      setUploadedData(response.data)
+      // updateProfile(secure_url)
+      // setUploadedData(response.data)
     } catch (error) {
       console.error(error)
     }
@@ -95,7 +95,7 @@ export default function FileUploader({
     <div className={styles.fileUploader}>
       <div>
         {isCroppingComponent ? (
-          <button onClick={handleCroppedImageUpload}>Upload Cropped Image</button>
+          <button onClick={getCroppedImageUpload}>Upload Cropped Image</button>
         ) : (
           <FieldInput type='file' name='file' onChange={handleFileChange} />
         )}
