@@ -58,7 +58,7 @@ export default async function handleImageCrop(
   // draw rotated image
   ctx.drawImage(image, 0, 0)
 
-  // croppedAreaPixels values are bounding box relative
+  // croppedImageAreaPixels values are bounding box relative
   // extract the cropped image using these values
   const data = ctx.getImageData(pixelCrop.x, pixelCrop.y, pixelCrop.width, pixelCrop.height)
 

@@ -2,15 +2,14 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import dbConnect from 'lib/dbConnect'
 import User from 'utils/schema/User'
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'PATCH') {
     await dbConnect()
     try {
       const { id } = req.query
       const formData = req.body
+
+      console.log('formData', formData)
 
       if (id && formData) {
         const user = await User.findByIdAndUpdate(id, formData, { new: true })

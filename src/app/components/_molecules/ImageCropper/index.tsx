@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import Cropper from 'react-easy-crop'
-import handleImageCrop from '../cropImage'
+import handleImageCrop from '../../../helpers/cropImage'
 
 import styles from './index.module.scss'
 import FileUploader from '../FileUploader'
@@ -17,7 +17,7 @@ export default function ImageCropper({ id }: ImageCropperProps) {
   const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [rotation, setRotation] = useState<number>(0)
   const [zoom, setZoom] = useState<number>(1)
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState<{
+  const [croppedImageAreaPixels, setCroppedImageAreaPixels] = useState<{
     x: number
     y: number
     width: number
@@ -32,21 +32,14 @@ export default function ImageCropper({ id }: ImageCropperProps) {
 
   const getCroppedImage = useCallback(async () => {
     try {
-      const croppedImage: any = await handleImageCrop(image, croppedAreaPixels)
+      const croppedImage: any = await handleImageCrop(image, croppedImageAreaPixels)
       setCroppedImage(croppedImage)
       return croppedImage
     } catch (error) {
       console.error(error)
       return null
     }
-  }, [image, croppedAreaPixels])
-
-  // const getCroppedImage = async () => {
-  //   const croppedImage: any = await getCroppedImage!()
-  //   return croppedImage
-  // }
-
-  console.log('crop', croppedImage)
+  }, [image, croppedImageAreaPixels])
 
   return (
     <div className={styles.imageCropper}>
@@ -61,7 +54,9 @@ export default function ImageCropper({ id }: ImageCropperProps) {
           onZoomChange={setZoom}
           aspect={5 / 5}
           cropShape='round'
-          onCropComplete={(_, croppedAreaPixels) => setCroppedAreaPixels(croppedAreaPixels)}
+          onCropComplete={(_, croppedImageAreaPixels) =>
+            setCroppedImageAreaPixels(croppedImageAreaPixels)
+          }
         />
       </div>
       <div className={styles.imageCropper__controls}>
@@ -77,7 +72,12 @@ export default function ImageCropper({ id }: ImageCropperProps) {
             onChange={e => setZoom(Number(e.target.value))}
           />
         </div>
-        <FileUploader id={id} isCroppingComponent getCroppedImage={getCroppedImage} />
+        <FileUploader
+          id={id}
+          isCroppingComponent
+          getCroppedImage={getCroppedImage}
+          croppedImageAreaPixels={croppedImageAreaPixels}
+        />
         <img src={croppedImage} alt='profile image' />
       </div>
     </div>

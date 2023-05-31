@@ -17,6 +17,8 @@ export default function ProfilePage() {
   const { user } = useMyUser()
   const { _id, username, email, createdAt, image } = user || {}
 
+  console.log(user)
+
   const { myForums, setMyForums } = useMyForums()
   const [showImageCropper, setShowImageCropper] = useState<boolean>(false)
 

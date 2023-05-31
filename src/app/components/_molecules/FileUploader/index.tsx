@@ -9,6 +9,7 @@ import styles from './index.module.scss'
 interface FileUploaderProps {
   id: string
   isCroppingComponent?: boolean
+  croppedImageAreaPixels?: object
   getCroppedImage?: () => void
 }
 
@@ -16,6 +17,7 @@ export default function FileUploader({
   id,
   isCroppingComponent = false,
   getCroppedImage,
+  croppedImageAreaPixels,
 }: FileUploaderProps) {
   const { setUserData } = useMyUser()
 
@@ -36,6 +38,7 @@ export default function FileUploader({
       setImageSrc('')
     }
   }
+  // console.log(croppedImageAreaPixels)
 
   const handleFileUpload = async () => {
     if (imageSrc) {
@@ -59,10 +62,12 @@ export default function FileUploader({
     }
   }
 
-  const getCroppedImageUpload = async () => {
+  const handleCroppedImageUpload = async () => {
     try {
       const croppedImage: any = await getCroppedImage!()
       // const formData = new FormData()
+      // console.log(croppedImage)
+
       // formData.append('file', croppedImage)
       // formData.append('upload_preset', 'profile_avatar')
 
@@ -72,7 +77,9 @@ export default function FileUploader({
       // )
 
       // const { secure_url } = response.data
+      // console.log(secure_url)
 
+      updateProfile(croppedImage)
       // updateProfile(secure_url)
       // setUploadedData(response.data)
     } catch (error) {
@@ -80,11 +87,13 @@ export default function FileUploader({
     }
   }
 
-  const updateProfile = async (image: string) => {
+  const updateProfile = async (image?: string) => {
+    console.log('image', image)
+    console.log('croppedImageAreaPixels', croppedImageAreaPixels)
+
     try {
-      const res = await axios.patch(`/api/users/update-user/${id}`, {
-        image,
-      })
+      const requestData = image ? { croppedImageAreaPixels } : { image }
+      const res = await axios.patch(`/api/users/update-user/${id}`, requestData)
       setUserData(res.data.user)
     } catch (error) {
       console.log(error)
@@ -95,7 +104,7 @@ export default function FileUploader({
     <div className={styles.fileUploader}>
       <div>
         {isCroppingComponent ? (
-          <button onClick={getCroppedImageUpload}>Upload Cropped Image</button>
+          <button onClick={() => updateProfile()}>Upload Cropped Image</button>
         ) : (
           <FieldInput type='file' name='file' onChange={handleFileChange} />
         )}

@@ -3,6 +3,13 @@ import Forum from './Forum'
 
 const Schema = mongoose.Schema
 
+const croppedImageAreaPixelsSchema = new Schema({
+  width: Number,
+  height: Number,
+  x: Number,
+  y: Number,
+})
+
 const UserSchema = new Schema({
   username: {
     type: String,
@@ -22,11 +29,14 @@ const UserSchema = new Schema({
   image: {
     type: String,
   },
+  croppedImageAreaPixels: {
+    type: croppedImageAreaPixelsSchema,
+  },
   dob: {
     type: String,
   },
   createdAt: { type: Date, default: Date.now },
-  // user only favoriteForums: [Forum.schema] to store the entire forum object.
+  // use only favoriteForums: [Forum.schema] to store the entire forum object.
   favoriteForums: [{ type: mongoose.Schema.Types.ObjectId, ref: Forum }],
 })
 

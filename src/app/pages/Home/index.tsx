@@ -12,7 +12,7 @@ export default function HomePage() {
   const { user, setUserData } = useMyUser()
   const { allForums } = useAllForums()
 
-  const favoriteForum = async (userId: string, forum: { _id?: string }) => {
+  const favoriteForum = async (userId: string, forum: any) => {
     const favoriteForums = user.favoriteForums
     const forumIsFavorited = !!favoriteForums.find((id: string) => id === forum._id)
 
@@ -24,7 +24,8 @@ export default function HomePage() {
         setUserData({ ...user, favoriteForums: newFavoriteForumsArr })
       } else {
         // favorite forum
-        newFavoriteForumsArr = favoriteForums.push(forum._id)
+        forum = forum._id
+        newFavoriteForumsArr = favoriteForums.push(forum)
         setUserData({ favoriteForums: newFavoriteForumsArr, ...user })
       }
     }
@@ -32,7 +33,7 @@ export default function HomePage() {
     const res = await axios
       .patch(`/api/forums/${forumIsFavorited ? 'un' : ''}favorite-forum`, {
         userId,
-        forum: forumIsFavorited ? forum : forum._id,
+        forum,
       })
       .then(() => {
         handleFavoriteForumUpdate()
