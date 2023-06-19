@@ -9,8 +9,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const { id } = req.query
       const formData = req.body
 
-      console.log('formData', formData)
-
       if (id && formData) {
         const user = await User.findByIdAndUpdate(id, formData, { new: true })
         return res.json({ status: 200, user })

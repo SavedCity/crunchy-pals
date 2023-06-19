@@ -12,21 +12,13 @@ import styles from './index.module.scss'
 function useOutsideAlerter(ref: any, setOpenMenu: any, openMenu: boolean) {
   useEffect(() => {
     function handleClickOutside(e: any) {
-      let clickedMenuLink = Array.from(
-        document.getElementsByTagName('a')
-      ).includes(e.target)
+      let clickedMenuLink = Array.from(document.getElementsByTagName('a')).includes(e.target)
       let clickedMenuIcon = Array.from(
         document.getElementsByClassName('material-symbols-outlined')
       ).includes(e.target)
-      if (
-        openMenu &&
-        (!ref.current?.contains(e.target) || clickedMenuLink || clickedMenuIcon)
-      ) {
+      if (openMenu && (!ref.current?.contains(e.target) || clickedMenuLink || clickedMenuIcon)) {
         // if the click is inside the menu and the click is an anchor tag ('<a>' tag)
-        if (
-          ref.current?.contains(e.target) &&
-          (clickedMenuLink || clickedMenuIcon)
-        ) {
+        if (ref.current?.contains(e.target) && (clickedMenuLink || clickedMenuIcon)) {
           Router.push(e.target.href || e.target.parentNode.href)
         }
         setOpenMenu(false)
@@ -42,19 +34,16 @@ function useOutsideAlerter(ref: any, setOpenMenu: any, openMenu: boolean) {
 export default function ProfileMenu() {
   const [openMenu, setOpenMenu] = useState<boolean>(false)
 
-  const { user } = useMyUser()
-  const { username, image } = user || {}
+  const { user, profileImage } = useMyUser()
+  const { username } = user || {}
 
   const wrapperRef = useRef(null)
   useOutsideAlerter(wrapperRef, setOpenMenu, openMenu)
 
   return (
     <div ref={wrapperRef} className={styles.profile}>
-      <section
-        className={styles.profile__avatar}
-        onClick={() => setOpenMenu(!openMenu)}
-      >
-        <Avatar src={image} size={40} />
+      <section className={styles.profile__avatar} onClick={() => setOpenMenu(!openMenu)}>
+        <Avatar src={profileImage} size={40} />
       </section>
 
       {openMenu && (

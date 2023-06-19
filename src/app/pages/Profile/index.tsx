@@ -9,18 +9,15 @@ import { useMyForums } from 'contexts/forums/my'
 import H1 from 'components/_atoms/H1'
 import Forum from 'components/_organisms/Forum'
 import ImageCropper from 'components/_molecules/ImageCropper'
-
-import styles from './index.module.scss'
 import Modal from 'components/_atoms/Modal'
 
-export default function ProfilePage() {
-  const { user } = useMyUser()
-  const { _id, username, email, createdAt, image } = user || {}
+import styles from './index.module.scss'
 
-  console.log(user)
+export default function ProfilePage() {
+  const { user, profileImage } = useMyUser()
+  const { _id, username, email, createdAt } = user || {}
 
   const { myForums, setMyForums } = useMyForums()
-  const [showImageCropper, setShowImageCropper] = useState<boolean>(false)
 
   const deleteForum = async (forumId: string) => {
     const forum = await axios
@@ -36,9 +33,22 @@ export default function ProfilePage() {
       .catch(err => console.log(err))
   }
 
-  const handleShowImageCropper = () => {
-    setShowImageCropper(!showImageCropper)
-  }
+  // const getCroppedImage = async () => {
+  //   try {
+  //     const croppedImage: any = await handleImageCrop(image, croppedImageAreaPixels)
+  //     setCroppedProfileImage(croppedImage)
+  //     return croppedImage
+  //   } catch (error) {
+  //     console.error(error)
+  //     return null
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   if (Object.keys(user).length) {
+  //     getCroppedImage()
+  //   }
+  // }, [user])
 
   return (
     <div
@@ -46,7 +56,7 @@ export default function ProfilePage() {
         [styles.profile]: true,
       })}
     >
-      <Avatar className={styles.profile__avatar} src={image} size={200} />
+      <Avatar className={styles.profile__avatar} src={profileImage} size={200} />
 
       <Modal openButtonText='Crop Image'>
         <ImageCropper id={_id} />

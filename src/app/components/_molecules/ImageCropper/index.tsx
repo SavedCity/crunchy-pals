@@ -1,6 +1,5 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useState } from 'react'
 import Cropper from 'react-easy-crop'
-import handleImageCrop from '../../../helpers/cropImage'
 
 import styles from './index.module.scss'
 import FileUploader from '../FileUploader'
@@ -28,18 +27,6 @@ export default function ImageCropper({ id }: ImageCropperProps) {
     x: 0,
     y: 0,
   })
-  const [croppedImage, setCroppedImage] = useState<string>()
-
-  const getCroppedImage = useCallback(async () => {
-    try {
-      const croppedImage: any = await handleImageCrop(image, croppedImageAreaPixels)
-      setCroppedImage(croppedImage)
-      return croppedImage
-    } catch (error) {
-      console.error(error)
-      return null
-    }
-  }, [image, croppedImageAreaPixels])
 
   return (
     <div className={styles.imageCropper}>
@@ -72,13 +59,7 @@ export default function ImageCropper({ id }: ImageCropperProps) {
             onChange={e => setZoom(Number(e.target.value))}
           />
         </div>
-        <FileUploader
-          id={id}
-          isCroppingComponent
-          getCroppedImage={getCroppedImage}
-          croppedImageAreaPixels={croppedImageAreaPixels}
-        />
-        <img src={croppedImage} alt='profile image' />
+        <FileUploader id={id} isCroppingComponent croppedImageAreaPixels={croppedImageAreaPixels} />
       </div>
     </div>
   )

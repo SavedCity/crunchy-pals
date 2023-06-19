@@ -1,6 +1,7 @@
 import { useSession } from 'next-auth/react'
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react'
 import axios from 'axios'
+import handleImageCrop from 'helpers/cropImage'
 
 const UserContext = createContext({})
 
@@ -43,5 +44,35 @@ const useUserContext = () => useContext(UserContext)
 
 export const useMyUser = () => {
   const { userData, setUserData }: object | any = useUserContext()
-  return { user: userData, favoriteForums: userData?.favoriteForums, setUserData }
+  const { image, favoriteForums, croppedImageAreaPixels } = userData
+
+  const [profileImage, setProfileImage] = useState<string | null>('')
+
+  const getCroppedImage = async () => {
+    try {
+      const croppedImage: any = await handleImageCrop(image, croppedImageAreaPixels)
+      setProfileImage(croppedImage)
+      return croppedImage
+    } catch (error) {
+      console.error(error)
+      return null
+    }
+  }
+
+  useEffect(() => {
+    const userHasLoaded = Object.keys(userData).length
+
+    if (userHasLoaded && croppedImageAreaPixels) {
+      getCroppedImage()
+    } else if (userHasLoaded) {
+      setProfileImage(null)
+    }
+  }, [userData])
+
+  return {
+    user: userData,
+    setUserData,
+    favoriteForums,
+    profileImage: profileImage ?? image,
+  }
 }

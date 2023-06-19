@@ -3,12 +3,15 @@ import Forum from './Forum'
 
 const Schema = mongoose.Schema
 
-const croppedImageAreaPixelsSchema = new Schema({
-  width: Number,
-  height: Number,
-  x: Number,
-  y: Number,
-})
+const croppedImageAreaPixelsSchema = new Schema(
+  {
+    width: Number,
+    height: Number,
+    x: Number,
+    y: Number,
+  },
+  { _id: false }
+)
 
 const UserSchema = new Schema({
   username: {

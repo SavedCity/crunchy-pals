@@ -10,13 +10,11 @@ interface FileUploaderProps {
   id: string
   isCroppingComponent?: boolean
   croppedImageAreaPixels?: object
-  getCroppedImage?: () => void
 }
 
 export default function FileUploader({
   id,
   isCroppingComponent = false,
-  getCroppedImage,
   croppedImageAreaPixels,
 }: FileUploaderProps) {
   const { setUserData } = useMyUser()
@@ -38,7 +36,6 @@ export default function FileUploader({
       setImageSrc('')
     }
   }
-  // console.log(croppedImageAreaPixels)
 
   const handleFileUpload = async () => {
     if (imageSrc) {
@@ -46,14 +43,11 @@ export default function FileUploader({
         const formData = new FormData()
         formData.append('file', imageSrc)
         formData.append('upload_preset', 'profile_avatar')
-
         const response = await axios.post(
           'https://api.cloudinary.com/v1_1/savedcity/image/upload',
           formData
         )
-
         const { secure_url } = response.data
-
         updateProfile(secure_url)
         setUploadedData(response.data)
       } catch (error) {
@@ -62,37 +56,11 @@ export default function FileUploader({
     }
   }
 
-  const handleCroppedImageUpload = async () => {
-    try {
-      const croppedImage: any = await getCroppedImage!()
-      // const formData = new FormData()
-      // console.log(croppedImage)
-
-      // formData.append('file', croppedImage)
-      // formData.append('upload_preset', 'profile_avatar')
-
-      // const response = await axios.post(
-      //   'https://api.cloudinary.com/v1_1/savedcity/image/upload',
-      //   formData
-      // )
-
-      // const { secure_url } = response.data
-      // console.log(secure_url)
-
-      updateProfile(croppedImage)
-      // updateProfile(secure_url)
-      // setUploadedData(response.data)
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
   const updateProfile = async (image?: string) => {
-    console.log('image', image)
-    console.log('croppedImageAreaPixels', croppedImageAreaPixels)
-
     try {
-      const requestData = image ? { croppedImageAreaPixels } : { image }
+      const requestData = image
+        ? { image, croppedImageAreaPixels: null }
+        : { croppedImageAreaPixels }
       const res = await axios.patch(`/api/users/update-user/${id}`, requestData)
       setUserData(res.data.user)
     } catch (error) {
